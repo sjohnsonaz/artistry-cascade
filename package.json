@@ -1,0 +1,39 @@
+{
+  "name": "cascade-demo",
+  "version": "0.0.0",
+  "description": "An example Cascade project",
+  "repository": "https://www.github.com/sjohnsonaz/cascade-demo.git",
+  "license": "MIT",
+  "author": "Sean Johnson <sjohnson@sjohnsonaz.com>",
+  "main": "dist/scripts/main.js",
+  "typings": "dist/scripts/main.d.ts",
+  "scripts": {
+    "start": "node ./dist/main.js",
+    "install": "",
+    "build": "tsc",
+    "prepublish": "tsc --declaration",
+    "test": "jest",
+    "browser": "webpack --config webpack.config.js",
+    "dev": "webpack --config webpack.dev.config.js --watch",
+    "node": "node ./dist/scripts/main.js",
+    "nodemon": "nodemon ./dist/scripts/main.js"
+  },
+  "dependencies": {
+    "cascade": "0.0.0",
+    "es6-shim": "^0.35.1",
+    "reflect-metadata": "^0.1.8"
+  },
+  "devDependencies": {
+    "@types/chai": "^3.4.34",
+    "@types/mocha": "^2.2.33",
+    "babel-cli": "^6.16.0",
+    "babel-core": "^6.17.0",
+    "babel-eslint": "^7.0.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.16.0",
+    "nodemon": "^1.11.0",
+    "ts-loader": "^0.9.5",
+    "typescript": "^2.0.3",
+    "webpack": "^1.13.2"
+  }
+}
