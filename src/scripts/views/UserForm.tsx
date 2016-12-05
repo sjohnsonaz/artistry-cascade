@@ -41,6 +41,7 @@ export default class UserForm extends Component<IUserFormProps> {
     render() {
         let {viewModel} = this.props;
         let {user} = viewModel;
+        let valid = user['firstName-valid'] && user['lastName-valid'];
         return (
             <tr onkeydown={this.onKeyDown}>
                 <td>
@@ -50,7 +51,7 @@ export default class UserForm extends Component<IUserFormProps> {
                     <input type="text" form="user-form" name="lastName" value={user.lastName} oninput={this.onChange.bind(this, 'lastName')} />
                 </td>
                 <td>
-                    <button type="submit" form="user-form" name="submit" className="button" onclick={this.addUser.bind(this)}>Add</button>
+                    <button type="submit" form="user-form" name="submit" className="button" onclick={this.addUser.bind(this)} disabled={!valid}>Add</button>
                     <form id="user-form" onsubmit={this.addUser.bind(this)}></form>
                 </td>
             </tr>

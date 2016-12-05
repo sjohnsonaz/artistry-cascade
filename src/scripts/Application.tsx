@@ -18,7 +18,7 @@ export default class Application {
                 console.log('started');
             }
         );
-        var user = new User('Sean', 'Johnson');
+        var user = new User('First', 'User');
         viewModel.users.push(user);
     }
 }
