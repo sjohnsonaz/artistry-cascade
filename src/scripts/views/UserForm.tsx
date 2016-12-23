@@ -1,4 +1,6 @@
-import Cascade, {Component} from 'cascade';
+import Cascade, { Component } from 'cascade';
+
+import Button from '../components/Button';
 
 import ViewModel from '../ViewModel';
 import User from '../models/User';
@@ -51,7 +53,7 @@ export default class UserForm extends Component<IUserFormProps> {
                     <input type="text" form="user-form" name="lastName" value={user.lastName} oninput={this.onChange.bind(this, 'lastName')} />
                 </td>
                 <td>
-                    <button type="submit" form="user-form" name="submit" className="button" onclick={this.addUser.bind(this)} disabled={!valid}>Add</button>
+                    <Button type="submit" form="user-form" name="submit" onclick={this.addUser.bind(this)} disabled={!valid}>Add</Button>
                     <form id="user-form" onsubmit={this.addUser.bind(this)}></form>
                 </td>
             </tr>

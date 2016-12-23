@@ -19,7 +19,7 @@
     "nodemon": "nodemon ./dist/scripts/main.js"
   },
   "dependencies": {
-    "cascade": "0.0.8",
+    "cascade": "0.0.9",
     "cascade-validation": "0.0.1",
     "es6-shim": "^0.35.1",
     "reflect-metadata": "^0.1.8",

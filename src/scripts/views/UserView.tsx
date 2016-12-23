@@ -1,4 +1,6 @@
-import Cascade, {Component} from 'cascade';
+import Cascade, { Component } from 'cascade';
+
+import Button from '../components/Button';
 
 import ViewModel from '../ViewModel';
 import User from '../models/User';
@@ -18,7 +20,7 @@ export default class UserView extends Component<IUserViewProps> {
             <tr>
                 <td>{user.firstName}</td>
                 <td>{user.lastName}</td>
-                <td><button className="button button-danger" onclick={this.removeUser}>Remove</button></td>
+                <td><Button theme="danger" onclick={this.removeUser}>Remove</Button></td>
             </tr>
         );
     }
