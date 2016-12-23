@@ -2,6 +2,7 @@ import Cascade, { Component } from 'cascade';
 
 import Modal from '../components/Modal';
 import Button from '../components/Button';
+import ButtonGroup from '../components/ButtonGroup';
 
 import ViewModel from '../ViewModel';
 
@@ -41,12 +42,19 @@ export default class UserListView extends Component<IUserListViewProps> {
 
                 <h1>Modal</h1>
                 <Button onclick={this.openModal}>Open Modal</Button>
-                <Modal open={viewModel.modalOpen} onclose={this.closeModal}>
+                <Modal open={viewModel.modalOpen} onclose={this.closeModal} title="Modal">
                     test
                 </Modal>
 
                 <h1>Tooltip</h1>
                 <Button tooltip="Information..." tooltipDirection="right">Tooltip</Button>
+
+                <h1>Button Group</h1>
+                <ButtonGroup>
+                    <Button theme="primary">Edit</Button>
+                    <Button theme="danger">Delete</Button>
+                    <Button>View</Button>
+                </ButtonGroup>
             </div>
         );
     }
