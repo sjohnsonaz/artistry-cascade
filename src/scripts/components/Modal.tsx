@@ -1,11 +1,12 @@
 import Cascade, { Component } from 'cascade';
 
+import { ITemplate } from './ITemplate';
 import Button from './Button';
 
 export interface IModalProps {
     open: boolean;
     onclose: (event: Event) => void;
-    title?: string | number | (() => JSX.Element | string | number);
+    title?: ITemplate;
 }
 
 export default class Modal extends Component<IModalProps> {

@@ -40,18 +40,21 @@ export default class UserListView extends Component<IUserListViewProps> {
                     </tbody>
                 </table>
 
-                <h1>Modal</h1>
+                <h2>Modal</h2>
                 <Button onclick={this.openModal}>Open Modal</Button>
                 <Modal open={viewModel.modalOpen} onclose={this.closeModal} title="Modal">
                     test
                 </Modal>
 
-                <h1>Tooltip</h1>
+                <h2>Tooltip</h2>
                 <Button tooltip="Information..." tooltipDirection="right">Tooltip</Button>
 
-                <h1>Button Group</h1>
+                <h2>Popover</h2>
+                <Button popover={<span><strong>Popover</strong> Text</span>} popoverDirection="right">Popover</Button>
+
+                <h2>Button Group</h2>
                 <ButtonGroup>
-                    <Button theme="primary">Edit</Button>
+                    <Button popover="Popover" theme="primary">Edit</Button>
                     <Button theme="danger">Delete</Button>
                     <Button>View</Button>
                 </ButtonGroup>

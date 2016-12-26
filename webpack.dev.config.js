@@ -30,7 +30,6 @@ module.exports = {
         }]
     },
     plugins: [
-        new webpack.optimize.UglifyJsPlugin(),
         new ExtractTextPlugin("./dist/bundle/[name].css")
     ],
     postcss: [autoprefixer({

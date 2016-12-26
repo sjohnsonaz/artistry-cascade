@@ -1,10 +1,17 @@
 import Cascade, { Component, Elements } from 'cascade';
 
+import { ITemplate } from './ITemplate';
+import Popover from './Popover';
+
 export interface IButtonProps extends Elements.JSXButtonElement {
     theme?: 'default' | 'primary' | 'danger';
     tooltip?: string;
     tooltipDirection?: 'top' | 'right' | 'bottom' | 'left';
     tooltipOpen?: boolean;
+    popover?: ITemplate;
+    popoverDirection?: 'top' | 'right' | 'bottom' | 'left';
+    popoverAlign?: 'top' | 'right' | 'bottom' | 'left' | 'center';
+    popoverOpen?: boolean;
 }
 
 export default class Button extends Component<IButtonProps> {
@@ -22,7 +29,7 @@ export default class Button extends Component<IButtonProps> {
                 break;
         }
 
-        if (this.props.tooltip) {
+        if (typeof this.props.tooltip !== 'undefined') {
             injectedProps['aria-label'] = this.props.tooltip;
             classNames.push('tooltip');
             switch (this.props.tooltipDirection) {
@@ -47,7 +54,27 @@ export default class Button extends Component<IButtonProps> {
             }
         }
 
+        let popOver;
+        if (typeof this.props.popover !== 'undefined') {
+            classNames.push('popover-trigger');
+            popOver = (
+                <Popover
+                    align={this.props.popoverAlign}
+                    direction={this.props.popoverDirection}
+                    open={this.props.popoverOpen}
+                    >
+                    {typeof this.props.popover === 'function' ?
+                        this.props.popover() :
+                        this.props.popover
+                    }
+                </Popover>
+            );
+        }
+
         let className = classNames.join(' ');
-        return <button {...this.props} className={className} {...injectedProps}>{this.children}</button>
+        return <button {...this.props} className={className} {...injectedProps}>
+            {popOver}
+            {this.children}
+        </button>
     }
 }
