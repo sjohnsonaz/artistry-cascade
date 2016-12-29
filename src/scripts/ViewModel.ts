@@ -4,6 +4,7 @@ import User from './models/User';
 
 export default class ViewModel {
     @observable modalOpen: boolean = false;
+    @observable innerModalOpen: boolean = false;
     @observable users: User[] = [];
     @observable user: User = new User('', '');
     @observable firstNameInput: HTMLElement;

@@ -22,6 +22,14 @@ export default class UserListView extends Component<IUserListViewProps> {
         this.props.viewModel.modalOpen = false;
     }
 
+    openInnerModal = () => {
+        this.props.viewModel.innerModalOpen = true;
+    }
+
+    closeInnerModal = () => {
+        this.props.viewModel.innerModalOpen = false;
+    }
+
     render() {
         let {viewModel} = this.props;
         return (
@@ -43,7 +51,11 @@ export default class UserListView extends Component<IUserListViewProps> {
                 <h2>Modal</h2>
                 <Button onclick={this.openModal}>Open Modal</Button>
                 <Modal open={viewModel.modalOpen} onclose={this.closeModal} title="Modal">
-                    test
+                    <div>test</div>
+                    <Button onclick={this.openInnerModal}>Open Inner Modal</Button>
+                    <Modal open={viewModel.innerModalOpen} onclose={this.closeInnerModal} title="Inner Modal">
+                        inner test
+                    </Modal>
                 </Modal>
 
                 <h2>Tooltip</h2>
