@@ -1,6 +1,6 @@
 # Cascade Components
 
-[![Build Status](https://travis-ci.org/sjohnsonaz/cascade-components.svg?branch=master)](https://travis-ci.org/sjohnsonaz/cascade-components)
+[![Build Status](https://travis-ci.org/sjohnsonaz/cascade-components.svg?branch=master)](https://travis-ci.org/sjohnsonaz/cascade-components) [![npm version](https://badge.fury.io/js/cascade-components.svg)](https://badge.fury.io/js/cascade-components)
 
 A powerful component library for Cascade.  All components have been designed with Cascade in mind, reducing re-renders and other JavaScript activity.
 
