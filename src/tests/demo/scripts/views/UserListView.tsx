@@ -1,8 +1,6 @@
 import Cascade, { Component } from 'cascade';
 
-import Modal from '../components/Modal';
-import Button from '../components/Button';
-import ButtonGroup from '../components/ButtonGroup';
+import { Button, ButtonGroup, Modal } from '../../../../scripts/modules/CascadeComponents';
 
 import ViewModel from '../ViewModel';
 

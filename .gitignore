@@ -31,4 +31,5 @@ typings/
 dist/
 bundle/
 *.tgz
+cascade-*
 .vscode/
