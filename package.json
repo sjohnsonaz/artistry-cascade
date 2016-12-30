@@ -1,7 +1,7 @@
 {
   "name": "cascade-components",
   "version": "0.0.0",
-  "description": "Components for Cascade",
+  "description": "A powerful component library for Cascade",
   "repository": "https://www.github.com/sjohnsonaz/cascade-components.git",
   "license": "MIT",
   "author": "Sean Johnson <sjohnson@sjohnsonaz.com>",
@@ -42,5 +42,21 @@
     "ts-loader": "^0.9.5",
     "typescript": "^2.1.4",
     "webpack": "^1.14.0"
-  }
+  },
+  "keywords": [
+    "component",
+    "button",
+    "modal",
+    "input",
+    "cascade",
+    "reactive",
+    "view",
+    "viewmodel",
+    "mvvm",
+    "mvc",
+    "template",
+    "dom",
+    "react",
+    "knockout"
+  ]
 }
