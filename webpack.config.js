@@ -5,10 +5,10 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     entry: {
-        'main': './src/scripts/modules/CascadeComponents.ts'
+        'CascadeComponents': './src/scripts/modules/CascadeComponents.ts'
     },
     output: {
-        filename: './dist/bundle/[name].js',
+        filename: './dist/bundle/[name].min.js',
         libraryTarget: 'var',
         library: '[name]'
     },
