@@ -5,8 +5,8 @@
   "repository": "https://www.github.com/sjohnsonaz/cascade-components.git",
   "license": "MIT",
   "author": "Sean Johnson <sjohnson@sjohnsonaz.com>",
-  "main": "dist/scripts/main.js",
-  "typings": "dist/scripts/main.d.ts",
+  "main": "dist/scripts/modules/CascadeComponents.js",
+  "typings": "dist/scripts/modules/CascadeComponents.d.ts",
   "scripts": {
     "start": "node ./dist/main.js",
     "install": "",
