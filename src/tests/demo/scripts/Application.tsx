@@ -8,6 +8,7 @@ import UserListView from './views/user/UserListView';
 import ModalView from './views/modal/ModalView';
 import ButtonView from './views/button/ButtonView';
 import SectionView from './views/section/SectionView';
+import ProgressBarView from './views/progressBar/ProgressBarView';
 import CodeView from './views/code/CodeView';
 
 export default class Application {
@@ -22,6 +23,7 @@ export default class Application {
                 <ModalView />
                 <ButtonView />
                 <SectionView />
+                <ProgressBarView />
                 <CodeView />
             </div>,
             function () {
