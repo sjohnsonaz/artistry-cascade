@@ -1,6 +1,6 @@
 import Cascade, { Component } from 'cascade';
 
-import { Button, ButtonGroup, Modal } from '../../../../../scripts/modules/CascadeComponents';
+import { Button, Section } from '../../../../../scripts/modules/CascadeComponents';
 
 import ViewModel from '../../ViewModel';
 
@@ -15,7 +15,7 @@ export default class UserListView extends Component<IUserListViewProps> {
     render() {
         let {viewModel} = this.props;
         return (
-            <div>
+            <Section title="Users">
                 <table className="table">
                     <thead>
                         <tr>
@@ -29,7 +29,7 @@ export default class UserListView extends Component<IUserListViewProps> {
                         {viewModel.users.map(user => <UserView user={user} viewModel={viewModel} />)}
                     </tbody>
                 </table>
-            </div>
+            </Section>
         );
     }
 }

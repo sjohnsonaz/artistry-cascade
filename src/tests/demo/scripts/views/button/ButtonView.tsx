@@ -1,6 +1,6 @@
 import Cascade, { Component, observable } from 'cascade';
 
-import { Button, ButtonGroup } from '../../../../../scripts/modules/CascadeComponents';
+import { Button, ButtonGroup, Section } from '../../../../../scripts/modules/CascadeComponents';
 
 export interface IButtonViewProps {
 
@@ -18,23 +18,41 @@ export default class ButtonView extends Component<IButtonViewProps> {
 
     render() {
         return (
-            <div>
-                <h2>Tooltip</h2>
-                <Button tooltip="Information..." tooltipDirection="right">Tooltip</Button>
+            <Section title="Buttons">
+                <h3>Individual Buttons</h3>
+                <div>
+                    <Button>Edit</Button>
+                    <Button theme="primary">Save</Button>
+                    <Button theme="danger">Delete</Button>
+                </div>
 
-                <h2>Popover</h2>
-                <Button popover={<span><strong>Popover</strong> Text</span>} popoverDirection="right">Popover</Button>
+                <h3>Disabled Buttons</h3>
+                <div>
+                    <Button disabled>Edit</Button>
+                    <Button disabled theme="primary">Save</Button>
+                    <Button disabled theme="danger">Delete</Button>
+                </div>
 
-                <h2>Button Group</h2>
+                <h3>Button Group</h3>
                 <ButtonGroup>
+                    <Button>View</Button>
                     <Button popover="Popover" theme="primary">Edit</Button>
                     <Button theme="danger">Delete</Button>
-                    <Button>View</Button>
                 </ButtonGroup>
 
-                <h2>Lockable Buttons</h2>
-                <Button lockContent="Locked" locked={this.locked} onclick={this.lockButton}>Lockable Button</Button>
-            </div>
+                <h3>Lockable Buttons</h3>
+                <div>
+                    <Button lockContent="Locked" locked={this.locked} onclick={this.lockButton}>Lockable Edit</Button>
+                    <Button lockContent="Locked" locked={this.locked} onclick={this.lockButton} theme="primary">Lockable Save</Button>
+                    <Button lockContent="Locked" locked={this.locked} onclick={this.lockButton} theme="danger">Lockable Delete</Button>
+                </div>
+
+                <h3>Tooltip</h3>
+                <Button tooltip="Information..." tooltipDirection="right">Tooltip</Button>
+
+                <h3>Popover</h3>
+                <Button popover={<span><strong>Popover</strong> Text</span>} popoverDirection="right">Popover</Button>
+            </Section>
         );
     }
 }

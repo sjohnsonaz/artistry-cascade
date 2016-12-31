@@ -1,6 +1,6 @@
 import Cascade, { Component, observable } from 'cascade';
 
-import { Button, Modal } from '../../../../../scripts/modules/CascadeComponents';
+import { Button, Modal, Section } from '../../../../../scripts/modules/CascadeComponents';
 
 export interface IModalViewProps {
 
@@ -28,7 +28,7 @@ export default class ModalView extends Component<IModalViewProps> {
 
     render() {
         return (
-            <div>
+            <Section title="Modal">
                 <h2>Modal</h2>
                 <Button onclick={this.openModal}>Open Modal</Button>
                 <Modal open={this.modalOpen} onclose={this.closeModal} title="Modal">
@@ -38,7 +38,7 @@ export default class ModalView extends Component<IModalViewProps> {
                         inner test
                     </Modal>
                 </Modal>
-            </div>
+            </Section>
         );
     }
 }

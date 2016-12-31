@@ -16,13 +16,10 @@ export default class SectionView extends Component<ISectionViewProps> {
     }
     render() {
         return (
-            <div>
-                <h2>Section</h2>
-                <Section title="Section" lockable locked={this.locked}>
-                    Section Content<br />
-                    <Button onclick={this.lockContents}>Lock</Button>
-                </Section>
-            </div>
+            <Section title="Section" lockable locked={this.locked}>
+                Section Content<br />
+                <Button onclick={this.lockContents}>Lock</Button>
+            </Section>
         );
     }
 }

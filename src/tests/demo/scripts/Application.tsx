@@ -18,12 +18,12 @@ export default class Application {
         window.User = User;
         Cascade.render(
             document.getElementById('root'),
-            <div>
-                <UserListView viewModel={viewModel} />
-                <ModalView />
+            <div className="container">
                 <ButtonView />
-                <SectionView />
                 <ProgressBarView />
+                <ModalView />
+                <SectionView />
+                <UserListView viewModel={viewModel} />
                 <CodeView />
             </div>,
             function () {
