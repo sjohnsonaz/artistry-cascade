@@ -1,9 +1,9 @@
 import Cascade, { Component } from 'cascade';
 
-import { Button } from '../../../../scripts/modules/CascadeComponents';
+import { Button } from '../../../../../scripts/modules/CascadeComponents';
 
-import ViewModel from '../ViewModel';
-import User from '../models/User';
+import ViewModel from '../../ViewModel';
+import User from '../../models/User';
 
 export interface IUserViewProps {
     user: User;
