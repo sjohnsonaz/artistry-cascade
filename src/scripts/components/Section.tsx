@@ -2,6 +2,7 @@ import Cascade, { Component, Elements } from 'cascade';
 
 export interface ISectionProps extends Elements.JSXElement {
     title: any;
+    lockable?: boolean;
     locked?: boolean;
 }
 
@@ -9,14 +10,16 @@ export default class Section extends Component<ISectionProps> {
     render() {
         let classNames = this.props.className ? [this.props.className] : [];
         classNames.push('section');
-        let className = classNames.join(' ');
 
         let innerClassNames = ['section-content'];
-        if (this.props.locked) {
+        if (this.props.lockable) {
             innerClassNames.push('lock-contents');
+        }
+        if (this.props.locked) {
             innerClassNames.push('locked');
         }
 
+        let className = classNames.join(' ');
         let innerClassName = innerClassNames.join(' ');
         return (
             <section className={className} {...this.props}>

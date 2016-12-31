@@ -12,13 +12,13 @@ export default class SectionView extends Component<ISectionViewProps> {
         this.locked = true;
         window.setTimeout(() => {
             this.locked = false;
-        }, 3000);
+        }, 1000);
     }
     render() {
         return (
             <div>
                 <h2>Section</h2>
-                <Section title="Section" locked={this.locked}>
+                <Section title="Section" lockable locked={this.locked}>
                     Section Content<br />
                     <Button onclick={this.lockContents}>Lock</Button>
                 </Section>
