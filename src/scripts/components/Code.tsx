@@ -7,7 +7,7 @@ export interface ICodeProps extends Elements.JSXPreElement {
 export default class Code extends Component<ICodeProps> {
     render() {
         return (
-            <pre class="code">
+            <pre className="code">
                 {this.children ?
                     this.children.map(child => <code>{child}</code>)
                     : undefined}

@@ -7,6 +7,7 @@ import User from './models/User';
 import UserListView from './views/user/UserListView';
 import ModalView from './views/modal/ModalView';
 import ButtonView from './views/button/ButtonView';
+import SectionView from './views/section/SectionView';
 import CodeView from './views/code/CodeView';
 
 export default class Application {
@@ -20,6 +21,7 @@ export default class Application {
                 <UserListView viewModel={viewModel} />
                 <ModalView />
                 <ButtonView />
+                <SectionView />
                 <CodeView />
             </div>,
             function () {
