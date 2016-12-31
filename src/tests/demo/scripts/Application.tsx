@@ -19,12 +19,14 @@ export default class Application {
         Cascade.render(
             document.getElementById('root'),
             <div className="container">
+                <h2>Components</h2>
                 <ButtonView />
                 <ProgressBarView />
                 <ModalView />
                 <SectionView />
-                <UserListView viewModel={viewModel} />
                 <CodeView />
+                <h2>Examples</h2>
+                <UserListView viewModel={viewModel} />
             </div>,
             function () {
                 console.log('started');
