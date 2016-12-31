@@ -1,4 +1,4 @@
-import Cascade, { Component } from 'cascade';
+import Cascade, { Component, observable } from 'cascade';
 
 import { Button, ButtonGroup } from '../../../../../scripts/modules/CascadeComponents';
 
@@ -7,6 +7,15 @@ export interface IButtonViewProps {
 }
 
 export default class ButtonView extends Component<IButtonViewProps> {
+    @observable locked: boolean = false;
+
+    lockButton = () => {
+        this.locked = true;
+        window.setTimeout(() => {
+            this.locked = false;
+        }, 1000);
+    }
+
     render() {
         return (
             <div>
@@ -22,6 +31,9 @@ export default class ButtonView extends Component<IButtonViewProps> {
                     <Button theme="danger">Delete</Button>
                     <Button>View</Button>
                 </ButtonGroup>
+
+                <h2>Lockable Buttons</h2>
+                <Button lockContent="Locked" locked={this.locked} onclick={this.lockButton}>Lockable Button</Button>
             </div>
         );
     }

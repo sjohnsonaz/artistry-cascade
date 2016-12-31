@@ -12,6 +12,8 @@ export interface IButtonProps extends Elements.JSXButtonElement {
     popoverDirection?: 'top' | 'right' | 'bottom' | 'left';
     popoverAlign?: 'top' | 'right' | 'bottom' | 'left' | 'center';
     popoverOpen?: boolean;
+    lockContent?: any;
+    locked?: boolean;
 }
 
 export default class Button extends Component<IButtonProps> {
@@ -71,10 +73,20 @@ export default class Button extends Component<IButtonProps> {
             );
         }
 
+        if (this.props.locked) {
+            classNames.push('button-locked');
+            injectedProps['disabled'] = true;
+        }
+
         let className = classNames.join(' ');
-        return <button {...this.props} className={className} {...injectedProps}>
-            {popOver}
-            {this.children}
-        </button>
+        return (
+            <button {...this.props} className={className} {...injectedProps}>
+                {popOver}
+                {this.props.lockContent ? [
+                    <div className="button-text">{this.children}</div>,
+                    <div className="button-spinner">{this.props.lockContent}</div>
+                ] : this.children}
+            </button>
+        );
     }
 }
