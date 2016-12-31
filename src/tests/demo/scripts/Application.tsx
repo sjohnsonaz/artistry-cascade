@@ -8,6 +8,7 @@ import ProgressBarView from './views/progressBar/ProgressBarView';
 import ModalView from './views/modal/ModalView';
 import SectionView from './views/section/SectionView';
 import TabView from './views/tab/TabView';
+import FormView from './views/form/FormView';
 import CodeView from './views/code/CodeView';
 import ViewModel from './ViewModel';
 import User from './models/User';
@@ -28,6 +29,7 @@ export default class Application {
                 <ModalView />
                 <SectionView />
                 <TabView />
+                <FormView />
                 <CodeView />
                 <h2>Examples</h2>
                 <UserListView viewModel={viewModel} />
