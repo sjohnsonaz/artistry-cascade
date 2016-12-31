@@ -2,14 +2,15 @@ declare var window: any;
 
 import Cascade from 'cascade';
 
+import ButtonView from './views/button/ButtonView';
+import ToggleView from './views/toggle/ToggleView';
+import ProgressBarView from './views/progressBar/ProgressBarView';
+import ModalView from './views/modal/ModalView';
+import SectionView from './views/section/SectionView';
+import CodeView from './views/code/CodeView';
 import ViewModel from './ViewModel';
 import User from './models/User';
 import UserListView from './views/user/UserListView';
-import ModalView from './views/modal/ModalView';
-import ButtonView from './views/button/ButtonView';
-import SectionView from './views/section/SectionView';
-import ProgressBarView from './views/progressBar/ProgressBarView';
-import CodeView from './views/code/CodeView';
 
 export default class Application {
     static run() {
@@ -21,6 +22,7 @@ export default class Application {
             <div className="container">
                 <h2>Components</h2>
                 <ButtonView />
+                <ToggleView />
                 <ProgressBarView />
                 <ModalView />
                 <SectionView />

@@ -6,3 +6,4 @@ export { default as Modal, IModalProps } from '../components/Modal';
 export { default as Popover, IPopoverProps } from '../components/Popover';
 export { default as ProgressBar, IProgressBarProps } from '../components/ProgressBar';
 export { default as Section, ISectionProps } from '../components/Section';
+export { default as Toggle, IToggleProps } from '../components/Toggle';
