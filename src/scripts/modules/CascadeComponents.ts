@@ -6,6 +6,7 @@ export { default as FormContainer, IFormContainerProps } from '../components/For
 export { default as FormInput, IFormInputProps } from '../components/FormInput';
 export { default as Modal, IModalProps } from '../components/Modal';
 export { default as Popover, IPopoverProps } from '../components/Popover';
+export { default as Range, IRangeProps } from '../components/Range';
 export { default as ProgressBar, IProgressBarProps } from '../components/ProgressBar';
 export { default as Section, ISectionProps } from '../components/Section';
 export { default as Tab, ITabProps } from '../components/Tab';

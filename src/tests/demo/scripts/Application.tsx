@@ -3,6 +3,7 @@ declare var window: any;
 import Cascade from 'cascade';
 
 import ButtonView from './views/button/ButtonView';
+import RangeView from './views/range/RangeView';
 import ToggleView from './views/toggle/ToggleView';
 import ProgressBarView from './views/progressBar/ProgressBarView';
 import ModalView from './views/modal/ModalView';
@@ -24,6 +25,7 @@ export default class Application {
             <div className="container">
                 <h2>Components</h2>
                 <ButtonView />
+                <RangeView />
                 <ToggleView />
                 <ProgressBarView />
                 <ModalView />
