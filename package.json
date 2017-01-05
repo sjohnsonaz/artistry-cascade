@@ -18,7 +18,7 @@
     "node": "node ./dist/scripts/main.js"
   },
   "peerDependencies": {
-    "cascade": "^0.0.12",
+    "cascade": "^0.0.13",
     "build-widgets": "https://github.com/sjohnsonaz/build-widgets.git"
   },
   "devDependencies": {
@@ -26,7 +26,7 @@
     "@types/mocha": "^2.2.33",
     "autoprefixer": "^6.5.4",
     "build-widgets": "https://github.com/sjohnsonaz/build-widgets.git",
-    "cascade": "^0.0.12",
+    "cascade": "^0.0.13",
     "cascade-validation": "0.0.1",
     "css-loader": "^0.26.1",
     "chai": "^3.5.0",
