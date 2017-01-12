@@ -4,9 +4,11 @@ import { ITemplate } from './ITemplate';
 import Button from './Button';
 
 export interface IModalProps {
+    className?: string;
     open: boolean;
     onclose: (event: Event) => void;
     title?: ITemplate;
+    animation?: 'center' | 'top' | 'right' | 'bottom' | 'left';
 }
 
 export default class Modal extends Component<IModalProps> {
@@ -20,8 +22,17 @@ export default class Modal extends Component<IModalProps> {
     }
 
     render() {
-        let {open} = this.props;
-        var className = 'modal' + (open ? ' modal-open' : '');
+        let {open, animation} = this.props;
+
+        let classNames = this.props.className ? [this.props.className] : [];
+        classNames.push('modal');
+        if (open) {
+            classNames.push(' modal-open');
+        }
+        if (animation) {
+            classNames.push('modal-animate-' + animation.trim());
+        }
+
         if (this.props.title) {
             var title;
             if (typeof this.props.title === 'function') {
@@ -30,6 +41,8 @@ export default class Modal extends Component<IModalProps> {
                 title = this.props.title;
             }
         }
+
+        let className = classNames.join(' ');
         return (
             <div className={className} onclick={this.close}>
                 {title ?

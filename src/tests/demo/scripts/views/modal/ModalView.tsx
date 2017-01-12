@@ -30,10 +30,10 @@ export default class ModalView extends Component<IModalViewProps> {
         return (
             <Section title="Modal">
                 <Button onclick={this.openModal}>Open Modal</Button>
-                <Modal open={this.modalOpen} onclose={this.closeModal} title="Modal">
+                <Modal open={this.modalOpen} onclose={this.closeModal} title="Modal" animation="top">
                     <div>test</div>
                     <Button onclick={this.openInnerModal}>Open Inner Modal</Button>
-                    <Modal open={this.innerModalOpen} onclose={this.closeInnerModal} title="Inner Modal">
+                    <Modal open={this.innerModalOpen} onclose={this.closeInnerModal} title="Inner Modal" animation="center">
                         inner test
                     </Modal>
                 </Modal>
