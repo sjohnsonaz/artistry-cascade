@@ -8,6 +8,7 @@ import ToggleView from './views/toggle/ToggleView';
 import ProgressBarView from './views/progressBar/ProgressBarView';
 import ModalView from './views/modal/ModalView';
 import SectionView from './views/section/SectionView';
+import CarouselView from './views/carousel/CarouselView';
 import TabView from './views/tab/TabView';
 import FormView from './views/form/FormView';
 import CodeView from './views/code/CodeView';
@@ -30,6 +31,7 @@ export default class Application {
                 <ProgressBarView />
                 <ModalView />
                 <SectionView />
+                <CarouselView />
                 <TabView />
                 <FormView />
                 <CodeView />

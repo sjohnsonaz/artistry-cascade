@@ -1,5 +1,6 @@
 export { default as Button, IButtonProps } from '../components/Button';
 export { default as ButtonGroup, IButtonGroupProps } from '../components/ButtonGroup';
+export { default as Carousel, ICarouselProps } from '../components/Carousel';
 export { default as Code, ICodeProps } from '../components/Code';
 export { default as Form, IFormProps } from '../components/Form';
 export { default as FormContainer, IFormContainerProps } from '../components/FormContainer';
