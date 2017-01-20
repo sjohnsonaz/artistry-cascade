@@ -9,33 +9,54 @@ export default class Carousel extends Component<ICarouselProps> {
     container: HTMLElement;
     child: HTMLElement;
 
-    containerRef = (container: HTMLElement) => {
-        this.container = container;
-    }
+    afterRender(node: HTMLElement, updating: boolean) {
+        let {activeIndex} = this.props;
+        activeIndex = activeIndex || 0;
+        if (updating) {
+            let height = node.clientHeight + 'px'
 
-    childRef = (child: HTMLElement) => {
-        this.child = child;
+            node.style.height = height;
+            node.classList.add('carousel-run');
+
+            let children = node.children;
+            for (var index = 0, length = children.length; index < length; index++) {
+                var child = children[index];
+                if (index === activeIndex) {
+                    child.className = 'carousel-selected';
+                    height = child.clientHeight + 'px';
+                } else {
+                    child.className = undefined;
+                }
+            }
+
+            node.style.height = height;
+
+            window.setTimeout(() => {
+                node.classList.remove('carousel-run');
+                node.style.height = 'auto';
+            }, 500);
+        } else {
+            let children = node.children;
+            for (var index = 0, length = children.length; index < length; index++) {
+                var child = children[index];
+                if (index === activeIndex) {
+                    child.className = 'carousel-selected';
+                } else {
+                    child.className = '';
+                }
+            }
+        }
     }
 
     render() {
-        let {activeIndex} = this.props;
-
         let classNames = this.props.className ? [this.props.className] : [];
         classNames.push('carousel');
-        classNames.push('carousel-run');
-
-        activeIndex = activeIndex || 0;
 
         let className = classNames.join(' ');
 
-        window.setTimeout(() => {
-            this.container.classList.remove('carousel-run');
-        }, 500);
-
         return (
-            <div className={className} style="background-color: black" ref={this.containerRef}>
+            <div className={className} style="height: auto; background-color: black">
                 {this.children ? this.children.map((child, index) => {
-                    let className = activeIndex === index ? 'carousel-selected' : '';
                     return <div className={className}>{child}</div>
                 }) : undefined}
             </div>
