@@ -5,7 +5,7 @@ export interface IFormInputProps extends Elements.JSXInputElement {
     modelProp: string;
 }
 
-export class FormInput extends Component<IFormInputProps> {
+export default class FormInput extends Component<IFormInputProps> {
     oninput = (event?: Event) => {
         let {model, modelProp} = this.props;
         model[modelProp] = (event.target as HTMLInputElement).value;
