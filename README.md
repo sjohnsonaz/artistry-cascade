@@ -10,6 +10,15 @@ The API is focused on consistency, and ease of use.
 
 * Button
 * ButtonGroup
+* Carousel
+* Code
+* Form
+* FormContainer
 * FormInput
 * Modal
 * Popover
+* ProgressBar
+* Range
+* Section
+* Tab
+* Toggle
