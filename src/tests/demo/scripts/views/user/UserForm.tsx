@@ -47,10 +47,10 @@ export default class UserForm extends Component<IUserFormProps> {
         return (
             <tr onkeydown={this.onKeyDown}>
                 <td>
-                    <input type="text" form="user-form" name="firstName" value={user.firstName} oninput={this.onChange.bind(this, 'firstName')} ref={this.setFirstNameInput} />
+                    <input type="text" className="input" form="user-form" name="firstName" value={user.firstName} oninput={this.onChange.bind(this, 'firstName')} ref={this.setFirstNameInput} />
                 </td>
                 <td>
-                    <input type="text" form="user-form" name="lastName" value={user.lastName} oninput={this.onChange.bind(this, 'lastName')} />
+                    <input type="text" className="input" form="user-form" name="lastName" value={user.lastName} oninput={this.onChange.bind(this, 'lastName')} />
                 </td>
                 <td>
                     <Button type="submit" form="user-form" name="submit" onclick={this.addUser.bind(this)} disabled={!valid}>Add</Button>
