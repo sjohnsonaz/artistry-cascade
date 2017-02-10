@@ -8,7 +8,10 @@ export interface IModalProps {
     open: boolean;
     onclose: (event: Event) => void;
     title?: ITemplate;
+    footer?: ITemplate;
     animation?: 'center' | 'top' | 'right' | 'bottom' | 'left';
+    lockable?: boolean;
+    locked?: boolean;
 }
 
 export default class Modal extends Component<IModalProps> {
@@ -42,20 +45,42 @@ export default class Modal extends Component<IModalProps> {
             }
         }
 
+        if (this.props.footer) {
+            var footer;
+            if (typeof this.props.footer === 'function') {
+                footer = this.props.footer();
+            } else {
+                footer = this.props.footer;
+            }
+        }
+
+        let modalContentClassNames = [];
+        if (this.props.lockable) {
+            modalContentClassNames.push('lock-contents');
+            if (this.props.locked) {
+                modalContentClassNames.push('locked');
+            }
+        }
+        let modalContentClassName = modalContentClassNames.join(' ');
         let className = classNames.join(' ');
         return (
             <div className={className} onclick={this.close}>
-                {title ?
+                {title || footer ?
                     <div className="modal-content" onclick={this.preventClick}>
-                        <div className="modal-header">
-                            <h1 className="modal-title">{title}</h1>
-                            <div className="modal-controls">
-                                <Button onclick={this.props.onclose}>Close</Button>
+                        {title ?
+                            <div className="modal-header">
+                                <h1 className="modal-title">{title}</h1>
+                                <div className="modal-controls">
+                                    <Button onclick={this.props.onclose}>Close</Button>
+                                </div>
                             </div>
-                        </div>
-                        <p>{this.children}</p>
+                            : null}
+                        <div className={'modal-body ' + modalContentClassName}>{this.children}</div>
+                        {footer ?
+                            <div className="modal-footer">{footer}</div>
+                            : null}
                     </div> :
-                    <div className="modal-content" onclick={this.preventClick}>
+                    <div className={'modal-content ' + modalContentClassName} onclick={this.preventClick}>
                         {this.children}
                     </div>
                 }
