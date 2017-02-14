@@ -1,6 +1,6 @@
 import Cascade, { Component, observable } from 'cascade';
 
-import { Button, ButtonGroup, Section } from '../../../../../scripts/modules/CascadeComponents';
+import { Button, ButtonBar, ButtonGroup, Section } from '../../../../../scripts/modules/CascadeComponents';
 
 export interface IButtonViewProps {
 
@@ -39,6 +39,13 @@ export default class ButtonView extends Component<IButtonViewProps> {
                     <Button popover="Popover" theme="primary">Edit</Button>
                     <Button theme="danger">Delete</Button>
                 </ButtonGroup>
+
+                <h3>Button Bar</h3>
+                <ButtonBar>
+                    <Button>View</Button>
+                    <Button popover="Popover" theme="primary">Edit</Button>
+                    <Button theme="danger">Delete</Button>
+                </ButtonBar>
 
                 <h3>Lockable Buttons</h3>
                 <div>
