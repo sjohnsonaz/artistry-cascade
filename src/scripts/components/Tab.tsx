@@ -1,10 +1,13 @@
 import Cascade, { Component, observable } from 'cascade';
 
+import Carousel from './Carousel';
+
 export interface ITabProps {
     titles: any[];
     activeIndex?: number;
     className?: string;
     onSelectPanel?: (index) => void;
+    animated?: boolean;
 }
 
 export default class Tab extends Component<ITabProps> {
@@ -37,12 +40,17 @@ export default class Tab extends Component<ITabProps> {
                         </li>
                     }) : undefined}
                 </ul>
-                <div className="tab-body">
-                    {this.children ? this.children.map((child, index) => {
-                        let className = activeIndex === index ? 'tab-panel tab-active' : 'tab-panel';
-                        return <div className={className}>{child}</div>
-                    }) : undefined}
-                </div>
+                {this.props.animated ?
+                    <Carousel className="tab-carousel" activeIndex={activeIndex}>
+                        {this.children}
+                    </Carousel>
+                    : <div className="tab-body">
+                        {this.children ? this.children.map((child, index) => {
+                            let className = activeIndex === index ? 'tab-panel tab-active' : 'tab-panel';
+                            return <div className={className}>{child}</div>
+                        }) : undefined}
+                    </div>
+                }
             </div>
         );
     }
