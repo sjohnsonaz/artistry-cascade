@@ -1,1 +1,12 @@
-{}
+{
+    "$default": {
+        "border": {
+            "width": "0"
+        },
+        "padding": "12px",
+        "font-family": "'Roboto', sans-serif"
+    },
+    "$button-bar": {
+        "margin": "7px"
+    }
+}

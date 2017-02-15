@@ -1,6 +1,6 @@
 import Cascade, { Component, observable } from 'cascade';
 
-import { Button, ButtonGroup, Section } from '../../../../../scripts/modules/CascadeComponents';
+import { Button, ButtonBar, ButtonGroup, Section } from '../../../../../scripts/modules/CascadeComponents';
 
 export interface IButtonViewProps {
 
@@ -21,15 +21,15 @@ export default class ButtonView extends Component<IButtonViewProps> {
             <Section title="Buttons">
                 <h3>Individual Buttons</h3>
                 <div>
-                    <Button>Edit</Button>
-                    <Button theme="primary">Save</Button>
+                    <Button>Edit</Button>{' '}
+                    <Button theme="primary">Save</Button>{' '}
                     <Button theme="danger">Delete</Button>
                 </div>
 
                 <h3>Disabled Buttons</h3>
                 <div>
-                    <Button disabled>Edit</Button>
-                    <Button disabled theme="primary">Save</Button>
+                    <Button disabled>Edit</Button>{' '}
+                    <Button disabled theme="primary">Save</Button>{' '}
                     <Button disabled theme="danger">Delete</Button>
                 </div>
 
@@ -40,10 +40,17 @@ export default class ButtonView extends Component<IButtonViewProps> {
                     <Button theme="danger">Delete</Button>
                 </ButtonGroup>
 
+                <h3>Button Bar</h3>
+                <ButtonBar>
+                    <Button>View</Button>
+                    <Button popover="Popover" theme="primary">Edit</Button>
+                    <Button theme="danger">Delete</Button>
+                </ButtonBar>
+
                 <h3>Lockable Buttons</h3>
                 <div>
-                    <Button lockContent="Locked" locked={this.locked} onclick={this.lockButton}>Lockable Edit</Button>
-                    <Button lockContent="Locked" locked={this.locked} onclick={this.lockButton} theme="primary">Lockable Save</Button>
+                    <Button lockContent="Locked" locked={this.locked} onclick={this.lockButton}>Lockable Edit</Button>{' '}
+                    <Button lockContent="Locked" locked={this.locked} onclick={this.lockButton} theme="primary">Lockable Save</Button>{' '}
                     <Button lockContent="Locked" locked={this.locked} onclick={this.lockButton} theme="danger">Lockable Delete</Button>
                 </div>
 
