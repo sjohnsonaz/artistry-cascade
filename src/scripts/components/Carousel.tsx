@@ -18,6 +18,8 @@ export default class Carousel extends Component<ICarouselProps> {
         activeIndex %= children.length;
 
         if (updating) {
+            let computedStyle = window.getComputedStyle(node, null);
+            let paddingHeight = parseFloat(computedStyle.getPropertyValue('padding-top')) + parseFloat(computedStyle.getPropertyValue('padding-bottom'));
             let height = node.clientHeight + 'px'
 
             node.style.height = height;
@@ -27,9 +29,9 @@ export default class Carousel extends Component<ICarouselProps> {
                 var child = children[index];
                 if (index === activeIndex) {
                     child.className = 'carousel-selected';
-                    height = child.clientHeight + 'px';
+                    height = paddingHeight + child.clientHeight + 'px';
                 } else if (child.className) {
-                    child.className = undefined;
+                    child.className = '';
                 }
             }
 
@@ -58,7 +60,7 @@ export default class Carousel extends Component<ICarouselProps> {
         let className = classNames.join(' ');
 
         return (
-            <div className={className} style="height: auto; background-color: black">
+            <div className={className} style="height: auto;">
                 {this.children ? this.children.map((child, index) => {
                     return <div className={className}>{child}</div>
                 }) : undefined}
