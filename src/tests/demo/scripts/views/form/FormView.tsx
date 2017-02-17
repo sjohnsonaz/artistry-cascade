@@ -12,7 +12,7 @@ export default class FormView extends Component<IFormViewProps> {
             <Section title="Form">
                 <Form>
                     <FormContainer title="Value">
-                        <input type="text" />
+                        <input type="text" className="input" />
                     </FormContainer>
                 </Form>
             </Section>
