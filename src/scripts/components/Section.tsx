@@ -4,12 +4,17 @@ export interface ISectionProps extends Elements.JSXElement {
     title: any;
     lockable?: boolean;
     locked?: boolean;
+    closed?: boolean;
 }
 
 export default class Section extends Component<ISectionProps> {
     render() {
         let classNames = this.props.className ? [this.props.className] : [];
         classNames.push('section');
+
+        if (this.props.closed) {
+            classNames.push('section-closed');
+        }
 
         let innerClassNames = ['section-content'];
         if (this.props.lockable) {
