@@ -17,6 +17,13 @@ export default class Carousel extends Component<ICarouselProps> {
         let children = node.children;
         activeIndex %= children.length;
 
+        // Clear toggleTimeout
+        let tabTimeout: number = (node as any).tabTimeout;
+        if (typeof tabTimeout === 'number') {
+            window.clearTimeout(tabTimeout);
+            (node as any).tabTimeout = undefined;
+        }
+
         if (updating) {
             let computedStyle = window.getComputedStyle(node, null);
             let paddingHeight = parseFloat(computedStyle.getPropertyValue('padding-top')) + parseFloat(computedStyle.getPropertyValue('padding-bottom'));
@@ -37,7 +44,7 @@ export default class Carousel extends Component<ICarouselProps> {
 
             node.style.height = height;
 
-            window.setTimeout(() => {
+            (node as any).tabTimeout = window.setTimeout(() => {
                 ClassNames.classListRemove(node, 'carousel-run');
                 node.style.height = 'auto';
             }, 500);
