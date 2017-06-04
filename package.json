@@ -19,7 +19,7 @@
     "node": "node ./dist/scripts/main.js"
   },
   "peerDependencies": {
-    "cascade": "^0.0.21",
+    "cascade": "^0.0.23",
     "build-widgets": "https://github.com/sjohnsonaz/build-widgets.git"
   },
   "devDependencies": {
@@ -27,21 +27,21 @@
     "@types/mocha": "^2.2.33",
     "autoprefixer": "^6.5.4",
     "build-widgets": "https://github.com/sjohnsonaz/build-widgets.git",
-    "cascade": "^0.0.21",
+    "cascade": "^0.0.23",
     "cascade-validation": "0.0.1",
-    "css-loader": "^0.26.1",
+    "css-loader": "^0.28.4",
     "chai": "^3.5.0",
-    "es6-shim": "^0.35.1",
+    "es6-shim": "^0.35.3",
     "extract-text-webpack-plugin": "^1.0.1",
     "jsdom": "^9.8.3",
     "mocha": "^3.1.2",
     "postcss-loader": "^1.2.1",
-    "reflect-metadata": "^0.1.8",
-    "style-loader": "^0.13.1",
+    "reflect-metadata": "^0.1.10",
+    "style-loader": "0.18.1",
     "stylus": "^0.54.5",
-    "stylus-loader": "^2.4.0",
-    "ts-loader": "^0.9.5",
-    "typescript": "^2.1.4",
+    "stylus-loader": "^3.0.1",
+    "ts-loader": "^2.1.0",
+    "typescript": "^2.3.4",
     "webpack": "^1.14.0"
   },
   "keywords": [
