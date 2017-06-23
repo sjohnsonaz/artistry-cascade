@@ -20,13 +20,13 @@
   },
   "peerDependencies": {
     "cascade": "^0.0.23",
-    "build-widgets": "https://github.com/sjohnsonaz/build-widgets.git"
+    "artistry": "^0.0.0"
   },
   "devDependencies": {
     "@types/chai": "^3.4.34",
     "@types/mocha": "^2.2.33",
     "autoprefixer": "^6.5.4",
-    "build-widgets": "https://github.com/sjohnsonaz/build-widgets.git",
+    "artistry": "^0.0.0",
     "cascade": "^0.0.23",
     "cascade-validation": "0.0.1",
     "css-loader": "^0.28.4",
