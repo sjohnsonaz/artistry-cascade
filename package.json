@@ -11,23 +11,23 @@
     "start": "node ./dist/main.js",
     "build": "tsc",
     "prepublishOnly": "tsc --declaration",
-    "test": "node src/mocha/NodeRunner.js",
+    "test": "tsc && node src/mocha/NodeRunner.js",
     "min": "webpack --config webpack.config.js --progress",
     "dev": "webpack --config webpack.dev.config.js --progress",
     "watch": "webpack --config webpack.dev.config.js --watch --progress",
     "node": "node ./dist/scripts/main.js"
   },
   "peerDependencies": {
-    "cascade": "0.0.23",
+    "cascade": "^0.0.24",
     "artistry": "0.0.0"
   },
   "devDependencies": {
     "@types/chai": "3.4.34",
     "@types/mocha": "2.2.33",
     "autoprefixer": "6.5.4",
-    "artistry": "0.0.0",
-    "cascade": "0.0.23",
-    "cascade-validation": "0.0.1",
+    "artistry": "^0.0.0",
+    "cascade": "^0.0.24",
+    "cascade-validation": "^0.0.1",
     "css-loader": "0.28.4",
     "chai": "3.5.0",
     "es6-shim": "0.35.3",
