@@ -9,9 +9,8 @@
   "typings": "dist/scripts/modules/CascadeComponents.d.ts",
   "scripts": {
     "start": "node ./dist/main.js",
-    "install": "",
     "build": "tsc",
-    "prepublish": "tsc --declaration",
+    "prepublishOnly": "tsc --declaration",
     "test": "node src/mocha/NodeRunner.js",
     "min": "webpack --config webpack.config.js --progress",
     "dev": "webpack --config webpack.dev.config.js --progress",
