@@ -1,6 +1,3 @@
-var path = require('path');
-var webpack = require('webpack');
-var autoprefixer = require('autoprefixer');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
@@ -15,7 +12,7 @@ module.exports = {
     },
     devtool: 'source-map',
     resolve: {
-        extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js']
+        extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js']
     },
     module: {
         loaders: [{
@@ -23,16 +20,27 @@ module.exports = {
             loader: 'ts-loader'
         }, {
             test: /\.styl$/,
-            loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader!stylus-loader')
+            loader: ExtractTextPlugin.extract({
+                fallback: 'style-loader',
+                use: [
+                    'css-loader',
+                    { loader: 'postcss-loader', options: { sourceMap: true } },
+                    'stylus-loader'
+                ]
+            })
         }, {
             test: /\.css$/,
-            loader: ExtractTextPlugin.extract('style-loader', 'css-loader!clean-css-loader!postcss-loader')
+            loader: ExtractTextPlugin.extract({
+                fallback: 'style-loader',
+                use: [
+                    'css-loader',
+                    'clean-css-loader',
+                    { loader: 'postcss-loader', options: { sourceMap: true } }
+                ]
+            })
         }]
     },
     plugins: [
         new ExtractTextPlugin("./dist/bundle/[name].css")
-    ],
-    postcss: [autoprefixer({
-        browsers: ['last 2 versions']
-    })]
+    ]
 };

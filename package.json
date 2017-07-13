@@ -19,30 +19,29 @@
   },
   "peerDependencies": {
     "cascade": "^0.0.24",
-    "artistry": "0.0.0"
+    "artistry": "^0.0.0"
   },
   "devDependencies": {
-    "@types/chai": "3.4.34",
-    "@types/mocha": "2.2.33",
-    "autoprefixer": "6.5.4",
+    "@types/chai": "4.0.1",
+    "@types/mocha": "2.2.41",
     "artistry": "^0.0.0",
+    "autoprefixer": "7.1.2",
     "cascade": "^0.0.24",
     "cascade-validation": "^0.0.1",
+    "chai": "4.1.0",
     "css-loader": "0.28.4",
-    "chai": "3.5.0",
     "es6-shim": "0.35.3",
-    "extract-text-webpack-plugin": "1.0.1",
-    "jsdom": "9.8.3",
-    "mocha": "3.1.2",
-    "normalize.css": "7.0.0",
-    "postcss-loader": "1.2.1",
+    "extract-text-webpack-plugin": "3.0.0",
+    "jsdom": "11.1.0",
+    "mocha": "3.4.2",
+    "postcss-loader": "2.0.6",
     "reflect-metadata": "0.1.10",
-    "style-loader": "0.18.1",
+    "style-loader": "0.18.2",
     "stylus": "0.54.5",
     "stylus-loader": "3.0.1",
-    "ts-loader": "2.1.0",
-    "typescript": "2.3.4",
-    "webpack": "1.14.0"
+    "ts-loader": "2.2.2",
+    "typescript": "2.4.1",
+    "webpack": "3.2.0"
   },
   "keywords": [
     "component",
