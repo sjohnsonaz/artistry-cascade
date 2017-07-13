@@ -2,6 +2,8 @@ declare var window: any;
 
 import Cascade from 'cascade';
 
+import { Container } from '../../../scripts/modules/CascadeComponents';
+
 import ButtonView from './views/button/ButtonView';
 import RangeView from './views/range/RangeView';
 import ToggleView from './views/toggle/ToggleView';
@@ -23,7 +25,7 @@ export default class Application {
         window.User = User;
         Cascade.render(
             document.getElementById('root'),
-            <div className="container">
+            <Container>
                 <h2>Components</h2>
                 <ButtonView />
                 <RangeView />
@@ -37,7 +39,7 @@ export default class Application {
                 <CodeView />
                 <h2>Examples</h2>
                 <UserListView viewModel={viewModel} />
-            </div>,
+            </Container>,
             function () {
                 console.log('started');
             }
