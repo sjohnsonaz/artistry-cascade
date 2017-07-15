@@ -5,6 +5,7 @@ export { default as Carousel, ICarouselProps } from '../components/Carousel';
 export { default as Code, ICodeProps } from '../components/Code';
 export { default as Container, IContainerProps } from '../components/Container';
 export { default as Form, IFormProps } from '../components/Form';
+export { default as FormActions, IFormActionsProps } from '../components/FormActions';
 export { default as FormContainer, IFormContainerProps } from '../components/FormContainer';
 export { default as FormInput, IFormInputProps } from '../components/FormInput';
 export { default as Modal, IModalProps } from '../components/Modal';
