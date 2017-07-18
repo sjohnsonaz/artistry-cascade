@@ -34,7 +34,6 @@ export default class Carousel extends Component<ICarouselProps> {
 
             for (var index = 0, length = children.length; index < length; index++) {
                 var child = children[index];
-                (child as HTMLElement).style.visibility = '';
                 if (index === activeIndex) {
                     child.className = 'carousel-selected';
                     height = paddingHeight + child.clientHeight + 'px';
@@ -48,12 +47,6 @@ export default class Carousel extends Component<ICarouselProps> {
             (node as any).tabTimeout = window.setTimeout(() => {
                 ClassNames.classListRemove(node, 'carousel-run');
                 node.style.height = 'auto';
-                for (var index = 0, length = children.length; index < length; index++) {
-                    var child = children[index];
-                    if (index !== activeIndex) {
-                        (child as HTMLElement).style.visibility = 'hidden';
-                    }
-                }
             }, 500);
         } else {
             for (var index = 0, length = children.length; index < length; index++) {
