@@ -19,12 +19,12 @@
   },
   "peerDependencies": {
     "cascade": "^0.1.1",
-    "artistry": "^0.0.4"
+    "artistry": "^0.0.5"
   },
   "devDependencies": {
     "@types/chai": "4.0.1",
     "@types/mocha": "2.2.41",
-    "artistry": "^0.0.4",
+    "artistry": "^0.0.5",
     "autoprefixer": "7.1.2",
     "cascade": "^0.1.1",
     "cascade-validation": "^0.0.1",
@@ -39,9 +39,9 @@
     "style-loader": "0.18.2",
     "stylus": "0.54.5",
     "stylus-loader": "3.0.1",
-    "ts-loader": "2.2.2",
-    "typescript": "2.4.1",
-    "webpack": "3.2.0"
+    "ts-loader": "2.3.1",
+    "typescript": "2.4.2",
+    "webpack": "3.4.1"
   },
   "keywords": [
     "component",
