@@ -8,6 +8,7 @@ import ButtonView from './views/button/ButtonView';
 import RangeView from './views/range/RangeView';
 import ToggleView from './views/toggle/ToggleView';
 import ProgressBarView from './views/progressBar/ProgressBarView';
+import MenuBarView from './views/menuBar/MenuBarView';
 import ModalView from './views/modal/ModalView';
 import SectionView from './views/section/SectionView';
 import CarouselView from './views/carousel/CarouselView';
@@ -25,7 +26,8 @@ export default class Application {
         window.User = User;
         Cascade.render(
             document.getElementById('root'),
-            <Container>
+            <Container menuBar>
+                <MenuBarView />
                 <h2>Components</h2>
                 <ButtonView />
                 <RangeView />

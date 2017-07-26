@@ -8,6 +8,7 @@ export { default as Form, IFormProps } from '../components/Form';
 export { default as FormActions, IFormActionsProps } from '../components/FormActions';
 export { default as FormContainer, IFormContainerProps } from '../components/FormContainer';
 export { default as FormInput, IFormInputProps } from '../components/FormInput';
+export { default as MenuBar, IMenuBarProps } from '../components/MenuBar';
 export { default as Modal, IModalProps } from '../components/Modal';
 export { default as Popover, IPopoverProps } from '../components/Popover';
 export { default as Range, IRangeProps } from '../components/Range';
