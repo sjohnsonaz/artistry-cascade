@@ -8,12 +8,21 @@ export interface IButtonViewProps {
 
 export default class ButtonView extends Component<IButtonViewProps> {
     @observable locked: boolean = false;
+    @observable popoverOpen: boolean = false;
 
     lockButton = () => {
         this.locked = true;
         window.setTimeout(() => {
             this.locked = false;
         }, 1000);
+    }
+
+    openPopover = () => {
+        this.popoverOpen = true;
+    }
+
+    closePopover = () => {
+        this.popoverOpen = false;
     }
 
     render() {
@@ -59,6 +68,14 @@ export default class ButtonView extends Component<IButtonViewProps> {
 
                 <h3>Popover</h3>
                 <Button popover={<span><strong>Popover</strong> Text</span>} popoverDirection="right">Popover</Button>
+
+                <h3>Popover Menu</h3>
+                <Button popover={<span><strong>Popover</strong> Text</span>} popoverDirection="right"
+                    popoverMenu
+                    popoverOpen={this.popoverOpen}
+                    onPopoverClose={this.closePopover}
+                    onclick={this.openPopover}
+                >Popover Menu</Button>
             </Section>
         );
     }
