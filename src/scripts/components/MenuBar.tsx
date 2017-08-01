@@ -2,6 +2,7 @@ import Cascade, { Component } from 'cascade';
 
 export interface IMenuBarProps {
     className?: string;
+    id?: string;
     title?: any;
     top?: boolean;
     links?: {
@@ -29,9 +30,8 @@ export default class MenuBar extends Component<IMenuBarProps> {
             )
         }
 
-        let className = classNames.join(' ');
         return (
-            <div className={className}>
+            <div className={classNames.join(' ')} id={this.props.id}>
                 {menuBarTitle}
                 <ul>
                     {this.props.links ?

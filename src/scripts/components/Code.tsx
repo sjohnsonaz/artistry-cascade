@@ -8,9 +8,8 @@ export default class Code extends Component<ICodeProps> {
     render() {
         let classNames = this.props.className ? [this.props.className] : [];
         classNames.push('code');
-        let className = classNames.join(' ');
         return (
-            <pre className={className} {...this.props}>
+            <pre className={classNames.join(' ')} {...this.props}>
                 {this.children ?
                     this.children.map(child => <code>{child}</code>)
                     : undefined}

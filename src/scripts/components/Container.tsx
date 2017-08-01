@@ -2,6 +2,7 @@ import Cascade, { Component } from 'cascade';
 
 export interface IContainerProps {
     className?: string;
+    id?: string;
     menuBar?: boolean;
 }
 
@@ -12,7 +13,6 @@ export default class ButtonGroups extends Component<IContainerProps>{
         if (this.props.menuBar) {
             classNames.push('container-menu-bar-top');
         }
-        let className = classNames.join(' ');
-        return <div className={className}>{this.children}</div>
+        return <div className={classNames.join(' ')} id={this.props.id}>{this.children}</div>
     }
 }

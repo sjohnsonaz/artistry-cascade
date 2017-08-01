@@ -9,9 +9,8 @@ export default class Toggle extends Component<IToggleProps> {
         classNames.push('toggle');
         delete this.props.className;
 
-        let className = classNames.join(' ');
         return (
-            <div className={className}>
+            <div className={classNames.join(' ')}>
                 <label>
                     <div className="toggle-box">
                         <input type="checkbox" {...this.props} />

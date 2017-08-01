@@ -8,9 +8,8 @@ export default class Form extends Component<IFormProps> {
     render() {
         let classNames = this.props.className ? [this.props.className] : [];
         classNames.push('form');
-        let className = classNames.join(' ');
         return (
-            <form className={className}>{this.children}</form>
+            <form className={classNames.join(' ')}>{this.children}</form>
         );
     }
 }

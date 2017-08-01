@@ -1,11 +1,12 @@
 import Cascade, { Component } from 'cascade';
 
 export interface IPopoverProps {
+    className?: string;
+    id?: string;
     direction?: 'top' | 'right' | 'bottom' | 'left';
     align?: 'top' | 'right' | 'bottom' | 'left' | 'center';
     open?: boolean;
     closed?: boolean;
-    className?: string;
 }
 
 export default class Popover extends Component<IPopoverProps> {
@@ -52,9 +53,8 @@ export default class Popover extends Component<IPopoverProps> {
         if (this.props.closed) {
             classNames.push('popover-closed');
         }
-        let className = classNames.join(' ');
         return (
-            <div className={className}>
+            <div className={classNames.join(' ')} id={this.props.id}>
                 <div className="popover-content">{this.children}</div>
             </div>
         );

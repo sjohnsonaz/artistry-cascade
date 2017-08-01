@@ -2,6 +2,7 @@ import Cascade, { Component, Elements } from 'cascade';
 
 export interface ITableProps {
     className?: string;
+    id?: string;
     data: any[];
     titles?: any[];
 }
@@ -10,16 +11,16 @@ export default class Table extends Component<ITableProps> {
     render() {
         let {
             className,
+            id,
             data,
             titles
         } = this.props;
 
-        let classNames = this.props.className ? [this.props.className] : [];
+        let classNames = className ? [className] : [];
         classNames.push('table');
-        className = classNames.join(' ');
 
         return (
-            <table className={className}>
+            <table className={classNames.join(' ')} id={id}>
                 {titles ?
                     <thead>
                         <tr>

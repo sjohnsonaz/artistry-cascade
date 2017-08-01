@@ -4,6 +4,7 @@ import ClassNames from '../util/ClassNames';
 
 export interface ICarouselProps {
     className?: string;
+    id?: string;
     activeIndex: number;
 }
 
@@ -67,9 +68,9 @@ export default class Carousel extends Component<ICarouselProps> {
         let className = classNames.join(' ');
 
         return (
-            <div className={className} style="height: auto;">
+            <div className={className} id={this.props.id} style="height: auto;">
                 {this.children ? this.children.map((child, index) => {
-                    return <div className={className}>{child}</div>
+                    return <div>{child}</div>
                 }) : undefined}
             </div>
         );

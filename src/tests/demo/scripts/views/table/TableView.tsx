@@ -35,6 +35,7 @@ export default class TableView extends Component<ITableViewProps> {
         return (
             <Section title="Table">
                 <Table
+                    id="table-component"
                     data={data}
                     titles={['Ingredient', 'Quantity', 'Unit']}
                 />

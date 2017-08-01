@@ -3,9 +3,10 @@ import Cascade, { Component, observable } from 'cascade';
 import Carousel from './Carousel';
 
 export interface ITabProps {
+    className?: string;
+    id?: string;
     titles: any[];
     activeIndex?: number;
-    className?: string;
     onSelectPanel?: (index) => void;
     animated?: boolean;
 }
@@ -29,9 +30,8 @@ export default class Tab extends Component<ITabProps> {
             this.props.activeIndex :
             (this.activeIndex || 0);
 
-        let className = classNames.join(' ');
         return (
-            <div className={className}>
+            <div className={classNames.join(' ')} id={this.props.id}>
                 <ul className="tab-header">
                     {this.props.titles ? this.props.titles.map((title, index) => {
                         let className = activeIndex === index ? 'tab-title tab-active' : 'tab-title';

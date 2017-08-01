@@ -5,6 +5,7 @@ import Button from './Button';
 
 export interface IModalProps {
     className?: string;
+    id?: string;
     open: boolean;
     onclose: (event: Event) => void;
     title?: ITemplate;
@@ -62,9 +63,8 @@ export default class Modal extends Component<IModalProps> {
             }
         }
         let modalContentClassName = modalContentClassNames.join(' ');
-        let className = classNames.join(' ');
         return (
-            <div className={className} onclick={this.close}>
+            <div className={classNames.join(' ')} id={this.props.id} onclick={this.close}>
                 {title || footer ?
                     <div className="modal-content" onclick={this.preventClick}>
                         {title ?

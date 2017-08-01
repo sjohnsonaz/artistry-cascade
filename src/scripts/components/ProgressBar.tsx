@@ -1,6 +1,8 @@
 import Cascade, { Component, Elements } from 'cascade';
 
-export interface IProgressBarProps extends Elements.JSXDivElement {
+export interface IProgressBarProps {
+    className?: string;
+    id?: string;
     value: number;
     title?: any;
 }
@@ -21,9 +23,8 @@ export default class ProgressBar extends Component<IProgressBarProps> {
 
         let title = this.props.title || value + '%'
 
-        let className = classNames.join(' ');
         return (
-            <div className={className} {...this.props}>
+            <div className={classNames.join(' ')} id={this.props.id}>
                 <div style={style}>
                     {title}
                 </div>
