@@ -15,4 +15,5 @@ export { default as Range, IRangeProps } from '../components/Range';
 export { default as ProgressBar, IProgressBarProps } from '../components/ProgressBar';
 export { default as Section, ISectionProps } from '../components/Section';
 export { default as Tab, ITabProps } from '../components/Tab';
+export { default as Table, ITableProps } from '../components/Table';
 export { default as Toggle, IToggleProps } from '../components/Toggle';

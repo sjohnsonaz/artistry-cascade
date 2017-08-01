@@ -13,6 +13,7 @@ import ModalView from './views/modal/ModalView';
 import SectionView from './views/section/SectionView';
 import CarouselView from './views/carousel/CarouselView';
 import TabView from './views/tab/TabView';
+import TableView from './views/table/TableView';
 import FormView from './views/form/FormView';
 import CodeView from './views/code/CodeView';
 import ViewModel from './ViewModel';
@@ -37,6 +38,7 @@ export default class Application {
                 <SectionView />
                 <CarouselView />
                 <TabView />
+                <TableView />
                 <FormView />
                 <CodeView />
                 <h2>Examples</h2>
