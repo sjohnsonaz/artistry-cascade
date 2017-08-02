@@ -26,29 +26,37 @@ export default class Pager extends Component<IPagerProps> {
 
     onClickBack = (event: Event) => {
         event.preventDefault();
-        if (this.props.onClickBack) {
-            this.props.onClickBack(event);
+        if (this.props.index > 0) {
+            if (this.props.onClickBack) {
+                this.props.onClickBack(event);
+            }
         }
     }
 
     onClickForward = (event: Event) => {
         event.preventDefault();
-        if (this.props.onClickForward) {
-            this.props.onClickForward(event);
+        if (this.props.index < this.props.count - 1) {
+            if (this.props.onClickForward) {
+                this.props.onClickForward(event);
+            }
         }
     }
 
     onClickStart = (event: Event) => {
         event.preventDefault();
-        if (this.props.onClickStart) {
-            this.props.onClickStart(event);
+        if (this.props.index > 0) {
+            if (this.props.onClickStart) {
+                this.props.onClickStart(event);
+            }
         }
     }
 
     onClickEnd = (event: Event) => {
         event.preventDefault();
-        if (this.props.onClickEnd) {
-            this.props.onClickEnd(event);
+        if (this.props.index < this.props.count - 1) {
+            if (this.props.onClickEnd) {
+                this.props.onClickEnd(event);
+            }
         }
     }
 
@@ -78,34 +86,33 @@ export default class Pager extends Component<IPagerProps> {
         for (var pagerIndex = low; pagerIndex < high; pagerIndex++) {
             let active = pagerIndex === index;
             pagers.push(
-                <li
-                    className={active ? 'pager-active' : undefined}
-                    disabled={active}
-                >
-                    <a href="#" onclick={this.onClickIndex.bind(this, pagerIndex)}>{pagerIndex + offset}</a>
+                <li className={active ? 'pager-active' : undefined}>
+                    <a href="#" onclick={this.onClickIndex.bind(this, pagerIndex)}>
+                        {pagerIndex + offset}
+                    </a>
                 </li>
             );
         }
         return (
             <ul className={classNames.join(' ')} id={id}>
                 {showEnds ?
-                    <li>
+                    <li className={index === 0 ? 'pager-disabled' : undefined}>
                         <a href="#" onclick={this.onClickStart}>&lt;&lt;</a>
                     </li>
                     : undefined}
                 {showArrows ?
-                    <li>
+                    <li className={index === 0 ? 'pager-disabled' : undefined}>
                         <a href="#" onclick={this.onClickBack}>&lt;</a>
                     </li>
                     : undefined}
                 {pagers}
                 {showArrows ?
-                    <li>
+                    <li className={index >= count - 1 ? 'pager-disabled' : undefined}>
                         <a href="#" onclick={this.onClickForward}>&gt;</a>
                     </li>
                     : undefined}
                 {showEnds ?
-                    <li>
+                    <li className={index >= count - 1 ? 'pager-disabled' : undefined}>
                         <a href="#" onclick={this.onClickEnd}>&gt;&gt;</a>
                     </li>
                     : undefined}
