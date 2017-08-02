@@ -1,4 +1,4 @@
-import Cascade, { Component, Elements } from 'cascade';
+import Cascade, { Component } from 'cascade';
 
 export interface ITableProps {
     className?: string;
