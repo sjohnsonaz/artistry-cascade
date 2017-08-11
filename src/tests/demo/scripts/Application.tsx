@@ -17,6 +17,7 @@ import TableView from './views/table/TableView';
 import PagerView from './views/pager/PagerView';
 import FormView from './views/form/FormView';
 import CodeView from './views/code/CodeView';
+import DrawerView from './views/drawer/DrawerView';
 import ViewModel from './ViewModel';
 import User from './models/User';
 import UserListView from './views/user/UserListView';
@@ -36,6 +37,7 @@ export default class Application {
                 <ToggleView />
                 <ProgressBarView />
                 <ModalView />
+                <DrawerView />
                 <SectionView />
                 <CarouselView />
                 <TabView />

@@ -4,6 +4,7 @@ export { default as ButtonBar, IButtonBarProps } from '../components/ButtonBar';
 export { default as Carousel, ICarouselProps } from '../components/Carousel';
 export { default as Code, ICodeProps } from '../components/Code';
 export { default as Container, IContainerProps } from '../components/Container';
+export { default as Drawer, IDrawerProps } from '../components/Drawer';
 export { default as Form, IFormProps } from '../components/Form';
 export { default as FormActions, IFormActionsProps } from '../components/FormActions';
 export { default as FormContainer, IFormContainerProps } from '../components/FormContainer';
