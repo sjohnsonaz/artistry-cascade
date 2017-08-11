@@ -17,6 +17,7 @@ export default class Drawer extends Component<IDrawerProps> {
     }
 
     close = (event: Event) => {
+        // TODO: Create a prop for preventing mask clicks.
         if (this.props.onClose) {
             this.props.onClose(event);
         }

@@ -22,6 +22,7 @@ export default class Modal extends Component<IModalProps> {
     }
 
     close = (event) => {
+        // TODO: Create a prop for preventing mask clicks.
         if (this.props.onclose) {
             this.props.onclose(event);
         }
