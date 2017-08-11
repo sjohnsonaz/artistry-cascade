@@ -22,11 +22,13 @@ export default class Modal extends Component<IModalProps> {
     }
 
     close = (event) => {
-        this.props.onclose(event);
+        if (this.props.onclose) {
+            this.props.onclose(event);
+        }
     }
 
     render() {
-        let {open, animation} = this.props;
+        let { open, animation } = this.props;
 
         let classNames = this.props.className ? [this.props.className] : [];
         classNames.push('modal');
