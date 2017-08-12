@@ -38,7 +38,7 @@ export default class ModalView extends Component<IModalViewProps> {
         return (
             <Section title="Modal">
                 <Button onclick={this.openModal}>Open Modal</Button>
-                <Modal open={this.modalOpen} onclose={this.closeModal} title="Modal" animation="top" lockable locked={this.modalLock}>
+                <Modal open={this.modalOpen} onclose={this.closeModal} title="Modal" animation="top" lockable locked={this.modalLock} lockScroll>
                     <div>test</div>
                     <ButtonBar>
                         <Button onclick={this.openInnerModal}>Open Inner Modal</Button>

@@ -1,6 +1,7 @@
 import Cascade, { Component } from 'cascade';
 
 import Draggable from './Draggable';
+import BodyScroll from '../util/BodyScroll';
 
 export interface IDrawerProps {
     className?: string;
@@ -9,6 +10,7 @@ export interface IDrawerProps {
     open: boolean;
     full?: boolean;
     onClose: (event: Event) => void;
+    lockScroll?: boolean;
 }
 
 export default class Drawer extends Component<IDrawerProps> {
@@ -30,7 +32,8 @@ export default class Drawer extends Component<IDrawerProps> {
             direction,
             open,
             full,
-            onClose
+            onClose,
+            lockScroll
         } = this.props;
 
         let classNames = className ? [className] : [];
@@ -45,6 +48,10 @@ export default class Drawer extends Component<IDrawerProps> {
 
         if (full) {
             classNames.push('drawer-full');
+        }
+
+        if (lockScroll) {
+            BodyScroll.lock(open);
         }
 
         return (

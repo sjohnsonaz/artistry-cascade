@@ -2,6 +2,7 @@ import Cascade, { Component } from 'cascade';
 
 import { ITemplate } from './ITemplate';
 import Button from './Button';
+import BodyScroll from '../util/BodyScroll';
 
 export interface IModalProps {
     className?: string;
@@ -13,6 +14,7 @@ export interface IModalProps {
     animation?: 'center' | 'top' | 'right' | 'bottom' | 'left';
     lockable?: boolean;
     locked?: boolean;
+    lockScroll?: boolean;
 }
 
 export default class Modal extends Component<IModalProps> {
@@ -29,13 +31,22 @@ export default class Modal extends Component<IModalProps> {
     }
 
     render() {
-        let { open, animation } = this.props;
+        let {
+            open,
+            animation,
+            lockScroll
+        } = this.props;
 
         let classNames = this.props.className ? [this.props.className] : [];
         classNames.push('modal');
         if (open) {
             classNames.push(' modal-open');
         }
+
+        if (lockScroll) {
+            BodyScroll.lock(open);
+        }
+
         if (animation) {
             classNames.push('modal-animate-' + animation.trim());
         }

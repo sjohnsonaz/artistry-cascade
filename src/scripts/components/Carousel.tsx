@@ -54,7 +54,7 @@ export default class Carousel extends Component<ICarouselProps> {
                 var child = children[index];
                 if (index === activeIndex) {
                     child.className = 'carousel-selected';
-                } else {
+                } else if (child.className) {
                     child.className = '';
                 }
             }
