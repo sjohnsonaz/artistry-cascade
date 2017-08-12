@@ -6,6 +6,7 @@ export interface ICarouselProps {
     className?: string;
     id?: string;
     activeIndex: number;
+    fade?: boolean;
 }
 
 export default class Carousel extends Component<ICarouselProps> {
@@ -54,7 +55,7 @@ export default class Carousel extends Component<ICarouselProps> {
                 var child = children[index];
                 if (index === activeIndex) {
                     child.className = 'carousel-selected';
-                } else if (child.className) {
+                } else {
                     child.className = '';
                 }
             }
@@ -65,10 +66,12 @@ export default class Carousel extends Component<ICarouselProps> {
         let classNames = this.props.className ? [this.props.className] : [];
         classNames.push('carousel');
 
-        let className = classNames.join(' ');
+        if (this.props.fade) {
+            classNames.push('carousel-animate-fade');
+        }
 
         return (
-            <div className={className} id={this.props.id} style="height: auto;">
+            <div className={classNames.join(' ')} id={this.props.id} style="height: auto;">
                 {this.children ? this.children.map((child, index) => {
                     return <div>{child}</div>
                 }) : undefined}
