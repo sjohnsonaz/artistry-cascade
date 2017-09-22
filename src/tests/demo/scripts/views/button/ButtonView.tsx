@@ -45,14 +45,14 @@ export default class ButtonView extends Component<IButtonViewProps> {
                 <h3>Button Group</h3>
                 <ButtonGroup>
                     <Button>View</Button>
-                    <Button popover="Popover" theme="primary">Edit</Button>
+                    <Button theme="primary" popover="Popover" popoverAlign="left">Edit</Button>
                     <Button theme="danger">Delete</Button>
                 </ButtonGroup>
 
                 <h3>Button Bar</h3>
                 <ButtonBar>
                     <Button>View</Button>
-                    <Button popover="Popover" theme="primary">Edit</Button>
+                    <Button theme="primary" popover="Popover" popoverAlign="left">Edit</Button>
                     <Button theme="danger">Delete</Button>
                 </ButtonBar>
 
