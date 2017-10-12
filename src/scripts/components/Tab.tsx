@@ -10,6 +10,7 @@ export interface ITabProps {
     onSelectPanel?: (index) => void;
     animated?: boolean;
     fade?: boolean;
+    safe?: boolean;
 }
 
 export default class Tab extends Component<ITabProps> {
@@ -42,7 +43,7 @@ export default class Tab extends Component<ITabProps> {
                     }) : undefined}
                 </ul>
                 {this.props.animated ?
-                    <Carousel className="tab-carousel" activeIndex={activeIndex} fade={this.props.fade}>
+                    <Carousel className="tab-carousel" activeIndex={activeIndex} fade={this.props.fade} safe={this.props.safe}>
                         {this.children}
                     </Carousel>
                     : <div className="tab-body">
