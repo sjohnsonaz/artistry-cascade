@@ -7,6 +7,7 @@ export interface ICarouselProps {
     id?: string;
     activeIndex: number;
     fade?: boolean;
+    safe?: boolean;
 }
 
 export default class Carousel extends Component<ICarouselProps> {
@@ -68,6 +69,10 @@ export default class Carousel extends Component<ICarouselProps> {
 
         if (this.props.fade) {
             classNames.push('carousel-animate-fade');
+        }
+
+        if (this.props.safe) {
+            classNames.push('carousel-safe');
         }
 
         return (
