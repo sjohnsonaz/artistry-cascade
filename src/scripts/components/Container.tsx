@@ -6,7 +6,7 @@ export interface IContainerProps {
     menuBar?: boolean;
 }
 
-export default class ButtonGroups extends Component<IContainerProps>{
+export default class Container extends Component<IContainerProps>{
     render() {
         let classNames = this.props.className ? [this.props.className] : [];
         classNames.push('container');
