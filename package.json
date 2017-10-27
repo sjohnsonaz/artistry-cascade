@@ -18,7 +18,7 @@
     "node": "node ./dist/scripts/main.js"
   },
   "peerDependencies": {
-    "cascade": "^0.1.2",
+    "cascade": "^0.1.4",
     "artistry": "^0.0.12"
   },
   "devDependencies": {
@@ -26,7 +26,7 @@
     "@types/mocha": "2.2.41",
     "artistry": "^0.0.12",
     "autoprefixer": "7.1.2",
-    "cascade": "^0.1.2",
+    "cascade": "^0.1.4",
     "cascade-validation": "^0.0.1",
     "chai": "4.1.0",
     "css-loader": "0.28.4",

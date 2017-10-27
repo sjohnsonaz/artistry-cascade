@@ -88,11 +88,11 @@ export default class Modal extends Component<IModalProps> {
                                     <Button onclick={this.props.onclose}>Close</Button>
                                 </div>
                             </div>
-                            : null}
+                            : undefined}
                         <div className={'modal-body ' + modalContentClassName}>{this.children}</div>
                         {footer ?
                             <div className="modal-footer">{footer}</div>
-                            : null}
+                            : undefined}
                     </div> :
                     <div className={'modal-content ' + modalContentClassName} onclick={this.preventClick}>
                         {this.children}
