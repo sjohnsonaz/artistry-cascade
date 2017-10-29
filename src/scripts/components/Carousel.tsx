@@ -27,7 +27,8 @@ export default class Carousel extends Component<ICarouselProps> {
             (node as any).tabTimeout = undefined;
         }
 
-        if (updating) {
+        if (updating && node['activeIndex'] !== activeIndex) {
+            node['activeIndex'] = activeIndex;
             let computedStyle = window.getComputedStyle(node, null);
             let paddingHeight = parseFloat(computedStyle.getPropertyValue('padding-top')) + parseFloat(computedStyle.getPropertyValue('padding-bottom'));
             let height = node.clientHeight + 'px'
@@ -52,6 +53,7 @@ export default class Carousel extends Component<ICarouselProps> {
                 node.style.height = 'auto';
             }, 500);
         } else {
+            node['activeIndex'] = activeIndex;
             for (var index = 0, length = children.length; index < length; index++) {
                 var child = children[index];
                 if (index === activeIndex) {
