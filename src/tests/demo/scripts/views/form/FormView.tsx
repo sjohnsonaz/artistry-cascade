@@ -10,7 +10,16 @@ export default class FormView extends Component<IFormViewProps> {
     render() {
         return (
             <Section title="Form">
-                <Form>
+                <Form
+                    onEnter={(event: KeyboardEvent) => {
+                        event.preventDefault();
+                        console.log('enter')
+                    }}
+                    onEscape={(event: KeyboardEvent) => {
+                        event.preventDefault();
+                        console.log('escape')
+                    }}
+                >
                     <FormContainer title="Value">
                         <input type="text" className="input" />
                     </FormContainer>
