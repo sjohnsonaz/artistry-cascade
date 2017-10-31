@@ -106,15 +106,25 @@ export default class Button extends Component<IButtonProps> {
         }
 
         let className = classNames.join(' ');
-        return (
-            <button {...this.props} className={className} {...injectedProps}>
-                {popOverMask}
-                {popOver}
-                {this.props.lockContent ? [
-                    <div className="button-text">{this.children}</div>,
-                    <div className="button-spinner">{this.props.lockContent}</div>
-                ] : this.children}
-            </button>
-        );
+        return !this.props.popoverMenu ?
+            (
+                <button {...this.props} className={className} {...injectedProps}>
+                    {popOverMask}
+                    {popOver}
+                    {this.props.lockContent ? [
+                        <div className="button-text">{this.children}</div>,
+                        <div className="button-spinner">{this.props.lockContent}</div>
+                    ] : this.children}
+                </button>
+            ) : (
+                <a {...this.props} className={className} {...injectedProps}>
+                    {popOverMask}
+                    {popOver}
+                    {this.props.lockContent ? [
+                        <div className="button-text">{this.children}</div>,
+                        <div className="button-spinner">{this.props.lockContent}</div>
+                    ] : this.children}
+                </a>
+            );
     }
 }

@@ -18,15 +18,15 @@
     "node": "node ./dist/scripts/main.js"
   },
   "peerDependencies": {
-    "cascade": "^0.1.4",
-    "artistry": "^0.0.12"
+    "cascade": "^0.1.5",
+    "artistry": "^0.0.15"
   },
   "devDependencies": {
     "@types/chai": "4.0.1",
     "@types/mocha": "2.2.41",
-    "artistry": "^0.0.12",
+    "artistry": "^0.0.15",
     "autoprefixer": "7.1.2",
-    "cascade": "^0.1.4",
+    "cascade": "^0.1.5",
     "cascade-validation": "^0.0.1",
     "chai": "4.1.0",
     "css-loader": "0.28.4",
@@ -40,7 +40,7 @@
     "stylus": "0.54.5",
     "stylus-loader": "3.0.1",
     "ts-loader": "2.3.1",
-    "typescript": "2.4.2",
+    "typescript": "2.6.1",
     "webpack": "3.4.1"
   },
   "keywords": [
