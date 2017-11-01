@@ -1,6 +1,6 @@
 import Cascade, { Component } from 'cascade';
 
-import { MenuBar, Section } from '../../../../../scripts/modules/CascadeComponents';
+import { MenuBar, Button, Section, UserThumbnail } from '../../../../../scripts/modules/CascadeComponents';
 
 export interface IMenuBarViewProps {
 
@@ -17,6 +17,13 @@ export default class MenuBarView extends Component<IMenuBarViewProps> {
                         active: true,
                         title: 'Home',
                         href: '#'
+                    }, {
+                        reverse: true,
+                        title: (
+                            <Button popover={<div>Logout</div>} popoverDirection="bottom" popoverAlign="right">
+                                <UserThumbnail src="https://placebear.com/50/50" size="small" />
+                            </Button>
+                        )
                     }
                 ]}
             />
