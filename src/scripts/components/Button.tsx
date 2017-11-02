@@ -13,7 +13,7 @@ export interface IButtonProps extends Elements.JSXButtonElement {
     popoverAlign?: 'top' | 'right' | 'bottom' | 'left' | 'center';
     popoverOpen?: boolean;
     popoverMenu?: boolean;
-    onPopoverClose?: (event: Event) => void;
+    onPopoverClose?: (event: Event) => boolean | void;
     lockContent?: any;
     locked?: boolean;
     down?: boolean;
