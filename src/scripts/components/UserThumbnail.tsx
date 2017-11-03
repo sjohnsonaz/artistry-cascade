@@ -5,8 +5,10 @@ import Popover from './Popover';
 
 export interface IUserThumbnailProps {
     className?: string;
+    id?: string;
     src?: string;
     size?: 'default' | 'small' | 'medium' | 'large';
+    placeholder?: string;
     popover?: ITemplate;
     popoverDirection?: 'top' | 'right' | 'bottom' | 'left';
     popoverAlign?: 'top' | 'right' | 'bottom' | 'left' | 'center';
@@ -33,9 +35,12 @@ export default class UserThumbnail extends Component<IUserThumbnailProps> {
                 break;
         }
 
-        let thumbnail = (
-            <img className={classNames.join(' ')} src={this.props.src} />
-        );
+        let thumbnail = this.props.src ?
+            (
+                <img className={classNames.join(' ')} src={this.props.src} />
+            ) : (
+                <span className={classNames.join(' ')}>{this.props.placeholder}</span>
+            );
 
         if (this.props.popover) {
             let popover = (
@@ -53,20 +58,21 @@ export default class UserThumbnail extends Component<IUserThumbnailProps> {
 
             if (this.props.popoverMenu) {
                 return (
-                    <a href="#" className="popover-trigger" onclick={this.props.onPopoverClose}>
+                    <a href="#" className="popover-trigger" onclick={this.props.onPopoverClose} id={this.props.id}>
                         {thumbnail}
                         {popover}
                     </a>
                 )
             } else {
                 return (
-                    <span className="popover-trigger">
+                    <span className="popover-trigger" style={!this.props.src ? 'display: inline-block;' : ''} id={this.props.id}>
                         {thumbnail}
                         {popover}
                     </span>
                 )
             }
         } else {
+            thumbnail.props.id = this.props.id;
             return thumbnail;
         }
     }

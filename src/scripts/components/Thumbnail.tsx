@@ -2,6 +2,7 @@ import Cascade, { Component } from 'cascade';
 
 export interface IThumbnailProps {
     className?: string;
+    id?: string;
     src?: string;
 }
 
@@ -11,7 +12,7 @@ export default class Thumbnail extends Component<IThumbnailProps> {
         classNames.push('thumbnail');
 
         return (
-            <img className={classNames.join(' ')} src={this.props.src} />
+            <img className={classNames.join(' ')} id={this.props.id} src={this.props.src} />
         )
     }
 }
