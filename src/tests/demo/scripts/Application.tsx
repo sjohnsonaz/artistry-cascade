@@ -33,7 +33,7 @@ export default class Application {
         });
         Cascade.render(
             document.getElementById('root'),
-            <Container menuBar>
+            <Container menuBarTop>
                 <MenuBarView />
                 <h2>Components</h2>
                 <ButtonView />
