@@ -10,9 +10,11 @@ export interface IMenuBarProps {
 }
 
 export default class MenuBar extends Component<IMenuBarProps> {
-    expand(event: MouseEvent) {
+    onOpen(event: MouseEvent) {
         event.preventDefault();
-        this.props.onOpen(event);
+        if (this.props.onOpen) {
+            this.props.onOpen(event);
+        }    
     }
 
     render() {
@@ -37,7 +39,7 @@ export default class MenuBar extends Component<IMenuBarProps> {
         return (
             <div className={classNames.join(' ')} id={this.props.id}>
                 {this.props.top ? <div className="menu-bar-expander">
-                    <a href="#" onclick={this.expand.bind(this)}>&#9776;</a>
+                    <a href="#" onclick={this.onOpen.bind(this)}>&#9776;</a>
                 </div> : undefined}
                 {menuBarTitle}
                 <ul>
