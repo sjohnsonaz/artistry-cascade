@@ -1,4 +1,4 @@
-import Cascade, { Component } from 'cascade';
+import Cascade, { Component, observable } from 'cascade';
 
 import { Button, MenuBar, MenuBarLink, Popover, Section, UserThumbnail } from '../../../../../scripts/modules/CascadeComponents';
 
@@ -7,6 +7,15 @@ export interface IMenuBarViewProps {
 }
 
 export default class MenuBarView extends Component<IMenuBarViewProps> {
+    @observable userMenuOpen: boolean = false;
+    toggleUserMenu = (event: MouseEvent) => {
+        event.preventDefault();
+        this.userMenuOpen = !this.userMenuOpen;
+    }
+    closeUserMenu = (event: MouseEvent) => {
+        event.preventDefault();
+        this.userMenuOpen = false;
+    }
     render() {
         return (
             <MenuBar
@@ -43,9 +52,14 @@ export default class MenuBarView extends Component<IMenuBarViewProps> {
                             src=""
                             placeholder="C"
                             size="small"
+                            onclick={this.toggleUserMenu}
                             popover={"Logout"}
                             popoverDirection="bottom"
                             popoverAlign="right"
+                            popoverMenu
+                            popoverOpen={this.userMenuOpen}
+                            menuBarTop
+                            onPopoverClose={this.closeUserMenu}
                         />
                     }
                 />

@@ -50,9 +50,13 @@ export default class Popover extends Component<IPopoverProps> {
         if (this.props.open) {
             classNames.push('popover-open');
         }
+        if (this.props.open === false) {
+            classNames.push('popover-closed');
+        }
         if (this.props.closed) {
             classNames.push('popover-closed');
         }
+
         return (
             <div className={classNames.join(' ')} id={this.props.id}>
                 <div className="popover-content">{this.children}</div>
