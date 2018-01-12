@@ -19,12 +19,12 @@
   },
   "peerDependencies": {
     "cascade": "^0.1.5",
-    "artistry": "^0.1.0"
+    "artistry": "^0.1.1"
   },
   "devDependencies": {
     "@types/chai": "4.0.1",
     "@types/mocha": "2.2.41",
-    "artistry": "^0.1.0",
+    "artistry": "^0.1.1",
     "autoprefixer": "7.1.2",
     "cascade": "^0.1.5",
     "cascade-validation": "^0.0.1",

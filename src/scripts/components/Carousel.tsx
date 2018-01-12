@@ -6,7 +6,7 @@ export interface ICarouselProps {
     className?: string;
     id?: string;
     activeIndex: number;
-    fade?: boolean;
+    animation?: 'slide' | 'slide-fade' | 'fade' | 'flip';
     safe?: boolean;
 }
 
@@ -19,6 +19,10 @@ export default class Carousel extends Component<ICarouselProps> {
         activeIndex = activeIndex || 0;
         let children = node.children;
         activeIndex %= children.length;
+        if (activeIndex < 0) {
+            activeIndex += children.length;
+            activeIndex %= children.length;
+        }
 
         // Clear toggleTimeout
         let tabTimeout: number = (node as any).tabTimeout;
@@ -69,8 +73,20 @@ export default class Carousel extends Component<ICarouselProps> {
         let classNames = this.props.className ? [this.props.className] : [];
         classNames.push('carousel');
 
-        if (this.props.fade) {
-            classNames.push('carousel-animate-fade');
+        switch (this.props.animation) {
+            case 'slide':
+                break;
+            case 'slide-fade':
+                classNames.push('carousel-animate-fade');
+                break;
+            case 'fade':
+                classNames.push('carousel-animate-fade');
+                break;
+            case 'flip':
+                classNames.push('carousel-animate-flip');
+                break;
+            default:
+                break;
         }
 
         if (this.props.safe) {

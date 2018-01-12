@@ -22,7 +22,23 @@ export default class CarouselView extends Component<ICarouselViewProps> {
             <Section title="Carousel">
                 <Button onclick={this.backCarouselSlide}>Back</Button>
                 <Button onclick={this.nextCarouselSlide}>Next</Button>
-                <Carousel activeIndex={this.activeIndex}>
+                <hr />
+                <Carousel activeIndex={this.activeIndex} animation="slide">
+                    <div style="background-color: red; padding: 10px;">
+                        Content 0
+                    </div>
+                    <div style="background-color: blue; padding: 10px;">
+                        Content 1
+                        <br /> Line 2
+                    </div>
+                    <div style="background-color: yellow; padding: 10px;">
+                        Content 2
+                        <br /> Line 2
+                        <br /> Line 3
+                    </div>
+                </Carousel>
+                <hr />
+                <Carousel activeIndex={this.activeIndex} animation="flip">
                     <div style="background-color: red; padding: 10px;">
                         Content 0
                     </div>
