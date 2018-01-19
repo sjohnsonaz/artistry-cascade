@@ -27,10 +27,8 @@ export default class Application {
         var viewModel = new ViewModel();
         window.viewModel = viewModel;
         window.User = User;
-        viewModel.bodyScrollLocked;
-        Cascade.subscribe<boolean>(viewModel, 'bodyScrollLocked', (value) => {
-            BodyScroll.lock(value);
-        });
+        window.BodyScroll = BodyScroll;
+        BodyScroll.listen();
         Cascade.render(
             document.getElementById('root'),
             <Container menuBarTop>

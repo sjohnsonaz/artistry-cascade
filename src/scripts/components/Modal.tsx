@@ -30,6 +30,10 @@ export default class Modal extends Component<IModalProps> {
         }
     }
 
+    afterDispose() {
+        BodyScroll.unlock(this.uniqueId + '');
+    }
+
     render() {
         let {
             open,
@@ -40,11 +44,10 @@ export default class Modal extends Component<IModalProps> {
         let classNames = this.props.className ? [this.props.className] : [];
         classNames.push('modal');
         if (open) {
+            //BodyScroll.lock(this.uniqueId + '');
             classNames.push(' modal-open');
-        }
-
-        if (lockScroll) {
-            BodyScroll.lock(open);
+        } else {
+            //BodyScroll.unlock(this.uniqueId + '');
         }
 
         if (animation) {
