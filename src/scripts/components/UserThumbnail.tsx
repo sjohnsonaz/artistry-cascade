@@ -56,7 +56,6 @@ export default class UserThumbnail extends Component<IUserThumbnailProps> {
                     align={this.props.popoverAlign}
                     direction={this.props.popoverDirection}
                     open={!this.props.popoverMenu ? this.props.popoverOpen : undefined}
-                    menuBarTop={this.props.menuBarTop}
                 >
                     {typeof this.props.popover === 'function' ?
                         this.props.popover() :
@@ -96,7 +95,7 @@ export default class UserThumbnail extends Component<IUserThumbnailProps> {
                 )
             }
         } else {
-            thumbnail.props.id = this.props.id;
+            (thumbnail.props as any).id = this.props.id;
             return thumbnail;
         }
     }

@@ -29,9 +29,6 @@ export default class MenuBarView extends Component<IMenuBarViewProps> {
                 />
                 <li class="menu-spacer"></li>
                 <MenuBarLink
-                    reverse
-                    simple
-                    noLink
                     title={
                         <UserThumbnail
                             src="https://placebear.com/50/50"
@@ -44,9 +41,6 @@ export default class MenuBarView extends Component<IMenuBarViewProps> {
                     }
                 />
                 <MenuBarLink
-                    reverse
-                    simple
-                    noLink
                     title={
                         <UserThumbnail
                             src=""

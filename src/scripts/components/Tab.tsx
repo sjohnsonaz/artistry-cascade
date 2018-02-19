@@ -43,7 +43,7 @@ export default class Tab extends Component<ITabProps> {
                     }) : undefined}
                 </ul>
                 {this.props.animated ?
-                    <Carousel className="tab-carousel" activeIndex={activeIndex} fade={this.props.fade} safe={this.props.safe}>
+                    <Carousel className="tab-carousel" activeIndex={activeIndex} safe={this.props.safe}>
                         {this.children}
                     </Carousel>
                     : <div className="tab-body">
