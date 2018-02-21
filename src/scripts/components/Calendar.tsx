@@ -83,17 +83,17 @@ export default class Calendar extends Component<ICalendarProps> {
     render() {
         var weeks = this.getWeeks(this.year, this.month);
         return (
-            <div>
-                <div>
-                    <div>
-                        <Button onclick={this.decreaseYear} />
-                        <strong>{this.year}</strong>
-                        <Button onclick={this.increaseYear} />
+            <div className="calendar">
+                <div className="calendar-title">
+                    <div className="calendar-year-title">
+                        <Button className="calendar-year-down" onclick={this.decreaseYear} />
+                        <strong className="calendar-year-name">{this.year}</strong>
+                        <Button className="calendar-year-up" onclick={this.increaseYear} />
                     </div>
-                    <div>
-                        <Button onclick={this.decreaseMonth} />
-                        <strong>{monthNames[this.month]}</strong>
-                        <Button onclick={this.increaseMonth} />
+                    <div className="calendar-month-title">
+                        <Button className="calendar-month-down" onclick={this.decreaseMonth} />
+                        <strong className="calendar-month-name">{monthNames[this.month]}</strong>
+                        <Button className="calendar-month-up" onclick={this.increaseMonth} />
                     </div>
                 </div>
                 <table>
@@ -118,7 +118,7 @@ export default class Calendar extends Component<ICalendarProps> {
                                     {week.map((day, index, array) => {
                                         var selected = this.props.date && this.props.date.getTime() === day.getTime();
                                         return (
-                                            <td className={selected ? 'selected-date' : undefined} key={this.year + ' ' + this.month + ' ' + index}>
+                                            <td className={selected ? 'calendar-day-selected' : undefined} key={this.year + ' ' + this.month + ' ' + index}>
                                                 <a onClick={this.selectDay.bind(this, day)}>{day.getDate()}</a>
                                             </td>
                                         );
