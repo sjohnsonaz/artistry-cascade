@@ -3,16 +3,13 @@ import Cascade, { Component } from 'cascade';
 export interface IPagerProps {
     className?: string;
     id?: string;
-    index?: number;
-    count?: number;
-    showCount?: number;
+    index: number;
+    count: number;
+    showCount: number;
     showArrows?: boolean;
     showEnds?: boolean;
     zeroIndexed?: boolean;
-    onClickIndex?: (index: number, event: Event) => void;
-    onClickBack?: (index: number, event: Event) => void;
-    onClickForward?: (index: number, event: Event) => void;
-    onClickStart?: (event: Event) => void;
+    onClickIndex: (index: number, event: Event) => void;
     onClickEnd?: (event: Event) => void;
 }
 
@@ -27,8 +24,8 @@ export default class Pager extends Component<IPagerProps> {
     onClickBack = (event: Event) => {
         event.preventDefault();
         if (this.props.index > 0) {
-            if (this.props.onClickBack) {
-                this.props.onClickBack(this.props.index - 1, event);
+            if (this.props.onClickIndex) {
+                this.props.onClickIndex(this.props.index - 1, event);
             }
         }
     }
@@ -36,8 +33,8 @@ export default class Pager extends Component<IPagerProps> {
     onClickForward = (event: Event) => {
         event.preventDefault();
         if (this.props.index < this.props.count - 1) {
-            if (this.props.onClickForward) {
-                this.props.onClickForward(this.props.index + 1, event);
+            if (this.props.onClickIndex) {
+                this.props.onClickIndex(this.props.index + 1, event);
             }
         }
     }
@@ -45,8 +42,8 @@ export default class Pager extends Component<IPagerProps> {
     onClickStart = (event: Event) => {
         event.preventDefault();
         if (this.props.index > 0) {
-            if (this.props.onClickStart) {
-                this.props.onClickStart(event);
+            if (this.props.onClickIndex) {
+                this.props.onClickIndex(0, event);
             }
         }
     }
