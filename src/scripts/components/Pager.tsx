@@ -10,8 +10,8 @@ export interface IPagerProps {
     showEnds?: boolean;
     zeroIndexed?: boolean;
     onClickIndex?: (index: number, event: Event) => void;
-    onClickBack?: (event: Event) => void;
-    onClickForward?: (event: Event) => void;
+    onClickBack?: (index: number, event: Event) => void;
+    onClickForward?: (index: number, event: Event) => void;
     onClickStart?: (event: Event) => void;
     onClickEnd?: (event: Event) => void;
 }
@@ -28,7 +28,7 @@ export default class Pager extends Component<IPagerProps> {
         event.preventDefault();
         if (this.props.index > 0) {
             if (this.props.onClickBack) {
-                this.props.onClickBack(event);
+                this.props.onClickBack(this.props.index - 1, event);
             }
         }
     }
@@ -37,7 +37,7 @@ export default class Pager extends Component<IPagerProps> {
         event.preventDefault();
         if (this.props.index < this.props.count - 1) {
             if (this.props.onClickForward) {
-                this.props.onClickForward(event);
+                this.props.onClickForward(this.props.index + 1, event);
             }
         }
     }
