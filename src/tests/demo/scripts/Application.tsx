@@ -7,6 +7,7 @@ import { Container, BodyScroll } from '../../../scripts/modules/CascadeComponent
 import ButtonView from './views/button/ButtonView';
 import RangeView from './views/range/RangeView';
 import ToggleView from './views/toggle/ToggleView';
+import CalendarView from './views/calendar/CalendarView';
 import ProgressBarView from './views/progressBar/ProgressBarView';
 import MenuBarView from './views/menuBar/MenuBarView';
 import ModalView from './views/modal/ModalView';
@@ -27,10 +28,8 @@ export default class Application {
         var viewModel = new ViewModel();
         window.viewModel = viewModel;
         window.User = User;
-        viewModel.bodyScrollLocked;
-        Cascade.subscribe<boolean>(viewModel, 'bodyScrollLocked', (value) => {
-            BodyScroll.lock(value);
-        });
+        window.BodyScroll = BodyScroll;
+        BodyScroll.listen();
         Cascade.render(
             document.getElementById('root'),
             <Container menuBarTop>
@@ -39,6 +38,7 @@ export default class Application {
                 <ButtonView />
                 <RangeView />
                 <ToggleView />
+                <CalendarView />
                 <ProgressBarView />
                 <ModalView />
                 <DrawerView />

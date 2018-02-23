@@ -16,6 +16,7 @@
     "min": "webpack --config webpack.config.js --progress",
     "dev": "webpack --config webpack.dev.config.js --progress",
     "watch": "webpack --config webpack.dev.config.js --watch --progress",
+    "watch-link": "tsc --watch --declaration",
     "node": "node ./dist/scripts/main.js"
   },
   "peerDependencies": {

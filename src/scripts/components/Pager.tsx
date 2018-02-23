@@ -3,16 +3,13 @@ import Cascade, { Component } from 'cascade';
 export interface IPagerProps {
     className?: string;
     id?: string;
-    index?: number;
-    count?: number;
-    showCount?: number;
+    index: number;
+    count: number;
+    showCount: number;
     showArrows?: boolean;
     showEnds?: boolean;
     zeroIndexed?: boolean;
-    onClickIndex?: (index: number, event: Event) => void;
-    onClickBack?: (event: Event) => void;
-    onClickForward?: (event: Event) => void;
-    onClickStart?: (event: Event) => void;
+    onClickIndex: (index: number, event: Event) => void;
     onClickEnd?: (event: Event) => void;
 }
 
@@ -27,8 +24,8 @@ export default class Pager extends Component<IPagerProps> {
     onClickBack = (event: Event) => {
         event.preventDefault();
         if (this.props.index > 0) {
-            if (this.props.onClickBack) {
-                this.props.onClickBack(event);
+            if (this.props.onClickIndex) {
+                this.props.onClickIndex(this.props.index - 1, event);
             }
         }
     }
@@ -36,8 +33,8 @@ export default class Pager extends Component<IPagerProps> {
     onClickForward = (event: Event) => {
         event.preventDefault();
         if (this.props.index < this.props.count - 1) {
-            if (this.props.onClickForward) {
-                this.props.onClickForward(event);
+            if (this.props.onClickIndex) {
+                this.props.onClickIndex(this.props.index + 1, event);
             }
         }
     }
@@ -45,8 +42,8 @@ export default class Pager extends Component<IPagerProps> {
     onClickStart = (event: Event) => {
         event.preventDefault();
         if (this.props.index > 0) {
-            if (this.props.onClickStart) {
-                this.props.onClickStart(event);
+            if (this.props.onClickIndex) {
+                this.props.onClickIndex(0, event);
             }
         }
     }
@@ -86,7 +83,7 @@ export default class Pager extends Component<IPagerProps> {
         for (var pagerIndex = low; pagerIndex < high; pagerIndex++) {
             let active = pagerIndex === index;
             pagers.push(
-                <li className={active ? 'pager-active' : undefined}>
+                <li key={pagerIndex.toString()} className={active ? 'pager-active' : undefined}>
                     <a href="#" onclick={this.onClickIndex.bind(this, pagerIndex)}>
                         {pagerIndex + offset}
                     </a>
@@ -96,23 +93,23 @@ export default class Pager extends Component<IPagerProps> {
         return (
             <ul className={classNames.join(' ')} id={id}>
                 {showEnds ?
-                    <li className={index === 0 ? 'pager-disabled' : undefined}>
+                    <li key="start" className={index === 0 ? 'pager-disabled' : undefined}>
                         <a href="#" onclick={this.onClickStart}>&lt;&lt;</a>
                     </li>
                     : undefined}
                 {showArrows ?
-                    <li className={index === 0 ? 'pager-disabled' : undefined}>
+                    <li key="back" className={index === 0 ? 'pager-disabled' : undefined}>
                         <a href="#" onclick={this.onClickBack}>&lt;</a>
                     </li>
                     : undefined}
                 {pagers}
                 {showArrows ?
-                    <li className={index >= count - 1 ? 'pager-disabled' : undefined}>
+                    <li key="next" className={index >= count - 1 ? 'pager-disabled' : undefined}>
                         <a href="#" onclick={this.onClickForward}>&gt;</a>
                     </li>
                     : undefined}
                 {showEnds ?
-                    <li className={index >= count - 1 ? 'pager-disabled' : undefined}>
+                    <li key="end" className={index >= count - 1 ? 'pager-disabled' : undefined}>
                         <a href="#" onclick={this.onClickEnd}>&gt;&gt;</a>
                     </li>
                     : undefined}

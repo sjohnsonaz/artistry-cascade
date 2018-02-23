@@ -37,9 +37,6 @@ export default class PagerView extends Component<IPagerViewProps> {
                     showArrows
                     showEnds
                     onClickIndex={this.onClickIndex}
-                    onClickBack={this.onClickBack}
-                    onClickForward={this.onClickForward}
-                    onClickStart={this.onClickStart}
                     onClickEnd={this.onClickEnd}
                 />
             </Section>
