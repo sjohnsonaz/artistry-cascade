@@ -25,10 +25,6 @@ export default class Drawer extends Component<IDrawerProps> {
         }
     }
 
-    dispose() {
-        BodyScroll.unlock(this.uniqueId + '');
-    }
-
     render() {
         let {
             className,
@@ -47,14 +43,15 @@ export default class Drawer extends Component<IDrawerProps> {
         classNames.push('drawer-' + direction);
 
         if (open) {
-            //BodyScroll.lock(this.uniqueId + '');
             classNames.push('drawer-open');
-        } else {
-            //BodyScroll.unlock(this.uniqueId + '');
         }
 
         if (full) {
             classNames.push('drawer-full');
+        }
+
+        if (lockScroll) {
+            BodyScroll.lock(open);
         }
 
         return (

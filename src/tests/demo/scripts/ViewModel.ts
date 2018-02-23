@@ -8,6 +8,7 @@ export default class ViewModel {
     @observable users: User[] = [];
     @observable user: User = new User('', '');
     @observable firstNameInput: HTMLElement;
+    @observable bodyScrollLocked: boolean = false;
 
     addUser() {
         let user = this.user;
