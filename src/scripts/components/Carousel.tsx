@@ -29,6 +29,16 @@ export default class Carousel extends Component<ICarouselProps> {
         node['runCount'] = (node['runCount'] || 0) + 1;
         let runCount = node['runCount'];
 
+        if (runCount === 1) {
+            // Listen for transitionend
+            node.addEventListener('transitionend', (event) => {
+                if (event.target === node) {
+                    node.classList.remove('carousel-run');
+                    node.style.height = 'auto';
+                }
+            });
+        }
+
         if (updating && node['activeIndex'] !== activeIndex) {
             node['activeIndex'] = activeIndex;
             let computedStyle = window.getComputedStyle(node, null);
@@ -62,14 +72,6 @@ export default class Carousel extends Component<ICarouselProps> {
                 }
 
                 node.style.height = height;
-
-                // Wait for the animation to run
-                await wait(500);
-                if (runCount === node['runCount']) {
-
-                    node.classList.remove('carousel-run');
-                    node.style.height = 'auto';
-                }
             }
         } else {
             node['activeIndex'] = activeIndex;

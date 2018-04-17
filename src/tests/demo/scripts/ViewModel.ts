@@ -20,6 +20,6 @@ export default class ViewModel {
     }
 
     removeUser(user: User) {
-        (this.users as any).remove(user);
+        this.users.splice(this.users.indexOf(user), 1);
     }
 }
