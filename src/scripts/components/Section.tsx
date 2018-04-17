@@ -41,18 +41,24 @@ export default class Section extends Component<ISectionProps> {
 
         let header = node.childNodes[0] as HTMLElement;
         let content = node.childNodes[1] as HTMLElement;
-
+        node.classList.add('section-run');
         if (closed) {
             node.style.height = node.offsetHeight + 'px';
             node.style.height = header.offsetHeight + 'px';
+            node.classList.add('section-closed');
+            (node as any).toggleTimeout = window.setTimeout(function () {
+                node.style.height = 'auto';
+                node.classList.remove('section-run');
+            }, 220);
         } else {
-            if (node.style.height && node.style.height != 'auto') {
-                var sectionBorder = node.offsetHeight - node.clientHeight;
-                node.style.height = sectionBorder / 2 + header.offsetHeight + content.offsetHeight + 'px';
-                (node as any).toggleTimeout = window.setTimeout(function () {
-                    node.style.height = 'auto';
-                }, 220);
-            }
+            var sectionBorder = node.offsetHeight - node.clientHeight;
+            node.style.height = sectionBorder / 2 + header.offsetHeight + content.offsetHeight + 'px';
+            node.classList.remove('section-closed');
+            node.style.height = sectionBorder / 2 + header.offsetHeight + content.offsetHeight + 'px';
+            (node as any).toggleTimeout = window.setTimeout(function () {
+                node.style.height = 'auto';
+                node.classList.remove('section-run');
+            }, 220);
         }
     }
 

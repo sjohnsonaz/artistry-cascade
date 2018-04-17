@@ -100,6 +100,10 @@ export default class Button extends Component<IButtonProps> {
             classNames.push('button-down');
         }
 
+        if (this.props.lockContent) {
+            classNames.push('button-lockable');
+        }
+
         if (this.props.locked) {
             classNames.push('button-locked');
             injectedProps['disabled'] = true;

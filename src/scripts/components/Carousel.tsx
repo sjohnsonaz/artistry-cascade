@@ -24,12 +24,9 @@ export default class Carousel extends Component<ICarouselProps> {
             activeIndex %= children.length;
         }
 
-        // Clear toggleTimeout
-        let tabTimeout: number = (node as any).tabTimeout;
-        if (typeof tabTimeout === 'number') {
-            window.clearTimeout(tabTimeout);
-            (node as any).tabTimeout = undefined;
-        }
+        // Clear timeouts
+        clearTimeoutBinding(node, 'tabTimeout0');
+        clearTimeoutBinding(node, 'tabTimeout1');
 
         if (updating && node['activeIndex'] !== activeIndex) {
             node['activeIndex'] = activeIndex;
@@ -38,24 +35,40 @@ export default class Carousel extends Component<ICarouselProps> {
             let height = node.clientHeight + 'px'
 
             node.style.height = height;
-            ClassNames.classListAdd(node, 'carousel-run');
+            node.classList.add('carousel-run');
 
-            for (var index = 0, length = children.length; index < length; index++) {
-                var child = children[index];
-                if (index === activeIndex) {
-                    child.className = 'carousel-selected';
-                    height = paddingHeight + child.clientHeight + 'px';
-                } else if (child.className) {
-                    child.className = '';
+            setTimeoutBinding(node, 'tabTimeout0', () => {
+
+                // Clear timeouts
+                clearTimeoutBinding(node, 'tabTimeout0');
+                clearTimeoutBinding(node, 'tabTimeout1');
+
+                let oldChild: Element;
+                for (var index = 0, length = children.length; index < length; index++) {
+                    let child = children[index];
+                    if (child.classList.contains('carousel-selected')) {
+                        oldChild = child;
+                        break;
+                    }
                 }
-            }
+                let activeChild = children[activeIndex];
 
-            node.style.height = height;
+                oldChild.classList.remove('carousel-selected');
 
-            (node as any).tabTimeout = window.setTimeout(() => {
-                ClassNames.classListRemove(node, 'carousel-run');
-                node.style.height = 'auto';
-            }, 500);
+                if (activeChild) {
+                    activeChild.classList.add('carousel-selected');
+                    height = paddingHeight + activeChild.clientHeight + 'px';
+                } else {
+                    height = 'auto';
+                }
+
+                node.style.height = height;
+
+                setTimeoutBinding(node, 'tabTimeout1', () => {
+                    node.classList.remove('carousel-run');
+                    node.style.height = 'auto';
+                }, 500);
+            }, 30);
         } else {
             node['activeIndex'] = activeIndex;
             for (var index = 0, length = children.length; index < length; index++) {
@@ -101,4 +114,17 @@ export default class Carousel extends Component<ICarouselProps> {
             </div>
         );
     }
+}
+
+function clearTimeoutBinding(container: any, property: string) {
+    let timeout: number = container[property];
+    if (typeof timeout === 'number') {
+        window.clearTimeout(timeout);
+        container[property] = undefined;
+    }
+}
+
+function setTimeoutBinding(container: any, property: string, callback: Function, time?: number) {
+    container[property] = window.setTimeout(callback, time);
+    return container[property];
 }
