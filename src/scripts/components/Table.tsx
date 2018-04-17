@@ -1,47 +1,79 @@
 import Cascade, { Component } from 'cascade';
 
-export interface ITableProps {
-    className?: string;
-    id?: string;
-    data: any[];
-    titles?: any[];
+export interface IColumn<T> {
+    property?: string;
+    title?: string | (() => any);
+    template?: (item: T) => any;
+    hidden?: false;
 }
 
-export default class Table extends Component<ITableProps> {
+export interface ITableProps<T> {
+    className?: string;
+    id?: string;
+    data: T[];
+    titles?: any[];
+    columns?: IColumn<T>[];
+    template?: (item: T) => any;
+}
+
+export default class Table<T> extends Component<ITableProps<T>> {
     render() {
         let {
             className,
             id,
             data,
-            titles
+            titles,
+            columns,
+            template
         } = this.props;
 
         let classNames = className ? [className] : [];
         classNames.push('table');
 
+        let renderedTitles = titles || columns.map(column => {
+            if (typeof column.title === 'function') {
+                return column.title();
+            } else {
+                return column.title
+            }
+        });
+
+        let renderedBody;
+        if (template) {
+            renderedBody = data.map(item => template(item));
+        } else if (columns) {
+            renderedBody = data.map(item => (
+                <tr>
+                    {columns.map(column => {
+                        if (column.template) {
+                            return column.template(item);
+                        } else if (column.property) {
+                            return <td>{item[column.property]}</td>
+                        } else {
+                            return <td></td>
+                        }
+                    })}
+                </tr>
+            ));
+        } else {
+            renderedBody = data.map(item => (
+                <tr>
+                    {Object.values(item).map(value => <td>{value}</td>)}
+                </tr>
+            ));
+        }
+
         return (
             <table className={classNames.join(' ')} id={id}>
-                {titles ?
+                {renderedTitles ?
                     <thead>
                         <tr>
-                            {titles.map(title => <th>{title}</th>)}
+                            {renderedTitles.map(title => <th>{title}</th>)}
                         </tr>
                     </thead>
                     : undefined}
                 <tbody>
-                    {data.map((item) => {
-                        let cells = [];
-                        for (var name in item) {
-                            if (item.hasOwnProperty(name)) {
-                                cells.push(<td>{item[name]}</td>);
-                            }
-                        }
-                        return (
-                            <tr>
-                                {cells}
-                            </tr>
-                        );
-                    })}
+                    {renderedBody}
                 </tbody>
                 <tfoot>
                     <tr>

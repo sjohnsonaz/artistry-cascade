@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
     "module": "commonjs",
     "moduleResolution": "node",
     "isolatedModules": false,
@@ -17,7 +17,12 @@
     "suppressImplicitAnyIndexErrors": true,
     "outDir": "dist",
     "sourceMap": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "lib": [
+      "dom",
+      "es6",
+      "es2017.object"
+    ]
   },
   "exclude": [
     "cascade-*",
