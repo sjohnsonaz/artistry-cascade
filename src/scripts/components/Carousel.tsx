@@ -1,6 +1,7 @@
 import Cascade, { Component, observable } from 'cascade';
 
 import ClassNames from '../util/ClassNames';
+import { wait } from '../util/PromiseUtil';
 
 export interface ICarouselProps {
     className?: string;
@@ -14,7 +15,7 @@ export default class Carousel extends Component<ICarouselProps> {
     container: HTMLElement;
     child: HTMLElement;
 
-    afterRender(node: HTMLElement, updating: boolean) {
+    async afterRender(node: HTMLElement, updating: boolean) {
         let { activeIndex } = this.props;
         activeIndex = activeIndex || 0;
         let children = node.children;
@@ -24,9 +25,9 @@ export default class Carousel extends Component<ICarouselProps> {
             activeIndex %= children.length;
         }
 
-        // Clear timeouts
-        clearTimeoutBinding(node, 'tabTimeout0');
-        clearTimeoutBinding(node, 'tabTimeout1');
+        // increment runCount
+        node['runCount'] = (node['runCount'] || 0) + 1;
+        let runCount = node['runCount'];
 
         if (updating && node['activeIndex'] !== activeIndex) {
             node['activeIndex'] = activeIndex;
@@ -37,11 +38,9 @@ export default class Carousel extends Component<ICarouselProps> {
             node.style.height = height;
             node.classList.add('carousel-run');
 
-            setTimeoutBinding(node, 'tabTimeout0', () => {
-
-                // Clear timeouts
-                clearTimeoutBinding(node, 'tabTimeout0');
-                clearTimeoutBinding(node, 'tabTimeout1');
+            // Wait for the carousel-run class to be added
+            await wait(30);
+            if (runCount === node['runCount']) {
 
                 let oldChild: Element;
                 for (var index = 0, length = children.length; index < length; index++) {
@@ -64,11 +63,14 @@ export default class Carousel extends Component<ICarouselProps> {
 
                 node.style.height = height;
 
-                setTimeoutBinding(node, 'tabTimeout1', () => {
+                // Wait for the animation to run
+                await wait(500);
+                if (runCount === node['runCount']) {
+
                     node.classList.remove('carousel-run');
                     node.style.height = 'auto';
-                }, 500);
-            }, 30);
+                }
+            }
         } else {
             node['activeIndex'] = activeIndex;
             for (var index = 0, length = children.length; index < length; index++) {
