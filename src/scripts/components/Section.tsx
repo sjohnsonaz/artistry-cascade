@@ -26,39 +26,41 @@ export default class Section extends Component<ISectionProps> {
         }
     }
 
-    afterRender(node: HTMLElement) {
-        // Get closed value
-        let closed = typeof this.props.closed !== 'undefined' ?
-            this.props.closed :
-            (this.closed || false);
+    afterRender(node: HTMLElement, updating: boolean) {
+        if (updating) {
+            // Get closed value
+            let closed = typeof this.props.closed !== 'undefined' ?
+                this.props.closed :
+                (this.closed || false);
 
-        // Clear toggleTimeout
-        let toggleTimeout: number = (node as any).toggleTimeout;
-        if (typeof toggleTimeout === 'number') {
-            window.clearTimeout(toggleTimeout);
-            (node as any).toggleTimeout = undefined;
-        }
+            // Clear toggleTimeout
+            let toggleTimeout: number = (node as any).toggleTimeout;
+            if (typeof toggleTimeout === 'number') {
+                window.clearTimeout(toggleTimeout);
+                (node as any).toggleTimeout = undefined;
+            }
 
-        let header = node.childNodes[0] as HTMLElement;
-        let content = node.childNodes[1] as HTMLElement;
-        node.classList.add('section-run');
-        if (closed) {
-            node.style.height = node.offsetHeight + 'px';
-            node.style.height = header.offsetHeight + 'px';
-            node.classList.add('section-closed');
-            (node as any).toggleTimeout = window.setTimeout(function () {
-                node.style.height = 'auto';
-                node.classList.remove('section-run');
-            }, 220);
-        } else {
-            var sectionBorder = node.offsetHeight - node.clientHeight;
-            node.style.height = sectionBorder / 2 + header.offsetHeight + content.offsetHeight + 'px';
-            node.classList.remove('section-closed');
-            node.style.height = sectionBorder / 2 + header.offsetHeight + content.offsetHeight + 'px';
-            (node as any).toggleTimeout = window.setTimeout(function () {
-                node.style.height = 'auto';
-                node.classList.remove('section-run');
-            }, 220);
+            let header = node.childNodes[0] as HTMLElement;
+            let content = node.childNodes[1] as HTMLElement;
+            node.classList.add('section-run');
+            if (closed) {
+                node.style.height = node.offsetHeight + 'px';
+                node.style.height = header.offsetHeight + 'px';
+                node.classList.add('section-closed');
+                (node as any).toggleTimeout = window.setTimeout(function () {
+                    node.style.height = 'auto';
+                    node.classList.remove('section-run');
+                }, 220);
+            } else {
+                var sectionBorder = node.offsetHeight - node.clientHeight;
+                node.style.height = sectionBorder / 2 + header.offsetHeight + content.offsetHeight + 'px';
+                node.classList.remove('section-closed');
+                node.style.height = sectionBorder / 2 + header.offsetHeight + content.offsetHeight + 'px';
+                (node as any).toggleTimeout = window.setTimeout(function () {
+                    node.style.height = 'auto';
+                    node.classList.remove('section-run');
+                }, 220);
+            }
         }
     }
 
