@@ -42,14 +42,14 @@ export default class TableView extends Component<ITableViewProps> {
                     id="table-component"
                     data={data}
                     columns={[{
-                        title: 'Ingredient',
+                        header: 'Ingredient',
                         property: 'ingredient'
                     }, {
-                        title: 'Quantity',
+                        header: 'Quantity',
                         property: 'quantity',
                         template: item => <strong>{item.quantity}</strong>
                     }, {
-                        title: 'Unit',
+                        header: 'Unit',
                         property: 'unit'
                     }]}
                 />
