@@ -12,6 +12,7 @@ export { default as Form, IFormProps } from '../components/Form';
 export { default as FormActions, IFormActionsProps } from '../components/FormActions';
 export { default as FormContainer, IFormContainerProps } from '../components/FormContainer';
 export { default as FormInput, IFormInputProps } from '../components/FormInput';
+export { default as List, IListProps } from '../components/List';
 export { default as MenuBar, IMenuBarProps } from '../components/MenuBar';
 export { default as MenuBarLink, IMenuBarLinkProps } from '../components/MenuBarLink';
 export { default as MenuBarSpacer, IMenuBarSpacerProps } from '../components/MenuBarSpacer';

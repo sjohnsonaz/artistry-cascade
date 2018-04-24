@@ -5,7 +5,7 @@ export interface IColumn<T> {
     header?: string | (() => any);
     footer?: string | (() => any);
     template?: (item: T) => any;
-    hidden?: false;
+    hidden?: boolean;
 }
 
 export interface ITableProps<T> {
@@ -16,6 +16,7 @@ export interface ITableProps<T> {
     footers?: any[];
     columns?: IColumn<T>[];
     template?: (item: T) => any;
+    list?: boolean;
 }
 
 export default class Table<T> extends Component<ITableProps<T>> {
@@ -74,7 +75,7 @@ export default class Table<T> extends Component<ITableProps<T>> {
                         </tr>
                     </thead>
                     : undefined}
-                <tbody>
+                <tbody className={this.props.list ? 'list' : ''}>
                     {renderedBody}
                 </tbody>
                 <tfoot>

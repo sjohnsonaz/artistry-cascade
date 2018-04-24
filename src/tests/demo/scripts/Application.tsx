@@ -16,6 +16,7 @@ import CarouselView from './views/carousel/CarouselView';
 import TabView from './views/tab/TabView';
 import TableView from './views/table/TableView';
 import PagerView from './views/pager/PagerView';
+import ListView from './views/list/ListView';
 import FormView from './views/form/FormView';
 import CodeView from './views/code/CodeView';
 import DrawerView from './views/drawer/DrawerView';
@@ -49,6 +50,7 @@ export default class Application {
                 <TabView />
                 <TableView />
                 <PagerView />
+                <ListView />
                 <FormView />
                 <CodeView />
                 <h2>Examples</h2>
