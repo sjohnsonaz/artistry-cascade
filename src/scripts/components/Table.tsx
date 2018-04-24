@@ -2,7 +2,8 @@ import Cascade, { Component } from 'cascade';
 
 export interface IColumn<T> {
     property?: string;
-    title?: string | (() => any);
+    header?: string | (() => any);
+    footer?: string | (() => any);
     template?: (item: T) => any;
     hidden?: false;
 }
@@ -11,7 +12,8 @@ export interface ITableProps<T> {
     className?: string;
     id?: string;
     data: T[];
-    titles?: any[];
+    headers?: any[];
+    footers?: any[];
     columns?: IColumn<T>[];
     template?: (item: T) => any;
 }
@@ -22,7 +24,7 @@ export default class Table<T> extends Component<ITableProps<T>> {
             className,
             id,
             data,
-            titles,
+            headers,
             columns,
             template
         } = this.props;
@@ -30,11 +32,11 @@ export default class Table<T> extends Component<ITableProps<T>> {
         let classNames = className ? [className] : [];
         classNames.push('table');
 
-        let renderedTitles = titles || columns.map(column => {
-            if (typeof column.title === 'function') {
-                return column.title();
+        let renderedTitles = headers || columns.map(column => {
+            if (typeof column.header === 'function') {
+                return column.header();
             } else {
-                return column.title
+                return column.header
             }
         });
 
