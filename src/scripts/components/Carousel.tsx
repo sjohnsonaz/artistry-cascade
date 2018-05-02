@@ -43,8 +43,8 @@ export default class Carousel extends Component<ICarouselProps> {
             node['activeIndex'] = activeIndex;
             let computedStyle = window.getComputedStyle(node, null);
             let paddingHeight =
-                parseFloat(computedStyle.getPropertyValue('border-top')) +
-                parseFloat(computedStyle.getPropertyValue('border-bottom')) +
+                parseFloat(computedStyle.getPropertyValue('border-top-width')) +
+                parseFloat(computedStyle.getPropertyValue('border-bottom-width')) +
                 parseFloat(computedStyle.getPropertyValue('padding-top')) +
                 parseFloat(computedStyle.getPropertyValue('padding-bottom'));
             let height = node.offsetHeight + 'px'
