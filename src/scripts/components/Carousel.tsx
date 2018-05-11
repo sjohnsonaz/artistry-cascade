@@ -14,6 +14,8 @@ export interface ICarouselProps {
 export default class Carousel extends Component<ICarouselProps> {
     container: HTMLElement;
     child: HTMLElement;
+    activeIndex: number;
+    runCount: number;
 
     async afterRender(node: HTMLElement, updating: boolean) {
         let { activeIndex } = this.props;
@@ -26,8 +28,8 @@ export default class Carousel extends Component<ICarouselProps> {
         }
 
         // increment runCount
-        node['runCount'] = (node['runCount'] || 0) + 1;
-        let runCount = node['runCount'];
+        this.runCount = (this.runCount || 0) + 1;
+        let runCount = this.runCount;
 
         if (runCount === 1) {
             // Listen for transitionend
@@ -39,8 +41,8 @@ export default class Carousel extends Component<ICarouselProps> {
             });
         }
 
-        if (updating && node['activeIndex'] !== activeIndex) {
-            node['activeIndex'] = activeIndex;
+        if (updating && this.activeIndex !== activeIndex) {
+            this.activeIndex = activeIndex;
             let computedStyle = window.getComputedStyle(node, null);
             let paddingHeight =
                 parseFloat(computedStyle.getPropertyValue('border-top-width')) +
@@ -54,7 +56,7 @@ export default class Carousel extends Component<ICarouselProps> {
 
             // Wait for the carousel-run class to be added
             await wait(30);
-            if (runCount === node['runCount']) {
+            if (runCount === this.runCount) {
 
                 let oldChild: Element;
                 for (var index = 0, length = children.length; index < length; index++) {
@@ -78,7 +80,7 @@ export default class Carousel extends Component<ICarouselProps> {
                 node.style.height = height;
             }
         } else {
-            node['activeIndex'] = activeIndex;
+            this.activeIndex = activeIndex;
             for (var index = 0, length = children.length; index < length; index++) {
                 var child = children[index];
                 if (index === activeIndex) {
