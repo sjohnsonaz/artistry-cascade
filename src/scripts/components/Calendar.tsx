@@ -82,18 +82,21 @@ export default class Calendar extends Component<ICalendarProps> {
 
     render() {
         var weeks = this.getWeeks(this.year, this.month);
+        let today = new Date();
+        today.setHours(0, 0, 0, 0);
+        let todayTime = today.getTime();
         return (
             <div className="calendar">
                 <div className="calendar-title">
                     <div className="calendar-year-title">
-                        <Button className="calendar-year-down" onclick={this.decreaseYear} />
+                        <Button className="calendar-year-down" onclick={this.decreaseYear}>-</Button>
                         <strong className="calendar-year-name">{this.year}</strong>
-                        <Button className="calendar-year-up" onclick={this.increaseYear} />
+                        <Button className="calendar-year-up" onclick={this.increaseYear}>+</Button>
                     </div>
                     <div className="calendar-month-title">
-                        <Button className="calendar-month-down" onclick={this.decreaseMonth} />
+                        <Button className="calendar-month-down" onclick={this.decreaseMonth}>-</Button>
                         <strong className="calendar-month-name">{monthNames[this.month]}</strong>
-                        <Button className="calendar-month-up" onclick={this.increaseMonth} />
+                        <Button className="calendar-month-up" onclick={this.increaseMonth}>+</Button>
                     </div>
                 </div>
                 <table>
@@ -116,10 +119,18 @@ export default class Calendar extends Component<ICalendarProps> {
                                         <td colSpan={7 - week.length}></td>
                                         : undefined}
                                     {week.map((day, index, array) => {
-                                        var selected = this.props.date && this.props.date.getTime() === day.getTime();
+                                        let time = day.getTime();
+                                        var selected = this.props.date && this.props.date.getTime() === time;
+                                        var current = todayTime === time;
+                                        let dayClassName = undefined;
+                                        if (selected) {
+                                            dayClassName = 'calendar-day-selected';
+                                        } else if (current) {
+                                            dayClassName = 'calendar-day-current';
+                                        }
                                         return (
-                                            <td className={selected ? 'calendar-day-selected' : undefined} key={this.year + ' ' + this.month + ' ' + index}>
-                                                <a onClick={this.selectDay.bind(this, day)}>{day.getDate()}</a>
+                                            <td key={this.year + ' ' + this.month + ' ' + index}>
+                                                <a className={dayClassName} onClick={this.selectDay.bind(this, day)}>{day.getDate()}</a>
                                             </td>
                                         );
                                     })}
