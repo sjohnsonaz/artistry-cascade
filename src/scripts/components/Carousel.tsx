@@ -86,7 +86,8 @@ export default class Carousel extends Component<ICarouselProps> {
             // Update indexes
             this.activeIndex = activeIndex;
             this.previousActiveIndex = previousActiveIndex;
-            await Cascade.set(this, 'selected', false);
+            this.selected = false;
+            await Cascade.track(this, 'selected');
 
             // Wait for animationFrame
             await waitAnimation(1);
@@ -157,34 +158,34 @@ export default class Carousel extends Component<ICarouselProps> {
                 if (this.activeIndex < this.previousActiveIndex) {
                     children = [
                         <div
-                            key={this.activeIndex as any}
+                            key={this.activeIndex}
                             className={this.selected ? "carousel-selected" : ""}
                         >{this.children[this.activeIndex]}</div>,
                         <div
-                            key={this.previousActiveIndex as any}
+                            key={this.previousActiveIndex}
                             className={this.selected ? "" : "carousel-selected"}
                         >{this.children[this.previousActiveIndex]}</div>
                     ];
                 } else {
                     children = [
                         <div
-                            key={this.previousActiveIndex as any}
+                            key={this.previousActiveIndex}
                             className={this.selected ? "" : "carousel-selected"}
                         >{this.children[this.previousActiveIndex]}</div>,
                         <div
-                            key={this.activeIndex as any}
+                            key={this.activeIndex}
                             className={this.selected ? "carousel-selected" : ""}
                         >{this.children[this.activeIndex]}</div>
                     ];
                 }
             } else {
                 children = (
-                    <div key={this.activeIndex as any} className={this.selected ? "carousel-selected" : ""}>{this.children[this.activeIndex]}</div>
+                    <div key={this.activeIndex} className={this.selected ? "carousel-selected" : ""}>{this.children[this.activeIndex]}</div>
                 );
             }
         } else {
             children = (
-                <div key={this.activeIndex as any} className={this.selected ? "carousel-selected" : ""}>{this.children}</div>
+                <div key={this.activeIndex} className={this.selected ? "carousel-selected" : ""}>{this.children}</div>
             );
         }
 
