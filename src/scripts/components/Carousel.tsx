@@ -155,37 +155,37 @@ export default class Carousel extends Component<ICarouselProps> {
         if (this.children instanceof Array) {
             if (this.activeIndex !== this.previousActiveIndex) {
                 if (this.activeIndex < this.previousActiveIndex) {
-                    children = <>
+                    children = [
                         <div
                             key={this.activeIndex as any}
                             className={this.selected ? "carousel-selected" : ""}
-                        >{this.children[this.activeIndex]}</div>
+                        >{this.children[this.activeIndex]}</div>,
                         <div
                             key={this.previousActiveIndex as any}
                             className={this.selected ? "" : "carousel-selected"}
                         >{this.children[this.previousActiveIndex]}</div>
-                    </>
+                    ];
                 } else {
-                    children = <>
+                    children = [
                         <div
                             key={this.previousActiveIndex as any}
                             className={this.selected ? "" : "carousel-selected"}
-                        >{this.children[this.previousActiveIndex]}</div>
+                        >{this.children[this.previousActiveIndex]}</div>,
                         <div
                             key={this.activeIndex as any}
                             className={this.selected ? "carousel-selected" : ""}
                         >{this.children[this.activeIndex]}</div>
-                    </>
+                    ];
                 }
             } else {
-                children = <>
+                children = (
                     <div key={this.activeIndex as any} className={this.selected ? "carousel-selected" : ""}>{this.children[this.activeIndex]}</div>
-                </>
+                );
             }
         } else {
-            children = <>
+            children = (
                 <div key={this.activeIndex as any} className={this.selected ? "carousel-selected" : ""}>{this.children}</div>
-            </>
+            );
         }
 
 
