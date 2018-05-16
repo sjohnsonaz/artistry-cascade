@@ -55,11 +55,9 @@ export default class Application {
                 <CodeView />
                 <h2>Examples</h2>
                 <UserListView viewModel={viewModel} />
-            </Container>,
-            function () {
-                console.log('started');
-            }
+            </Container>
         );
+        console.log('started');
         var user = new User('First', 'User');
         viewModel.users.push(user);
     }
