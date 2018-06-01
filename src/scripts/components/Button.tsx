@@ -27,11 +27,30 @@ export default class Button extends Component<IButtonProps> {
         }
     }
     render() {
-        let classNames = this.props.className ? [this.props.className] : [];
+        const {
+            className,
+            id,
+            theme,
+            down,
+            lockContent,
+            locked,
+            tooltip,
+            tooltipDirection,
+            tooltipOpen,
+            popover,
+            popoverAlign,
+            popoverDirection,
+            popoverMenu,
+            popoverOpen,
+            onPopoverClose,
+            ...props
+        } = this.props;
+
+        let classNames = className ? [className] : [];
         let injectedProps = {};
 
         classNames.push('button');
-        switch (this.props.theme) {
+        switch (theme) {
             case 'primary':
                 classNames.push('button-primary');
                 break;
@@ -40,10 +59,10 @@ export default class Button extends Component<IButtonProps> {
                 break;
         }
 
-        if (typeof this.props.tooltip !== 'undefined') {
-            injectedProps['aria-label'] = this.props.tooltip;
+        if (typeof tooltip !== 'undefined') {
+            injectedProps['aria-label'] = tooltip;
             classNames.push('tooltip');
-            switch (this.props.tooltipDirection) {
+            switch (tooltipDirection) {
                 case 'top':
                     classNames.push('tooltip-top');
                     break;
@@ -60,19 +79,19 @@ export default class Button extends Component<IButtonProps> {
                     classNames.push('tooltip-top');
                     break;
             }
-            if (this.props.tooltipOpen) {
+            if (tooltipOpen) {
                 classNames.push('tooltip-open');
             }
         }
 
         let popOver;
         let popOverMask;
-        if (typeof this.props.popover !== 'undefined') {
+        if (typeof popover !== 'undefined') {
             classNames.push('popover-trigger');
-            if (this.props.popoverMenu) {
-                if (this.props.popoverOpen) {
+            if (popoverMenu) {
+                if (popoverOpen) {
                     classNames.push('popover-open');
-                    if (!this.props.down) {
+                    if (!down) {
                         classNames.push('button-down');
                     }
                 } else {
@@ -84,49 +103,48 @@ export default class Button extends Component<IButtonProps> {
             }
             popOver = (
                 <Popover
-                    align={this.props.popoverAlign}
-                    direction={this.props.popoverDirection}
-                    open={!this.props.popoverMenu ? this.props.popoverOpen : undefined}
+                    align={popoverAlign}
+                    direction={popoverDirection}
+                    open={!popoverMenu ? popoverOpen : undefined}
                 >
-                    {typeof this.props.popover === 'function' ?
-                        this.props.popover() :
-                        this.props.popover
+                    {typeof popover === 'function' ?
+                        popover() :
+                        popover
                     }
                 </Popover>
             );
         }
 
-        if (this.props.down) {
+        if (down) {
             classNames.push('button-down');
         }
 
-        if (this.props.lockContent) {
+        if (lockContent) {
             classNames.push('button-lockable');
         }
 
-        if (this.props.locked) {
+        if (locked) {
             classNames.push('button-locked');
             injectedProps['disabled'] = true;
         }
 
-        let className = classNames.join(' ');
-        return !this.props.popoverMenu ?
+        return !popoverMenu ?
             (
-                <button {...this.props} className={className} {...injectedProps}>
+                <button {...props} className={classNames.join(' ')} id={id} {...injectedProps}>
                     {popOverMask}
                     {popOver}
-                    {this.props.lockContent ? [
+                    {lockContent ? [
                         <div className="button-text">{this.children}</div>,
-                        <div className="button-spinner">{this.props.lockContent}</div>
+                        <div className="button-spinner">{lockContent}</div>
                     ] : this.children}
                 </button>
             ) : (
-                <a {...this.props} className={className} {...injectedProps}>
+                <a {...props} className={classNames.join(' ')} id={id} {...injectedProps}>
                     {popOverMask}
                     {popOver}
-                    {this.props.lockContent ? [
+                    {lockContent ? [
                         <div className="button-text">{this.children}</div>,
-                        <div className="button-spinner">{this.props.lockContent}</div>
+                        <div className="button-spinner">{lockContent}</div>
                     ] : this.children}
                 </a>
             );
