@@ -1,6 +1,7 @@
 ﻿import Cascade, { Component } from 'cascade';
 
 import Button from './Button';
+import ButtonGroup from './ButtonGroup';
 import Input from './FormInput';
 
 import Calendar, { ICalendarProps } from './Calendar';
@@ -25,10 +26,24 @@ export default class DatePicker extends Component<IDatePickerProps>{
             date = this.props.date as Date;
         }
         return (
-            <div>
-                <div>{getDateFormatted(date)}</div>
-                <Calendar date={date} onSelect={this.onSelect} />
-            </div>
+            <ButtonGroup fill className="popover-trigger">
+                <Input
+                    value={getDateFormatted(date)}
+                    fill
+                    onChange={() => { }}
+                />
+                <Button
+                    link
+                    noTrigger
+                    popoverDirection="bottom"
+                    popoverAlign="right"
+                    popoverFill
+                    popover={<Calendar
+                        date={date}
+                        onSelect={this.onSelect}
+                    />}
+                >Calendar</Button>
+            </ButtonGroup>
         );
     }
 }

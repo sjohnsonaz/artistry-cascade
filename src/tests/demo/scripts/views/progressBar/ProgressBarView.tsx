@@ -9,7 +9,7 @@ export interface IProgressBarViewProps {
 export default class ProgressBarView extends Component<IProgressBarViewProps> {
     render() {
         return (
-            <Section title="Progress Bar">
+            <Section header="Progress Bar" space>
                 <ProgressBar value={50} />
             </Section>
         );

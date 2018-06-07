@@ -29,7 +29,7 @@ export default class PagerView extends Component<IPagerViewProps> {
     }
     render() {
         return (
-            <Section title="Pager">
+            <Section header="Pager" space>
                 <Pager
                     count={20}
                     index={this.index}

@@ -9,7 +9,7 @@ export interface ITabViewProps {
 export default class TabView extends Component<ITabViewProps> {
     render() {
         return (
-            <Section title="Tab">
+            <Section header="Tab" space>
                 <Tab titles={['Tab 1', 'Tab 2', 'Tab 3']} animated>
                     <div>Tab 1 Content<br />
                         <input type="text" className="input" />

@@ -1,6 +1,6 @@
 import Cascade, { Component } from 'cascade';
 
-import { Button, Form, FormActions, FormContainer, Section } from '../../../../../scripts/modules/CascadeComponents';
+import { Button, Form, FormAction, FormContainer, FormDivider, FormInput, Section } from '../../../../../scripts/modules/CascadeComponents';
 
 export interface IFormViewProps {
 
@@ -9,7 +9,7 @@ export interface IFormViewProps {
 export default class FormView extends Component<IFormViewProps> {
     render() {
         return (
-            <Section title="Form">
+            <Section header="Form">
                 <Form
                     onEnter={(event: KeyboardEvent) => {
                         event.preventDefault();
@@ -20,13 +20,14 @@ export default class FormView extends Component<IFormViewProps> {
                         console.log('escape')
                     }}
                 >
-                    <FormContainer title="Value">
-                        <input type="text" className="input" />
+                    <FormContainer label="Value">
+                        <FormInput fill />
                     </FormContainer>
-                    <FormActions>
+                    <FormDivider />
+                    <FormAction>
                         <Button>Cancel</Button>
                         <Button theme="primary">Save</Button>
-                    </FormActions>
+                    </FormAction>
                 </Form>
             </Section>
         );

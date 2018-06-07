@@ -27,7 +27,7 @@ export default class ButtonView extends Component<IButtonViewProps> {
 
     render() {
         return (
-            <Section title="Buttons">
+            <Section header="Buttons" space>
                 <h3>Individual Buttons</h3>
                 <div>
                     <Button>Edit</Button>{' '}

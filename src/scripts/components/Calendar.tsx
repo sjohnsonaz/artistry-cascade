@@ -1,6 +1,7 @@
 ﻿import Cascade, { Component, observable } from 'cascade';
 
 import Button from './Button';
+import ButtonGroup from './ButtonGroup';
 
 type Month = 'January' | 'February' | 'March' | 'April' | 'May' | 'June' | 'July' | 'August' | 'September' | 'October' | 'November' | 'December';
 
@@ -16,8 +17,8 @@ export default class Calendar extends Component<ICalendarProps> {
     @observable year: number;
     @observable date: Date;
 
-    constructor(props?: ICalendarProps) {
-        super(props);
+    constructor() {
+        super();
         var date = this.props.date || new Date(Date.now());
         this.year = date.getFullYear();
         this.month = date.getMonth();
@@ -82,22 +83,52 @@ export default class Calendar extends Component<ICalendarProps> {
 
     render() {
         var weeks = this.getWeeks(this.year, this.month);
+        let years = [];
+        let year = this.year;
+        for (let index = -100, length = 200; index <= length; index++) {
+            years.push(year + index);
+        }
         let today = new Date();
         today.setHours(0, 0, 0, 0);
         let todayTime = today.getTime();
         return (
             <div className="calendar">
                 <div className="calendar-title">
-                    <div className="calendar-year-title">
-                        <Button className="calendar-year-down" onclick={this.decreaseYear}>-</Button>
-                        <strong className="calendar-year-name">{this.year}</strong>
-                        <Button className="calendar-year-up" onclick={this.increaseYear}>+</Button>
-                    </div>
-                    <div className="calendar-month-title">
-                        <Button className="calendar-month-down" onclick={this.decreaseMonth}>-</Button>
-                        <strong className="calendar-month-name">{monthNames[this.month]}</strong>
-                        <Button className="calendar-month-up" onclick={this.increaseMonth}>+</Button>
-                    </div>
+                    <ButtonGroup>
+                        <Button onclick={this.decreaseYear}>-</Button>
+                        <select
+                            className="select"
+                            style="flex-grow: 1;"
+                            value={this.year.toString()}
+                            onchange={(event) => {
+                                this.year = parseInt((event.target as any).value);
+                            }}>
+                            {years.map(year => <option value={year} key={year}>{year}</option>)}
+                        </select>
+                        <Button onclick={this.increaseYear}>+</Button>
+                    </ButtonGroup>
+                    <ButtonGroup>
+                        <Button onclick={this.decreaseMonth}>-</Button>
+                        <select className="select" style="flex-grow: 1;"
+                            value={this.month as any}
+                            onchange={(event) => {
+                                this.month = parseInt((event.target as any).value);
+                            }}>
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                        <Button onclick={this.increaseMonth}>+</Button>
+                    </ButtonGroup>
                 </div>
                 <table>
                     <thead>
@@ -130,7 +161,7 @@ export default class Calendar extends Component<ICalendarProps> {
                                         }
                                         return (
                                             <td key={this.year + ' ' + this.month + ' ' + index}>
-                                                <a className={dayClassName} onClick={this.selectDay.bind(this, day)}>{day.getDate()}</a>
+                                                <a className={dayClassName} onclick={this.selectDay.bind(this, day)}>{day.getDate()}</a>
                                             </td>
                                         );
                                     })}

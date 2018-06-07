@@ -1,14 +1,14 @@
 import Cascade, { Component } from 'cascade';
 
-export interface IFormActionsProps {
+export interface IFormDividerProps {
     className?: string;
     id?: string;
 }
 
-export default class FormActions extends Component<IFormActionsProps>{
+export default class FormDivider extends Component<IFormDividerProps>{
     render() {
         let classNames = this.props.className ? [this.props.className] : [];
-        classNames.push('form-actions');
+        classNames.push('form-divider');
         return <div className={classNames.join(' ')} id={this.props.id}>{this.children}</div>
     }
 }

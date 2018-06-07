@@ -5,6 +5,7 @@ export interface IPopoverProps {
     id?: string;
     direction?: 'top' | 'right' | 'bottom' | 'left';
     align?: 'top' | 'right' | 'bottom' | 'left' | 'center';
+    fill?: boolean;
     open?: boolean;
     closed?: boolean;
 }
@@ -46,6 +47,9 @@ export default class Popover extends Component<IPopoverProps> {
             default:
                 classNames.push('popover-align-center');
                 break;
+        }
+        if (this.props.fill) {
+            classNames.push('popover-fill');
         }
         if (this.props.open) {
             classNames.push('popover-open');

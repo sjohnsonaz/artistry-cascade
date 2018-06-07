@@ -23,7 +23,7 @@ export default class SectionView extends Component<ISectionViewProps> {
 
     render() {
         return (
-            <Section title="Section" lockable closeable locked={this.locked} closed={this.closed} onClose={this.close}>
+            <Section header="Section" space lockable closeable locked={this.locked} closed={this.closed} onClose={this.close}>
                 Section Content<br />
                 <Button onclick={this.lockContents}>Lock</Button>
             </Section>

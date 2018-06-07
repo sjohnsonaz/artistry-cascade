@@ -1,6 +1,6 @@
 import Cascade, { Component } from 'cascade';
 
-import { DatePicker, Section } from '../../../../../scripts/modules/CascadeComponents';
+import { DatePicker, FormContainer, Section } from '../../../../../scripts/modules/CascadeComponents';
 
 export interface ICalendarViewProps {
 
@@ -9,8 +9,11 @@ export interface ICalendarViewProps {
 export default class CalendarView extends Component<ICalendarViewProps> {
     render() {
         return (
-            <Section title="Calendar">
-                <DatePicker date={new Date(Date.now())} onSelect={() => { }} />
+            <Section header="Calendar">
+                <FormContainer
+                    label="Calendar">
+                    <DatePicker date={new Date(Date.now())} onSelect={() => { }} />
+                </FormContainer>
             </Section>
         );
     }

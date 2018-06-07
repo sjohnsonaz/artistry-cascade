@@ -1,20 +1,52 @@
 import Cascade, { Component, Elements } from 'cascade';
 
-export interface IFormInputProps extends Elements.JSXInputElement {
-    model: Object;
-    modelProp: string;
+export interface IFormInputProps<T> extends Elements.JSXInputElement {
+    fill?: boolean;
+    model?: T;
+    modelProp?: keyof T;
 }
 
-export default class FormInput extends Component<IFormInputProps> {
-    oninput = (event?: Event) => {
+export default class FormInput<T> extends Component<IFormInputProps<T>> {
+    onInput = (event?: Event) => {
         let { model, modelProp } = this.props;
-        if (model) {
-            model[modelProp] = (event.target as HTMLInputElement).value;
+        if (model && modelProp) {
+            model[modelProp] = (event.target as HTMLInputElement).value as any;
         }
     }
 
     render() {
-        let { model, modelProp } = this.props;
-        return <input {...this.props} value={model ? model[modelProp] : undefined} oninput={this.oninput} />
+        let {
+            id,
+            className,
+            value,
+            fill,
+            model,
+            modelProp,
+            onInput,
+            ...props
+        } = this.props;
+        let renderedValue: string;
+        if (model && modelProp) {
+            renderedValue = model[modelProp] as any;
+        } else {
+            renderedValue = value as string;
+        }
+
+        let classNames = this.props.className ? [this.props.className] : [];
+        classNames.push('input');
+
+        if (fill) {
+            classNames.push('input-fill');
+        }
+
+        return (
+            <input
+                id={id}
+                className={classNames.join(' ')}
+                value={renderedValue}
+                onInput={onInput || this.onInput}
+                {...props}
+            />
+        );
     }
 }

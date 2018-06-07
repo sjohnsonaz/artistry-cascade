@@ -9,7 +9,7 @@ export interface IRangeViewProps {
 export default class RangeView extends Component<IRangeViewProps> {
     render() {
         return (
-            <Section title="Range">
+            <Section header="Range" space>
                 <Range />
             </Section>
         );

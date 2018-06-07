@@ -1,18 +1,14 @@
 import Cascade, { Component } from 'cascade';
 
-export interface IButtonGroupProps {
+export interface IFormTextProps {
     className?: string;
     id?: string;
-    fill?: boolean;
 }
 
-export default class ButtonGroups extends Component<IButtonGroupProps>{
+export default class FormText extends Component<IFormTextProps>{
     render() {
         let classNames = this.props.className ? [this.props.className] : [];
-        classNames.push('button-group');
-        if (this.props.fill) {
-            classNames.push('input-fill');
-        }
+        classNames.push('form-text');
         return <div className={classNames.join(' ')} id={this.props.id}>{this.children}</div>
     }
 }

@@ -9,7 +9,7 @@ export interface IToggleViewProps {
 export default class ToggleView extends Component<IToggleViewProps> {
     render() {
         return (
-            <Section title="Toggle">
+            <Section header="Toggle" space>
                 <Toggle />
             </Section>
         );

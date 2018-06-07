@@ -15,6 +15,7 @@ export interface IModalProps {
     lockable?: boolean;
     locked?: boolean;
     lockScroll?: boolean;
+    space?: boolean;
 }
 
 export default class Modal extends Component<IModalProps> {
@@ -74,6 +75,13 @@ export default class Modal extends Component<IModalProps> {
             modalContentClassNames.push('lock-contents');
             if (this.props.locked) {
                 modalContentClassNames.push('locked');
+            }
+        }
+        if (this.props.space) {
+            if (title || footer) {
+                modalContentClassNames.push('modal-body-space');
+            } else {
+                modalContentClassNames.push('modal-content-space');
             }
         }
         let modalContentClassName = modalContentClassNames.join(' ');

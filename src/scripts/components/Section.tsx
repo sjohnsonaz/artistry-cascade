@@ -3,11 +3,14 @@ import Cascade, { Component, Elements, observable } from 'cascade';
 import Button from './Button';
 
 export interface ISectionProps extends Elements.JSXElement {
-    title: any;
+    header: any;
+    footer?: any;
     lockable?: boolean;
     locked?: boolean;
     closeable?: boolean;
     closed?: boolean;
+    space?: boolean;
+    relative?: boolean;
     onClose?: (closed: boolean) => void;
 }
 
@@ -66,7 +69,20 @@ export default class Section extends Component<ISectionProps> {
     }
 
     render() {
-        let classNames = this.props.className ? [this.props.className] : [];
+        let {
+            id,
+            className,
+            header,
+            footer,
+            closeable,
+            closed,
+            lockable,
+            locked,
+            space,
+            relative,
+            ...props
+        } = this.props;
+        let classNames = className ? [className] : [];
         classNames.push('section');
 
         /*
@@ -75,24 +91,34 @@ export default class Section extends Component<ISectionProps> {
         }
         */
         let innerClassNames = ['section-content'];
-        if (this.props.lockable) {
+        if (lockable) {
             innerClassNames.push('lock-contents');
         }
-        if (this.props.locked) {
+
+        if (locked) {
             innerClassNames.push('locked');
         }
 
-        let className = classNames.join(' ');
-        let innerClassName = innerClassNames.join(' ');
+        if (space) {
+            innerClassNames.push('section-content-space');
+        }
+
+        if (relative) {
+            innerClassNames.push('section-content-relative');
+        }
+
         return (
-            <section className={className} {...this.props}>
+            <section className={classNames.join(' ')} id={id} {...props}>
                 <header>
-                    {this.props.title}
-                    {this.props.closeable ?
+                    {header}
+                    {closeable ?
                         <Button className="section-toggle" onclick={this.close}>-</Button>
                         : undefined}
                 </header>
-                <div className={innerClassName}>{this.children}</div>
+                <div className={innerClassNames.join(' ')}>{this.children}</div>
+                {footer ?
+                    <footer>{footer}</footer> :
+                    null}
             </section>
         );
     }

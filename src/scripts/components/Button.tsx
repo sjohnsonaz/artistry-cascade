@@ -1,9 +1,11 @@
-import Cascade, { Component, Elements } from 'cascade';
+import Cascade, { Component, Elements, observable } from 'cascade';
 
 import { ITemplate } from './ITemplate';
 import Popover from './Popover';
 
 export interface IButtonProps extends Elements.JSXButtonElement {
+    id?: string;
+    className?: string;
     theme?: 'default' | 'primary' | 'danger';
     tooltip?: string;
     tooltipDirection?: 'top' | 'right' | 'bottom' | 'left';
@@ -11,15 +13,30 @@ export interface IButtonProps extends Elements.JSXButtonElement {
     popover?: ITemplate;
     popoverDirection?: 'top' | 'right' | 'bottom' | 'left';
     popoverAlign?: 'top' | 'right' | 'bottom' | 'left' | 'center';
-    popoverOpen?: boolean;
     popoverMenu?: boolean;
+    popoverOpen?: boolean;
+    popoverFill?: boolean;
     onPopoverClose?: (event: Event) => boolean | void;
     lockContent?: any;
     locked?: boolean;
     down?: boolean;
+    link?: boolean;
+    noTrigger?: boolean;
+}
+
+
+export interface IButtonState {
+    open?: boolean;
 }
 
 export default class Button extends Component<IButtonProps> {
+    @observable open = false;
+    afterProps() {
+        if (typeof this.props.open !== 'undefined') {
+            this.open = this.props.open;
+        }
+    }
+
     onPopoverClose(event: Event) {
         event.stopPropagation();
         if (this.props.onPopoverClose) {
@@ -42,7 +59,10 @@ export default class Button extends Component<IButtonProps> {
             popoverDirection,
             popoverMenu,
             popoverOpen,
+            popoverFill,
             onPopoverClose,
+            link,
+            noTrigger,
             ...props
         } = this.props;
 
@@ -87,7 +107,9 @@ export default class Button extends Component<IButtonProps> {
         let popOver;
         let popOverMask;
         if (typeof popover !== 'undefined') {
-            classNames.push('popover-trigger');
+            if (!noTrigger) {
+                classNames.push('popover-trigger');
+            }
             if (popoverMenu) {
                 if (popoverOpen) {
                     classNames.push('popover-open');
@@ -106,6 +128,7 @@ export default class Button extends Component<IButtonProps> {
                     align={popoverAlign}
                     direction={popoverDirection}
                     open={!popoverMenu ? popoverOpen : undefined}
+                    fill={popoverFill}
                 >
                     {typeof popover === 'function' ?
                         popover() :
@@ -128,24 +151,28 @@ export default class Button extends Component<IButtonProps> {
             injectedProps['disabled'] = true;
         }
 
-        return !popoverMenu ?
+        return !(popoverMenu || link) ?
             (
-                <button {...props} className={classNames.join(' ')} id={id} {...injectedProps}>
+                <button {...props as any} className={classNames.join(' ')} id={id} {...injectedProps}>
                     {popOverMask}
                     {popOver}
-                    {lockContent ? [
-                        <div className="button-text">{this.children}</div>,
-                        <div className="button-spinner">{lockContent}</div>
-                    ] : this.children}
+                    {lockContent ?
+                        <>
+                            <div className="button-text">{this.children}</div>
+                            <div className="button-spinner">{lockContent}</div>
+                        </> :
+                        this.children}
                 </button>
             ) : (
-                <a {...props} className={classNames.join(' ')} id={id} {...injectedProps}>
+                <a {...props as any} className={classNames.join(' ')} id={id} {...injectedProps}>
                     {popOverMask}
                     {popOver}
-                    {lockContent ? [
-                        <div className="button-text">{this.children}</div>,
-                        <div className="button-spinner">{lockContent}</div>
-                    ] : this.children}
+                    {lockContent ?
+                        <>
+                            <div className="button-text">{this.children}</div>
+                            <div className="button-spinner">{lockContent}</div>
+                        </> :
+                        this.children}
                 </a>
             );
     }
