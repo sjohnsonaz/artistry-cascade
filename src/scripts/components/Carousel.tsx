@@ -20,7 +20,7 @@ export default class Carousel extends Component<ICarouselProps> {
     @observable previousActiveIndex: number = 0;
     @observable running: boolean = false;
     @observable animating: boolean = false;
-    @observable selected: boolean = false;
+    @observable selected: boolean = true;
     runCount: number = 0;
 
     transitionEnd = async (event: TransitionEvent) => {
@@ -35,7 +35,8 @@ export default class Carousel extends Component<ICarouselProps> {
     }
 
 
-    async afterRender(node: HTMLElement, updating: boolean) {
+    async afterProps(updating: boolean) {
+        let node = this.element as HTMLElement;
         // Only run if we are changing indexes
         if (updating) {
             let { activeIndex } = this.props;
