@@ -34,6 +34,11 @@ export default class Carousel extends Component<ICarouselProps> {
         }
     }
 
+    afterRender(node: HTMLDivElement, updating: boolean) {
+        if (!updating) {
+            node.addEventListener('transitionend', this.transitionEnd);
+        }
+    }
 
     async afterProps(updating: boolean) {
         let node = this.element as HTMLElement;
@@ -180,14 +185,14 @@ export default class Carousel extends Component<ICarouselProps> {
                     ];
                 }
             } else {
-                children = (
+                children = [
                     <div key={this.activeIndex} className={this.selected ? "carousel-selected" : ""}>{this.children[this.activeIndex]}</div>
-                );
+                ];
             }
         } else {
-            children = (
+            children = [
                 <div key={this.activeIndex} className={this.selected ? "carousel-selected" : ""}>{this.children}</div>
-            );
+            ];
         }
 
 
@@ -196,7 +201,6 @@ export default class Carousel extends Component<ICarouselProps> {
                 className={classNames.join(' ')}
                 id={this.props.id}
                 style={"height: " + this.height}
-                onTransitionEnd={this.transitionEnd}
             >
                 {children}
             </div>
