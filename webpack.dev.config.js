@@ -1,12 +1,13 @@
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
+    mode: 'development',
     entry: {
         'main': './src/tests/demo/scripts/main.ts',
         'styles': './src/tests/demo/styles/style.styl'
     },
     output: {
-        filename: './dist/bundle/[name].js',
+        filename: './bundle/[name].js',
         libraryTarget: 'var',
         library: '[name]'
     },
@@ -15,32 +16,34 @@ module.exports = {
         extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js']
     },
     module: {
-        loaders: [{
+        rules: [{
             test: /\.tsx?$/,
-            loader: 'ts-loader'
+            use: ['ts-loader']
         }, {
             test: /\.styl$/,
-            loader: ExtractTextPlugin.extract({
-                fallback: 'style-loader',
-                use: [
-                    'css-loader',
-                    { loader: 'postcss-loader', options: { sourceMap: true } },
-                    'stylus-loader'
-                ]
-            })
+            //loader: "style-loader!css-loader!clean-css-loader!postcss-loader!less-loader",
+            use: [
+                MiniCssExtractPlugin.loader,
+                'css-loader',
+                //{ loader: 'postcss-loader', options: { sourceMap: true } },
+                'stylus-loader'
+            ]
         }, {
             test: /\.css$/,
-            loader: ExtractTextPlugin.extract({
-                fallback: 'style-loader',
-                use: [
-                    'css-loader',
-                    'clean-css-loader',
-                    { loader: 'postcss-loader', options: { sourceMap: true } }
-                ]
-            })
+            use: [
+                MiniCssExtractPlugin.loader,
+                'css-loader',
+                'clean-css-loader',
+                //{ loader: 'postcss-loader', options: { sourceMap: true } }
+            ]
         }]
     },
     plugins: [
-        new ExtractTextPlugin("./dist/bundle/[name].css")
+        new MiniCssExtractPlugin({
+            // Options similar to the same options in webpackOptions.output
+            // both options are optional
+            filename: "bundle/[name].css",
+            chunkFilename: "bundle/[id].css"
+        })
     ]
 };
