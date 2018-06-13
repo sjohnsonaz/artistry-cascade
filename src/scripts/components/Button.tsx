@@ -6,6 +6,7 @@ import Popover from './Popover';
 export interface IButtonProps extends Elements.JSXButtonElement {
     id?: string;
     className?: string;
+    type?: 'button' | 'submit' | 'reset';
     theme?: 'default' | 'primary' | 'danger';
     tooltip?: string;
     tooltipDirection?: 'top' | 'right' | 'bottom' | 'left';
@@ -45,8 +46,9 @@ export default class Button extends Component<IButtonProps> {
     }
     render() {
         const {
-            className,
             id,
+            className,
+            type,
             theme,
             down,
             lockContent,
@@ -78,6 +80,9 @@ export default class Button extends Component<IButtonProps> {
                 classNames.push('button-danger');
                 break;
         }
+
+        // Always set button type
+        let buttonType = type || 'button';
 
         if (typeof tooltip !== 'undefined') {
             injectedProps['aria-label'] = tooltip;
@@ -153,7 +158,7 @@ export default class Button extends Component<IButtonProps> {
 
         return !(popoverMenu || link) ?
             (
-                <button {...props as any} className={classNames.join(' ')} id={id} {...injectedProps}>
+                <button {...props as any} className={classNames.join(' ')} id={id} type={buttonType} {...injectedProps}>
                     {popOverMask}
                     {popOver}
                     {lockContent ?
