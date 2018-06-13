@@ -11,6 +11,7 @@ export interface IDrawerProps {
     full?: boolean;
     onClose: (event: Event) => void;
     lockScroll?: boolean;
+    background?: boolean;
 }
 
 export default class Drawer extends Component<IDrawerProps> {
@@ -33,7 +34,8 @@ export default class Drawer extends Component<IDrawerProps> {
             open,
             full,
             onClose,
-            lockScroll
+            lockScroll,
+            background
         } = this.props;
 
         let classNames = className ? [className] : [];
@@ -44,6 +46,10 @@ export default class Drawer extends Component<IDrawerProps> {
 
         if (open) {
             classNames.push('drawer-open');
+        }
+
+        if (background) {
+            classNames.push('drawer-background');
         }
 
         if (full) {
