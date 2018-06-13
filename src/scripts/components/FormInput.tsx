@@ -7,7 +7,7 @@ export interface IFormInputProps<T> extends Elements.JSXInputElement {
 }
 
 export default class FormInput<T> extends Component<IFormInputProps<T>> {
-    onInput = (event?: Event) => {
+    oninput = (event?: Event) => {
         let { model, modelProp } = this.props;
         if (model && modelProp) {
             model[modelProp] = (event.target as HTMLInputElement).value as any;
@@ -44,7 +44,7 @@ export default class FormInput<T> extends Component<IFormInputProps<T>> {
                 id={id}
                 className={classNames.join(' ')}
                 value={renderedValue}
-                onInput={onInput || this.onInput}
+                oninput={onInput || this.oninput}
                 {...props}
             />
         );
