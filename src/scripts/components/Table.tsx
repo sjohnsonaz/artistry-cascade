@@ -33,13 +33,17 @@ export default class Table<T> extends Component<ITableProps<T>> {
         let classNames = className ? [className] : [];
         classNames.push('table');
 
-        let renderedTitles = headers || columns.map(column => {
-            if (typeof column.header === 'function') {
-                return column.header();
-            } else {
-                return column.header
-            }
-        });
+        let renderedTitles = headers || (
+            columns ?
+                columns.map(column => {
+                    if (typeof column.header === 'function') {
+                        return column.header();
+                    } else {
+                        return column.header
+                    }
+                }) :
+                undefined
+        );
 
         let renderedBody;
         if (template) {
