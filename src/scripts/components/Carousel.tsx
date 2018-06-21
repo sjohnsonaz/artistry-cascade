@@ -9,13 +9,15 @@ export interface ICarouselProps {
     activeIndex: number;
     animation?: 'slide' | 'slide-fade' | 'fade' | 'flip';
     safe?: boolean;
+    staticHeight?: boolean;
+    fillHeight?: boolean;
 }
 
 export default class Carousel extends Component<ICarouselProps> {
     container: HTMLElement;
     child: HTMLElement;
 
-    @observable height: string = 'auto';
+    @observable height: string = undefined;
     @observable activeIndex: number = 0;
     @observable previousActiveIndex: number = 0;
     @observable running: boolean = false;
@@ -28,7 +30,7 @@ export default class Carousel extends Component<ICarouselProps> {
             let running = this.running;
             if (!running) {
                 this.animating = false;
-                this.height = 'auto';
+                this.height = undefined;
                 this.previousActiveIndex = this.activeIndex;
             }
         }
@@ -77,10 +79,12 @@ export default class Carousel extends Component<ICarouselProps> {
                 return;
             }
 
-            // Store current height
-            await Cascade.set(this, 'height', node.offsetHeight + 'px');
-            if (runCount !== this.runCount) {
-                return;
+            if (!this.props.staticHeight) {
+                // Store current height
+                await Cascade.set(this, 'height', node.offsetHeight + 'px');
+                if (runCount !== this.runCount) {
+                    return;
+                }
             }
 
             // Start animating
@@ -107,24 +111,33 @@ export default class Carousel extends Component<ICarouselProps> {
                 return;
             }
 
-            // Update height
-            let computedStyle = window.getComputedStyle(node, null);
-            let paddingHeight =
-                parseFloat(computedStyle.getPropertyValue('border-top-width')) +
-                parseFloat(computedStyle.getPropertyValue('border-bottom-width')) +
-                parseFloat(computedStyle.getPropertyValue('padding-top')) +
-                parseFloat(computedStyle.getPropertyValue('padding-bottom'));
-            let activeChild = node.querySelector('.carousel-selected');
-            if (activeChild) {
-                await Cascade.set(this, 'height', paddingHeight + activeChild.clientHeight + 'px');
-            }
-            if (runCount !== this.runCount) {
-                return;
+            if (!this.props.staticHeight) {
+                // Update height
+                let computedStyle = window.getComputedStyle(node, null);
+                let paddingHeight =
+                    parseFloat(computedStyle.getPropertyValue('border-top-width')) +
+                    parseFloat(computedStyle.getPropertyValue('border-bottom-width')) +
+                    parseFloat(computedStyle.getPropertyValue('padding-top')) +
+                    parseFloat(computedStyle.getPropertyValue('padding-bottom'));
+                let activeChild = node.querySelector('.carousel-selected');
+                if (activeChild) {
+                    await Cascade.set(this, 'height', paddingHeight + activeChild.clientHeight + 'px');
+                }
+                if (runCount !== this.runCount) {
+                    return;
+                }
             }
 
             // Stop run
             if (this.running) {
-                await Cascade.set(this, 'running', false);
+                if (this.props.staticHeight) {
+                    this.running = false;
+                    this.animating = false;
+                    this.height = undefined;
+                    await Cascade.set(this, 'previousActiveIndex', this.activeIndex);
+                } else {
+                    await Cascade.set(this, 'running', false);
+                }
             }
         }
     }
@@ -135,6 +148,10 @@ export default class Carousel extends Component<ICarouselProps> {
 
         if (this.animating) {
             classNames.push('carousel-run');
+        }
+
+        if (this.props.fillHeight) {
+            classNames.push('fill-height');
         }
 
         switch (this.props.animation) {

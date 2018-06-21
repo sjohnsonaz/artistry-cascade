@@ -11,6 +11,8 @@ export interface ITabProps {
     animated?: boolean;
     fade?: boolean;
     safe?: boolean;
+    staticHeight?: boolean;
+    fillHeight?: boolean;
 }
 
 export default class Tab extends Component<ITabProps> {
@@ -32,6 +34,10 @@ export default class Tab extends Component<ITabProps> {
             this.props.activeIndex :
             (this.activeIndex || 0);
 
+        if (this.props.fillHeight) {
+            classNames.push('fill-height');
+        }
+
         return (
             <div className={classNames.join(' ')} id={this.props.id}>
                 <ul className="tab-header">
@@ -43,7 +49,13 @@ export default class Tab extends Component<ITabProps> {
                     }) : undefined}
                 </ul>
                 {this.props.animated ?
-                    <Carousel className="tab-carousel" activeIndex={activeIndex} safe={this.props.safe}>
+                    <Carousel
+                        className="tab-carousel"
+                        activeIndex={activeIndex}
+                        safe={this.props.safe}
+                        staticHeight={this.props.staticHeight}
+                        fillHeight={this.props.fillHeight}
+                    >
                         {this.children}
                     </Carousel>
                     : <div className="tab-body">
