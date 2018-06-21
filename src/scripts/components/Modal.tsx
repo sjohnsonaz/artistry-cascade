@@ -2,9 +2,10 @@ import Cascade, { Component } from 'cascade';
 
 import { ITemplate } from './ITemplate';
 import Button from './Button';
+import { IGridExternalProps, gridConfig } from './Grid';
 import BodyScroll from '../util/BodyScroll';
 
-export interface IModalProps {
+export interface IModalProps extends IGridExternalProps {
     className?: string;
     id?: string;
     open: boolean;
@@ -90,7 +91,12 @@ export default class Modal extends Component<IModalProps> {
                 modalContentClassNames.push('modal-content-space');
             }
         }
+        if (this.props.grid) {
+            gridConfig(modalContentClassNames, this.props);
+        }
+
         let modalContentClassName = modalContentClassNames.join(' ');
+
         return (
             <div className={classNames.join(' ')} id={this.props.id} onclick={this.close}>
                 {title || footer ?

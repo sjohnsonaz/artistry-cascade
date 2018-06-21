@@ -1,8 +1,9 @@
 import Cascade, { Component, Elements, observable } from 'cascade';
 
 import Button from './Button';
+import { IGridExternalProps, gridConfig } from './Grid';
 
-export interface ISectionProps extends Elements.JSXElement {
+export interface ISectionProps extends Elements.JSXElement, IGridExternalProps {
     header: any;
     footer?: any;
     lockable?: boolean;
@@ -80,6 +81,10 @@ export default class Section extends Component<ISectionProps> {
             locked,
             space,
             relative,
+            grid,
+            gridColumns,
+            gridSize,
+            gridSpace,
             ...props
         } = this.props;
         let classNames = className ? [className] : [];
@@ -105,6 +110,10 @@ export default class Section extends Component<ISectionProps> {
 
         if (relative) {
             innerClassNames.push('section-content-relative');
+        }
+
+        if (grid) {
+            gridConfig(innerClassNames, this.props);
         }
 
         return (

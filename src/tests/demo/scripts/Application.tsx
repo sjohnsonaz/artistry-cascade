@@ -20,6 +20,7 @@ import ListView from './views/list/ListView';
 import FormView from './views/form/FormView';
 import CodeView from './views/code/CodeView';
 import DrawerView from './views/drawer/DrawerView';
+import GridView from './views/grid/GridView';
 import ViewModel from './ViewModel';
 import User from './models/User';
 import UserListView from './views/user/UserListView';
@@ -53,6 +54,7 @@ export default class Application {
                 <ListView />
                 <FormView />
                 <CodeView />
+                <GridView />
                 <h2>Examples</h2>
                 <UserListView viewModel={viewModel} />
             </Container>

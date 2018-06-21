@@ -1,9 +1,9 @@
 import Cascade, { Component } from 'cascade';
 
-import Draggable from './Draggable';
+import { IGridExternalProps, gridConfig } from './Grid';
 import BodyScroll from '../util/BodyScroll';
 
-export interface IDrawerProps {
+export interface IDrawerProps extends IGridExternalProps {
     className?: string;
     id?: string;
     direction?: 'top' | 'right' | 'bottom' | 'left';
@@ -60,9 +60,14 @@ export default class Drawer extends Component<IDrawerProps> {
             BodyScroll.lock(open);
         }
 
+        let innerClassNames = ['drawer-content'];
+        if (this.props.grid) {
+            gridConfig(innerClassNames, this.props);
+        }
+
         return (
             <div className={classNames.join(' ')} id={id} onclick={this.close}>
-                <div className="drawer-content" onclick={this.preventClick}>
+                <div className={innerClassNames.join(' ')} onclick={this.preventClick}>
                     {this.children}
                 </div>
             </div>
