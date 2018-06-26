@@ -8,6 +8,7 @@ export { default as CardNavigation, ICardNavigationProps } from '../components/C
 export { default as CardTitle, ICardTitleProps } from '../components/CardTitle';
 export { default as Carousel, ICarouselProps } from '../components/Carousel';
 export { default as Cell, ICellProps } from '../components/Cell';
+export { default as Closeable, ICloseableProps } from '../components/Closeable';
 export { default as Code, ICodeProps } from '../components/Code';
 export { default as Container, IContainerProps } from '../components/Container';
 export { default as DatePicker, IDatePickerProps } from '../components/DatePicker';

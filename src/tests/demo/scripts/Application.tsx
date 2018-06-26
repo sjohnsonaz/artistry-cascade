@@ -24,6 +24,7 @@ import GridView from './views/grid/GridView';
 import ViewModel from './ViewModel';
 import User from './models/User';
 import UserListView from './views/user/UserListView';
+import CardView from './views/card/CardView';
 
 export default class Application {
     static run() {
@@ -55,6 +56,7 @@ export default class Application {
                 <FormView />
                 <CodeView />
                 <GridView />
+                <CardView />
                 <h2>Examples</h2>
                 <UserListView viewModel={viewModel} />
             </Container>

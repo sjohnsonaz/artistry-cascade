@@ -1,11 +1,11 @@
 ﻿import Cascade, { Component } from 'cascade';
 
+import Closeable from './Closeable';
 import { IGridExternalProps, gridConfig } from './Grid';
 
 export interface ICardProps extends IGridExternalProps {
     id?: string;
     className?: string;
-    closed?: boolean;
     header?: any;
     footer?: any;
     space?: boolean;
@@ -18,7 +18,6 @@ export default class Card extends Component<ICardProps> {
         let {
             id,
             className,
-            closed,
             header,
             footer,
             space,
@@ -38,7 +37,7 @@ export default class Card extends Component<ICardProps> {
         }
 
         return (
-            <div className={classNames.join(' ')} id={id} data-closed={closed}>
+            <div className={classNames.join(' ')} id={id}>
                 {header ? <header>{header}</header> : null}
                 <div className={innerClassNames.join(' ')}>
                     {this.children}
