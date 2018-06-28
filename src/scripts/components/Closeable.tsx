@@ -7,16 +7,11 @@ export interface ICloseableProps {
 }
 
 export default class Closeable extends Component<ICloseableProps> {
-    @observable closed: boolean;
+    @observable closed: boolean = this.props.closed;
     @observable running: boolean = false;
     @observable animating: boolean = false;
     @observable height: string = undefined;
     runCount: number = 0;
-
-    constructor() {
-        super();
-        this.closed = this.props.closed;
-    }
 
     transitionEnd = async (event: TransitionEvent) => {
         if (event.propertyName === 'height') {
@@ -42,7 +37,7 @@ export default class Closeable extends Component<ICloseableProps> {
 
     async afterProps(updating: boolean) {
         if (updating && this.props.closed !== this.prevProps.closed) {
-            let node = this.root.current;
+            let node = this.element as HTMLDivElement;
             let runCount = this.runCount;
 
             this.running = true;
@@ -117,7 +112,6 @@ export default class Closeable extends Component<ICloseableProps> {
                 data-closed={this.closed}
                 data-running={this.running}
                 style={"height: " + this.height}
-                ref={this.root}
             >
                 {this.children}
             </div>

@@ -23,7 +23,7 @@ export default class CardView extends Component<ICardViewProps> {
                             Card Content
                         </Cell>
                         <Cell>
-                            <Button onClick={this.toggle}>Expand</Button>
+                            <Button onclick={this.toggle}>Expand</Button>
                         </Cell>
                     </Row>
                     <Closeable closed={this.closed}>
