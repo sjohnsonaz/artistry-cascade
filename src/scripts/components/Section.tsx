@@ -17,7 +17,10 @@ export interface ISectionProps extends Elements.JSXElement, IGridExternalProps {
 
 export default class Section extends Component<ISectionProps> {
     @observable closed: boolean;
-    toggleTimeout: number;
+    @observable running: boolean = false;
+    @observable animating: boolean = false;
+    @observable height: string = undefined;
+    runCount: number = 0;
 
     close = () => {
         if (this.props.onClose) {
@@ -31,40 +34,82 @@ export default class Section extends Component<ISectionProps> {
         }
     }
 
-    afterRender(node: HTMLElement, updating: boolean) {
-        if (updating) {
-            // Get closed value
-            let closed = typeof this.props.closed !== 'undefined' ?
-                this.props.closed :
-                (this.closed || false);
-
-            // Clear toggleTimeout
-            let toggleTimeout: number = this.toggleTimeout;
-            if (typeof toggleTimeout === 'number') {
-                window.clearTimeout(toggleTimeout);
-                this.toggleTimeout = undefined;
+    transitionEnd = async (event: TransitionEvent) => {
+        if (event.propertyName === 'height') {
+            let animating = this.animating;
+            if (!animating) {
+                if (this.closed) {
+                    this.running = false;
+                    await Cascade.track(this, 'running');
+                } else {
+                    this.height = undefined;
+                    this.running = false;
+                    await Cascade.track(this, 'running');
+                }
             }
+        }
+    }
 
+    afterRender(node: HTMLDivElement, updating: boolean) {
+        if (!updating) {
+            node.addEventListener('transitionend', this.transitionEnd);
+        }
+    }
+
+    async afterProps(updating: boolean) {
+        if (updating && this.props.closed !== this.prevProps.closed) {
+            let node = this.element as HTMLElement;
             let header = node.childNodes[0] as HTMLElement;
             let content = node.childNodes[1] as HTMLElement;
-            node.classList.add('section-run');
-            if (closed) {
-                node.style.height = node.offsetHeight + 'px';
-                node.style.height = header.offsetHeight + 'px';
-                node.classList.add('section-closed');
-                this.toggleTimeout = window.setTimeout(function () {
-                    node.style.height = 'auto';
-                    node.classList.remove('section-run');
-                }, 220);
+
+            let runCount = this.runCount;
+
+            this.running = true;
+            this.animating = true;
+            await Cascade.track(this, 'animating');
+
+            if (runCount !== this.runCount) {
+                return;
+            }
+
+            if (this.props.closed) {
+                this.height = node.offsetHeight + 'px';
+                await Cascade.track(this, 'height');
+                if (runCount !== this.runCount) {
+                    return;
+                }
+
+                this.height = header.offsetHeight + 'px';
+                this.closed = true;
+                await Cascade.track(this, 'closed');
+                if (runCount !== this.runCount) {
+                    return;
+                }
+
+                this.animating = false;
+                await Cascade.track(this, 'animating');
             } else {
-                var sectionBorder = node.offsetHeight - node.clientHeight;
-                node.style.height = sectionBorder / 2 + header.offsetHeight + content.offsetHeight + 'px';
-                node.classList.remove('section-closed');
-                node.style.height = sectionBorder / 2 + header.offsetHeight + content.offsetHeight + 'px';
-                this.toggleTimeout = window.setTimeout(function () {
-                    node.style.height = 'auto';
-                    node.classList.remove('section-run');
-                }, 220);
+                var border = node.offsetHeight - node.clientHeight;
+                this.height = border / 2 + header.offsetHeight + content.offsetHeight + 'px';
+                await Cascade.track(this, 'height');
+                if (runCount !== this.runCount) {
+                    return;
+                }
+
+                this.closed = false;
+                await Cascade.track(this, 'closed');
+                if (runCount !== this.runCount) {
+                    return;
+                }
+
+                this.height = border / 2 + header.offsetHeight + content.offsetHeight + 'px';
+                await Cascade.track(this, 'height');
+                if (runCount !== this.runCount) {
+                    return;
+                }
+
+                this.animating = false;
+                await Cascade.track(this, 'animating');
             }
         }
     }
@@ -90,11 +135,14 @@ export default class Section extends Component<ISectionProps> {
         let classNames = className ? [className] : [];
         classNames.push('section');
 
-        /*
-        if (this.props.closed) {
+        if (this.closed) {
             classNames.push('section-closed');
         }
-        */
+
+        if (this.running) {
+            classNames.push('section-run');
+        }
+
         let innerClassNames = ['section-content'];
         if (lockable) {
             innerClassNames.push('lock-contents');
@@ -117,7 +165,12 @@ export default class Section extends Component<ISectionProps> {
         }
 
         return (
-            <section className={classNames.join(' ')} id={id} {...props}>
+            <section
+                className={classNames.join(' ')}
+                id={id}
+                style={"height: " + this.height}
+                {...props}
+            >
                 <header>
                     {header}
                     {closeable ?
