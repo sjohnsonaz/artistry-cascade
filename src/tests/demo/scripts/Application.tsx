@@ -2,7 +2,7 @@ declare var window: any;
 
 import Cascade from 'cascade';
 
-import { Container, BodyScroll } from '../../../scripts/modules/CascadeComponents';
+import { Container, BodyScroll, PortalManager } from '../../../scripts/modules/CascadeComponents';
 
 import ButtonView from './views/button/ButtonView';
 import RangeView from './views/range/RangeView';
@@ -31,10 +31,8 @@ export default class Application {
         var viewModel = new ViewModel();
         window.viewModel = viewModel;
         window.User = User;
-        viewModel.bodyScrollLocked;
-        Cascade.subscribe<boolean>(viewModel, 'bodyScrollLocked', (value) => {
-            BodyScroll.lock(value);
-        });
+        PortalManager.addElement('modal-root', 'modal-root');
+        BodyScroll.init();
         Cascade.render(
             document.getElementById('root'),
             <Container menuBarTop>

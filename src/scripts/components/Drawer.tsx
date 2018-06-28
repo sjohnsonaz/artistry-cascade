@@ -1,7 +1,9 @@
-import Cascade, { Component } from 'cascade';
+import Cascade, { Component, observable, Portal } from 'cascade';
 
 import { IGridExternalProps, gridConfig } from './Grid';
+import { waitAnimation } from '../util/PromiseUtil';
 import BodyScroll from '../util/BodyScroll';
+import PortalManager from '../util/PortalManager';
 
 export interface IDrawerProps extends IGridExternalProps {
     className?: string;
@@ -15,6 +17,9 @@ export interface IDrawerProps extends IGridExternalProps {
 }
 
 export default class Drawer extends Component<IDrawerProps> {
+    @observable open: boolean = false;
+    container = document.createElement('div');
+
     preventClick(event: Event) {
         event.stopPropagation();
     }
@@ -26,15 +31,33 @@ export default class Drawer extends Component<IDrawerProps> {
         }
     }
 
+    async afterProps(mounted: boolean) {
+        if (mounted && this.props.open != this.prevProps.open) {
+            if (this.props.open) {
+                BodyScroll.lock();
+                await waitAnimation();
+                this.open = this.props.open;
+            } else {
+                BodyScroll.unlock();
+                this.open = this.props.open;
+            }
+        }
+    }
+
+    afterDispose(element: Node) {
+        // If we were locked, unlock
+        if (this.open) {
+            BodyScroll.unlock();
+        }
+    }
+
     render() {
         let {
             className,
             id,
             direction,
-            open,
             full,
             onClose,
-            lockScroll,
             background
         } = this.props;
 
@@ -44,7 +67,7 @@ export default class Drawer extends Component<IDrawerProps> {
         direction = direction || 'bottom';
         classNames.push('drawer-' + direction);
 
-        if (open) {
+        if (this.open) {
             classNames.push('drawer-open');
         }
 
@@ -56,21 +79,19 @@ export default class Drawer extends Component<IDrawerProps> {
             classNames.push('drawer-full');
         }
 
-        if (lockScroll) {
-            BodyScroll.lock(open);
-        }
-
         let innerClassNames = ['drawer-content'];
         if (this.props.grid) {
             gridConfig(innerClassNames, this.props);
         }
 
         return (
-            <div className={classNames.join(' ')} id={id} onclick={this.close}>
-                <div className={innerClassNames.join(' ')} onclick={this.preventClick}>
-                    {this.children}
+            <Portal element={PortalManager.getElement('modal-root')}>
+                <div className={classNames.join(' ')} id={id} onclick={this.close}>
+                    <div className={innerClassNames.join(' ')} onclick={this.preventClick}>
+                        {this.children}
+                    </div>
                 </div>
-            </div>
+            </Portal>
         );
     }
 }

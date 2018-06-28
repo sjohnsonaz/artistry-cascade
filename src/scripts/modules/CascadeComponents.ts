@@ -1,4 +1,5 @@
 export { default as BodyScroll } from '../util/BodyScroll';
+export { default as PortalManager } from '../util/PortalManager';
 export { default as Button, IButtonProps } from '../components/Button';
 export { default as ButtonGroup, IButtonGroupProps } from '../components/ButtonGroup';
 export { default as ButtonBar, IButtonBarProps } from '../components/ButtonBar';
