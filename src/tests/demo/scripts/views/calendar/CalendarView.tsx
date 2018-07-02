@@ -12,7 +12,7 @@ export default class CalendarView extends Component<ICalendarViewProps> {
             <Section header="Calendar">
                 <FormContainer
                     label="Calendar">
-                    <DatePicker date={new Date(Date.now())} onSelect={() => { }} />
+                    <DatePicker date={new Date(Date.now())} onSelect={() => { }} fill />
                 </FormContainer>
             </Section>
         );

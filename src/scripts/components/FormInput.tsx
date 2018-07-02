@@ -36,7 +36,7 @@ export default class FormInput<T> extends Component<IFormInputProps<T>> {
         classNames.push('input');
 
         if (fill) {
-            classNames.push('input-fill');
+            classNames.push('fill-width');
         }
 
         return (

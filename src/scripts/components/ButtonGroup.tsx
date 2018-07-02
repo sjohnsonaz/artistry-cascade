@@ -11,7 +11,7 @@ export default class ButtonGroups extends Component<IButtonGroupProps>{
         let classNames = this.props.className ? [this.props.className] : [];
         classNames.push('button-group');
         if (this.props.fill) {
-            classNames.push('input-fill');
+            classNames.push('fill-width');
         }
         return <div className={classNames.join(' ')} id={this.props.id}>{this.children}</div>
     }

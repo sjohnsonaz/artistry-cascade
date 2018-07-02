@@ -11,6 +11,7 @@ export interface IDatePickerProps {
     mask?: string;
     date: Date | string;
     onSelect: (date: Date) => void;
+    fill?: boolean;
 }
 
 export default class DatePicker extends Component<IDatePickerProps>{
@@ -29,7 +30,7 @@ export default class DatePicker extends Component<IDatePickerProps>{
             <ButtonGroup fill className="popover-trigger">
                 <Input
                     value={getDateFormatted(date)}
-                    fill
+                    fill={this.props.fill}
                     onChange={() => { }}
                 />
                 <Button
