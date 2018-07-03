@@ -21,7 +21,7 @@ export default class DrawerView extends Component<IDrawerViewProps> {
         return (
             <Section header="Drawer" space>
                 <Button onclick={this.openDrawer}>Open Drawer</Button>
-                <Drawer open={this.drawerOpen} onClose={this.closeDrawer} lockScroll>
+                <Drawer open={this.drawerOpen} onClose={this.closeDrawer}>
                     <Button onclick={this.closeDrawer} className="pull-right">Close</Button>
                     <p>Drawer Content</p>
                     <br />

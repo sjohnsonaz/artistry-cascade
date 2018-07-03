@@ -17,14 +17,20 @@ export interface IModalProps extends IGridExternalProps {
     animation?: 'center' | 'top' | 'right' | 'bottom' | 'left';
     lockable?: boolean;
     locked?: boolean;
-    lockScroll?: boolean;
     space?: boolean;
     background?: boolean;
 }
 
 export default class Modal extends Component<IModalProps> {
-    @observable open: boolean = false;
+    @observable open: boolean = this.props.open;
     container = document.createElement('div');
+
+    constructor(props: IModalProps, ...children: any[]) {
+        super(props, ...children);
+        if (this.props.open) {
+            BodyScroll.lock();
+        }
+    }
 
     preventClick(event: Event) {
         event.stopPropagation();
