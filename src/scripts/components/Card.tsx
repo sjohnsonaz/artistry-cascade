@@ -9,6 +9,7 @@ export interface ICardProps extends IGridExternalProps {
     header?: any;
     footer?: any;
     space?: boolean;
+    fill?: boolean;
     nav?: any;
     navAlign?: 'start' | 'end';
 }
@@ -21,6 +22,7 @@ export default class Card extends Component<ICardProps> {
             header,
             footer,
             space,
+            fill,
             nav,
             navAlign,
             grid
@@ -31,6 +33,9 @@ export default class Card extends Component<ICardProps> {
         let innerClassNames = ['card-content'];
         if (space) {
             innerClassNames.push('card-content-space');
+        }
+        if (fill) {
+            classNames.push('fill');
         }
         if (grid) {
             gridConfig(innerClassNames, this.props);

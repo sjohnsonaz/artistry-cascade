@@ -34,17 +34,15 @@ export default class Section extends Component<ISectionProps> {
         }
     }
 
-    transitionEnd = async (event: TransitionEvent) => {
+    transitionEnd = (event: TransitionEvent) => {
         if (event.propertyName === 'height') {
             let animating = this.animating;
             if (!animating) {
                 if (this.closed) {
                     this.running = false;
-                    await Cascade.track(this, 'running');
                 } else {
                     this.height = undefined;
                     this.running = false;
-                    await Cascade.track(this, 'running');
                 }
             }
         }

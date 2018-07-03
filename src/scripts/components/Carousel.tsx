@@ -25,7 +25,7 @@ export default class Carousel extends Component<ICarouselProps> {
     @observable selected: boolean = true;
     runCount: number = 0;
 
-    transitionEnd = async (event: TransitionEvent) => {
+    transitionEnd = (event: TransitionEvent) => {
         if (event.propertyName === 'height') {
             let running = this.running;
             if (!running) {
