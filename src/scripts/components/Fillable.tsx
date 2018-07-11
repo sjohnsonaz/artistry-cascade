@@ -7,6 +7,7 @@ export interface IFillableProps {
     id?: string;
     className?: string;
     filled?: boolean;
+    card?: boolean;
 }
 
 export default class Fillable extends Component<IFillableProps> {
@@ -36,7 +37,7 @@ export default class Fillable extends Component<IFillableProps> {
         if (event.propertyName === 'top') {
             let animating = this.animating;
             if (!animating) {
-                if (this.filled) {
+                if (this.props.filled) {
                     this.running = false;
                     BodyScroll.lock();
                 } else {
@@ -72,7 +73,7 @@ export default class Fillable extends Component<IFillableProps> {
                 this.bottom = window.innerHeight - rect.top - rect.height + 'px';
                 this.left = rect.left + 'px';
                 this.right = document.body.scrollWidth - rect.left - rect.width + 'px';
-                await Cascade.track(this, 'filled');
+                await Cascade.track(this, 'top');
                 if (runCount !== this.runCount) {
                     return;
                 }
@@ -82,20 +83,31 @@ export default class Fillable extends Component<IFillableProps> {
                 let rect = node.getBoundingClientRect();
                 this.height = rect.height + 'px';
                 this.width = rect.width + 'px';
+                this.running = true;
+                await Cascade.track(this, 'running');
+                if (runCount !== this.runCount) {
+                    return;
+                }
+
                 this.top = rect.top + 'px';
                 this.bottom = window.innerHeight - rect.top - rect.height + 'px';
                 this.left = rect.left + 'px';
                 this.right = document.body.scrollWidth - rect.left - rect.width + 'px';
+                await Cascade.track(this, 'top');
+                if (runCount !== this.runCount) {
+                    return;
+                }
+    
+                this.top = undefined;
+                this.right = undefined;
+                this.bottom = undefined;
+                this.left = undefined;
                 this.filled = true;
                 await Cascade.track(this, 'filled');
                 if (runCount !== this.runCount) {
                     return;
                 }
 
-                this.top = 0 + 'px';
-                this.right = 0 + 'px';
-                this.bottom = 0 + 'px';
-                this.left = 0 + 'px';
                 this.animating = false;
             }
         }
@@ -111,26 +123,35 @@ export default class Fillable extends Component<IFillableProps> {
     render() {
         let {
             id,
-            className
+            className,
+            card
         } = this.props;
         let classNames = className ? [className] : [];
         classNames.push('fillable');
+
+        if (card) {
+            classNames.push('card-fillable');
+        }
 
         return (
             <div
                 className={classNames.join(' ')}
                 id={id}
+                data-running={this.running}
                 data-filled={this.filled}
-                style={"height:" + this.height + "; width: " + this.width + ";"}
+                style={{
+                    height: this.height,
+                    width: this.width
+                }}
             >
                 <div
                     className="fillable-content"
-                    style={
-                        "top: " + this.top + "; " +
-                        "right: " + this.right + "; " +
-                        "bottom: " + this.bottom + "; " +
-                        "left: " + this.left + ";"
-                    }
+                    style={{
+                        top: this.top,
+                        right: this.right,
+                        bottom: this.bottom,
+                        left: this.left
+                    }}
                 >
                     {this.children}
                 </div>

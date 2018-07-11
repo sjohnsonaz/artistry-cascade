@@ -22,7 +22,7 @@ export default class CardView extends Component<ICardViewProps> {
         return (
             <Section header="Card" space>
                 <h3>Card</h3>
-                <Fillable filled={this.filled}>
+                <Fillable card filled={this.filled}>
                     <Card grid space fill>
                         <Row>
                             <Cell>

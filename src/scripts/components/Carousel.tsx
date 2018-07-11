@@ -217,7 +217,7 @@ export default class Carousel extends Component<ICarouselProps> {
             <div
                 className={classNames.join(' ')}
                 id={this.props.id}
-                style={"height: " + this.height}
+                style={{ height: this.height }}
             >
                 {children}
             </div>

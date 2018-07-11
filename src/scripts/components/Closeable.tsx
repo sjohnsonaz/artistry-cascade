@@ -109,7 +109,7 @@ export default class Closeable extends Component<ICloseableProps> {
                 id={id}
                 data-closed={this.closed}
                 data-running={this.running}
-                style={"height: " + this.height}
+                style={{ height: this.height }}
             >
                 {this.children}
             </div>

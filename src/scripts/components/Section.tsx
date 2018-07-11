@@ -166,7 +166,9 @@ export default class Section extends Component<ISectionProps> {
             <section
                 className={classNames.join(' ')}
                 id={id}
-                style={"height: " + this.height}
+                style={{
+                    height: this.height
+                }}
                 {...props}
             >
                 <header>
