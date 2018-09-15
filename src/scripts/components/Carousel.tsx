@@ -18,8 +18,8 @@ export default class Carousel extends Component<ICarouselProps> {
     child: HTMLElement;
 
     @observable height: string = undefined;
-    @observable activeIndex: number = 0;
-    @observable previousActiveIndex: number = 0;
+    @observable activeIndex: number = this.props.activeIndex || 0;
+    @observable previousActiveIndex: number = this.props.activeIndex || 0;
     @observable running: boolean = false;
     @observable animating: boolean = false;
     @observable selected: boolean = true;
@@ -69,11 +69,10 @@ export default class Carousel extends Component<ICarouselProps> {
             }
 
             // Store runCount in closure
-            let runCount = this.runCount + 1;
+            this.runCount++;
+            let runCount = this.runCount;
 
             // Start run
-            this.runCount = runCount;
-
             await Cascade.set(this, 'running', true);
             if (runCount !== this.runCount) {
                 return;
@@ -140,6 +139,10 @@ export default class Carousel extends Component<ICarouselProps> {
                 }
             }
         }
+    }
+
+    afterDispose() {
+        this.runCount++;
     }
 
     render() {

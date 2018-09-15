@@ -64,6 +64,7 @@ export default class Fillable extends Component<IFillableProps> {
     async afterProps(mounted: boolean) {
         if (mounted && this.props.filled !== this.prevProps.filled) {
             let node = this.element as HTMLDivElement;
+            this.runCount++;
             let runCount = this.runCount;
 
             this.animating = true;
@@ -97,7 +98,7 @@ export default class Fillable extends Component<IFillableProps> {
                 if (runCount !== this.runCount) {
                     return;
                 }
-    
+
                 this.top = undefined;
                 this.right = undefined;
                 this.bottom = undefined;
@@ -118,7 +119,9 @@ export default class Fillable extends Component<IFillableProps> {
         if (this.filled) {
             BodyScroll.unlock();
         }
+        this.runCount++;
     }
+
 
     render() {
         let {

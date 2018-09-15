@@ -60,6 +60,7 @@ export default class Section extends Component<ISectionProps> {
             let header = node.childNodes[0] as HTMLElement;
             let content = node.childNodes[1] as HTMLElement;
 
+            this.runCount++;
             let runCount = this.runCount;
 
             this.running = true;
@@ -110,6 +111,10 @@ export default class Section extends Component<ISectionProps> {
                 await Cascade.track(this, 'animating');
             }
         }
+    }
+
+    afterDispose() {
+        this.runCount++;
     }
 
     render() {

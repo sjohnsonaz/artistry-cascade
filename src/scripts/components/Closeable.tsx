@@ -33,9 +33,15 @@ export default class Closeable extends Component<ICloseableProps> {
         }
     }
 
+    afterDispose() {
+        this.runCount++;
+    }
+
     async afterProps(updating: boolean) {
         if (updating && this.props.closed !== this.prevProps.closed) {
             let node = this.element as HTMLDivElement;
+
+            this.runCount++;
             let runCount = this.runCount;
 
             this.running = true;

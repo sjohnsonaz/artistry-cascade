@@ -17,7 +17,7 @@ export interface ITabProps {
 }
 
 export default class Tab extends Component<ITabProps> {
-    @observable activeIndex: number;
+    @observable activeIndex: number = this.props.activeIndex || 0;
 
     selectPanel(index: number) {
         if (this.props.onSelectPanel) {
