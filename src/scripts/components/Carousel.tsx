@@ -2,6 +2,7 @@ import Cascade, { Component, observable } from 'cascade';
 
 import ClassNames from '../util/ClassNames';
 import { wait, waitAnimation } from '../util/PromiseUtil';
+import { ScrollableType } from './Scrollable';
 
 export interface ICarouselProps {
     className?: string;
@@ -11,6 +12,7 @@ export interface ICarouselProps {
     safe?: boolean;
     staticHeight?: boolean;
     fillHeight?: boolean;
+    scroll?: ScrollableType;
 }
 
 export default class Carousel extends Component<ICarouselProps> {
@@ -177,6 +179,10 @@ export default class Carousel extends Component<ICarouselProps> {
             classNames.push('carousel-safe');
         }
 
+        if (this.props.scroll) {
+            classNames.push('scrollable');
+        }
+
         let children;
 
         if (this.children instanceof Array) {
@@ -221,6 +227,7 @@ export default class Carousel extends Component<ICarouselProps> {
                 className={classNames.join(' ')}
                 id={this.props.id}
                 style={{ height: this.height }}
+                data-scroll={this.props.scroll}
             >
                 {children}
             </div>

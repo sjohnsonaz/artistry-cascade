@@ -1,6 +1,7 @@
 import Cascade, { Component, observable } from 'cascade';
 
 import Carousel from './Carousel';
+import { ScrollableType } from './Scrollable';
 
 export interface ITabProps {
     className?: string;
@@ -14,6 +15,7 @@ export interface ITabProps {
     space?: boolean;
     staticHeight?: boolean;
     fillHeight?: boolean;
+    scroll?: ScrollableType;
 }
 
 export default class Tab extends Component<ITabProps> {
@@ -60,6 +62,7 @@ export default class Tab extends Component<ITabProps> {
                         safe={this.props.safe}
                         staticHeight={this.props.staticHeight}
                         fillHeight={this.props.fillHeight}
+                        scroll={this.props.scroll}
                     >
                         {this.children}
                     </Carousel>
