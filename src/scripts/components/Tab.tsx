@@ -61,7 +61,6 @@ export default class Tab extends Component<ITabProps> {
                         activeIndex={activeIndex}
                         safe={this.props.safe}
                         staticHeight={this.props.staticHeight}
-                        fillHeight={this.props.fillHeight}
                         scroll={this.props.scroll}
                     >
                         {this.children}
