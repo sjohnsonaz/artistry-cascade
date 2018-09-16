@@ -20,13 +20,13 @@
     "node": "node ./dist/scripts/main.js"
   },
   "peerDependencies": {
-    "artistry": "^0.5.7",
+    "artistry": "^0.5.11",
     "cascade": "^0.6.0"
   },
   "devDependencies": {
     "@types/chai": "4.1.3",
     "@types/mocha": "5.2.1",
-    "artistry": "^0.5.7",
+    "artistry": "^0.5.11",
     "autoprefixer": "8.6.1",
     "cascade": "^0.6.0",
     "cascade-validation": "^0.0.1",
