@@ -45,7 +45,7 @@ export default class Scrollable extends Component<IScrollableProps> {
                 id={id}
                 data-scroll={type}
             >
-                {this.props.children}
+                {this.children}
             </div>
         );
     }
