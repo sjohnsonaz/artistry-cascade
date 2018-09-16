@@ -15,6 +15,7 @@ export { default as Code, ICodeProps } from '../components/Code';
 export { default as Container, IContainerProps } from '../components/Container';
 export { default as DatePicker, IDatePickerProps } from '../components/DatePicker';
 export { default as Drawer, IDrawerProps } from '../components/Drawer';
+export { default as FileUpload, IFileUploadProps } from '../components/FileUpload';
 export { default as Fillable, IFillableProps } from '../components/Fillable';
 export { default as Form, IFormProps } from '../components/Form';
 export { default as FormAction, IFormActionProps } from '../components/FormAction';
