@@ -1,6 +1,6 @@
 import Cascade, { Component, observable } from 'cascade';
 
-import { Tab, Section } from '../../../../../scripts/modules/CascadeComponents';
+import { Tab, Section } from '../../../../../scripts/modules/ArtistryCascade';
 
 export interface ITabViewProps {
 

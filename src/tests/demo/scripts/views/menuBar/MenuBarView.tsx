@@ -1,6 +1,6 @@
 import Cascade, { Component, observable } from 'cascade';
 
-import { Button, MenuBar, MenuBarLink, Popover, Section, UserThumbnail } from '../../../../../scripts/modules/CascadeComponents';
+import { Button, MenuBar, MenuBarLink, Popover, Section, UserThumbnail } from '../../../../../scripts/modules/ArtistryCascade';
 
 export interface IMenuBarViewProps {
 
@@ -20,7 +20,7 @@ export default class MenuBarView extends Component<IMenuBarViewProps> {
         return (
             <MenuBar
                 top
-                title="Cascade Components"
+                title="Artistry Cascade"
             >
                 <MenuBarLink
                     active

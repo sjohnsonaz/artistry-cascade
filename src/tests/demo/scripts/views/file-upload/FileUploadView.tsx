@@ -1,6 +1,6 @@
 import Cascade, { Component } from 'cascade';
 
-import { FileUpload, Section } from '../../../../../scripts/modules/CascadeComponents';
+import { FileUpload, Section } from '../../../../../scripts/modules/ArtistryCascade';
 
 export interface ITableViewProps {
 

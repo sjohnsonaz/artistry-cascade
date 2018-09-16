@@ -1,6 +1,6 @@
 import Cascade, { Component } from 'cascade';
 
-import { Button, Section } from '../../../../../scripts/modules/CascadeComponents';
+import { Button, Section } from '../../../../../scripts/modules/ArtistryCascade';
 
 import ViewModel from '../../ViewModel';
 

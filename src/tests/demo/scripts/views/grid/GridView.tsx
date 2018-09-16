@@ -1,6 +1,6 @@
 import Cascade, { Component } from 'cascade';
 
-import { Cell, Grid, Row, Section } from '../../../../../scripts/modules/CascadeComponents';
+import { Cell, Grid, Row, Section } from '../../../../../scripts/modules/ArtistryCascade';
 
 export interface IGridViewProps {
 

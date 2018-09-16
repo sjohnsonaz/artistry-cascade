@@ -1,6 +1,6 @@
 import Cascade, { Component, observable } from 'cascade';
 
-import { Button, Card, Cell, Closeable, Fillable, Grid, Row, Section } from '../../../../../scripts/modules/CascadeComponents';
+import { Button, Card, Cell, Closeable, Fillable, Grid, Row, Section } from '../../../../../scripts/modules/ArtistryCascade';
 
 export interface ICardViewProps {
 

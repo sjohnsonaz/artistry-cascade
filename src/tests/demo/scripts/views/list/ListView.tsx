@@ -1,6 +1,6 @@
 import Cascade, { Component, observable } from 'cascade';
 
-import { List, Section } from '../../../../../scripts/modules/CascadeComponents';
+import { List, Section } from '../../../../../scripts/modules/ArtistryCascade';
 
 export interface ITableViewProps {
 

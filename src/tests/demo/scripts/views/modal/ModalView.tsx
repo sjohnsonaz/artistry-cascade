@@ -1,6 +1,6 @@
 import Cascade, { Component, observable } from 'cascade';
 
-import { Button, ButtonBar, Modal, Section } from '../../../../../scripts/modules/CascadeComponents';
+import { Button, ButtonBar, Modal, Section } from '../../../../../scripts/modules/ArtistryCascade';
 
 export interface IModalViewProps {
 

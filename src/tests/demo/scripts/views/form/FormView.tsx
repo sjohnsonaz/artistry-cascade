@@ -1,6 +1,6 @@
 import Cascade, { Component } from 'cascade';
 
-import { Button, Form, FormAction, FormContainer, FormDivider, FormInput, Section } from '../../../../../scripts/modules/CascadeComponents';
+import { Button, Form, FormAction, FormContainer, FormDivider, FormInput, Section } from '../../../../../scripts/modules/ArtistryCascade';
 
 export interface IFormViewProps {
 

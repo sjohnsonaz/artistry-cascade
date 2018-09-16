@@ -1,6 +1,6 @@
 import Cascade, { Component } from 'cascade';
 
-import { ProgressBar, Section } from '../../../../../scripts/modules/CascadeComponents';
+import { ProgressBar, Section } from '../../../../../scripts/modules/ArtistryCascade';
 
 export interface IProgressBarViewProps {
 

@@ -2,7 +2,7 @@ declare var window: any;
 
 import Cascade from 'cascade';
 
-import { Container, BodyScroll, PortalManager } from '../../../scripts/modules/CascadeComponents';
+import { Container, BodyScroll, PortalManager } from '../../../scripts/modules/ArtistryCascade';
 
 import ButtonView from './views/button/ButtonView';
 import RangeView from './views/range/RangeView';

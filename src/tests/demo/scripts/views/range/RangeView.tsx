@@ -1,6 +1,6 @@
 import Cascade, { Component } from 'cascade';
 
-import { Range, Section } from '../../../../../scripts/modules/CascadeComponents';
+import { Range, Section } from '../../../../../scripts/modules/ArtistryCascade';
 
 export interface IRangeViewProps {
 

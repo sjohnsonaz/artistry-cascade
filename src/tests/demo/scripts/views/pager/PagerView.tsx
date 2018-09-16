@@ -1,6 +1,6 @@
 import Cascade, { Component, observable } from 'cascade';
 
-import { Pager, Section } from '../../../../../scripts/modules/CascadeComponents';
+import { Pager, Section } from '../../../../../scripts/modules/ArtistryCascade';
 
 export interface IPagerViewProps {
 

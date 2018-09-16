@@ -1,6 +1,6 @@
 import Cascade, { Component } from 'cascade';
 
-import { DatePicker, FormContainer, Section } from '../../../../../scripts/modules/CascadeComponents';
+import { DatePicker, FormContainer, Section } from '../../../../../scripts/modules/ArtistryCascade';
 
 export interface ICalendarViewProps {
 

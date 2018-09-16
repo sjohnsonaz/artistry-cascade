@@ -1,6 +1,6 @@
 import Cascade, { Component, observable } from 'cascade';
 
-import { Button, ButtonBar, ButtonGroup, Section } from '../../../../../scripts/modules/CascadeComponents';
+import { Button, ButtonBar, ButtonGroup, Section } from '../../../../../scripts/modules/ArtistryCascade';
 
 export interface IButtonViewProps {
 

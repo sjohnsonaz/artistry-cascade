@@ -1,6 +1,6 @@
 import Cascade, { Component } from 'cascade';
 
-import { Button } from '../../../../../scripts/modules/CascadeComponents';
+import { Button } from '../../../../../scripts/modules/ArtistryCascade';
 
 import ViewModel from '../../ViewModel';
 import User from '../../models/User';

@@ -1,6 +1,6 @@
 import Cascade, { Component } from 'cascade';
 
-import { Code, Section } from '../../../../../scripts/modules/CascadeComponents';
+import { Code, Section } from '../../../../../scripts/modules/ArtistryCascade';
 
 export interface ICodeViewProps {
 

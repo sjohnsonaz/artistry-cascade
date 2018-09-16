@@ -1,6 +1,6 @@
 import Cascade, { Component } from 'cascade';
 
-import { Section, Toggle } from '../../../../../scripts/modules/CascadeComponents';
+import { Section, Toggle } from '../../../../../scripts/modules/ArtistryCascade';
 
 export interface IToggleViewProps {
 

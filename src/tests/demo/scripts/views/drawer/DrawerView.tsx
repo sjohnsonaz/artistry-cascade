@@ -1,6 +1,6 @@
 import Cascade, { Component, observable } from 'cascade';
 
-import { Button, Form, FormAction, FormContainer, FormDivider, Drawer, Section } from '../../../../../scripts/modules/CascadeComponents';
+import { Button, Form, FormAction, FormContainer, FormDivider, Drawer, Section } from '../../../../../scripts/modules/ArtistryCascade';
 
 export interface IDrawerViewProps {
 
