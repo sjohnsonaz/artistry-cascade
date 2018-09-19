@@ -168,10 +168,10 @@ export default class Button extends Component<IButtonProps> {
                     {popOverMask}
                     {popOver}
                     {lockContent ?
-                        <>
-                            <div className="button-text">{this.children}</div>
+                        [
+                            <div className="button-text">{this.children}</div>,
                             <div className="button-spinner">{lockContent}</div>
-                        </> :
+                        ] :
                         this.children}
                 </button>
             ) : (
@@ -179,10 +179,10 @@ export default class Button extends Component<IButtonProps> {
                     {popOverMask}
                     {popOver}
                     {lockContent ?
-                        <>
-                            <div className="button-text">{this.children}</div>
+                        [
+                            <div className="button-text">{this.children}</div>,
                             <div className="button-spinner">{lockContent}</div>
-                        </> :
+                        ] :
                         this.children}
                 </a>
             );
