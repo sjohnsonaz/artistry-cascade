@@ -85,7 +85,6 @@ export default class Drawer extends Component<IDrawerProps> {
             id,
             direction,
             full,
-            onClose,
             background
         } = this.props;
 
