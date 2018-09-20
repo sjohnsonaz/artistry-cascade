@@ -1,11 +1,12 @@
-import Cascade, { Component, observable, Portal } from 'cascade';
+import Cascade, { Component, observable, Portal, Ref } from 'cascade';
 
 import { ITemplate } from './ITemplate';
 import Button from './Button';
 import { IGridExternalProps, gridConfig } from './Grid';
 import { waitAnimation } from '../util/PromiseUtil';
 import BodyScroll from '../util/BodyScroll';
-import PortalManager from '../util/PortalManager';
+import DepthStack from '../util/DepthStack';
+import PortalManager from '../util/Portal';
 
 export interface IModalProps extends IGridExternalProps {
     className?: string;
@@ -23,12 +24,15 @@ export interface IModalProps extends IGridExternalProps {
 
 export default class Modal extends Component<IModalProps> {
     @observable open: boolean = this.props.open;
+    @observable remove: boolean = !this.props.open;
     container = document.createElement('div');
+    rootRef: Ref<HTMLDivElement> = new Ref();
 
     constructor(props: IModalProps, ...children: any[]) {
         super(props, ...children);
         if (this.props.open) {
             BodyScroll.lock();
+            DepthStack.push(this.close);
         }
     }
 
@@ -43,24 +47,41 @@ export default class Modal extends Component<IModalProps> {
         }
     }
 
-    async afterProps(mounted: boolean) {
-        if (mounted && this.props.open != this.prevProps.open) {
-            if (this.props.open) {
-                BodyScroll.lock();
-                await waitAnimation();
-                this.open = this.props.open;
-            } else {
-                BodyScroll.unlock();
-                this.open = this.props.open;
+    transitionEnd = (event: TransitionEvent) => {
+        if (event.propertyName === 'transform') {
+            if (!this.props.open) {
+                this.remove = true;
             }
         }
     }
 
+    afterRender(node: HTMLDivElement, updating: boolean) {
+        if (!updating) {
+            this.rootRef.current.children[0].addEventListener('transitionend', this.transitionEnd);
+        }
+    }
+
+    async afterProps(mounted: boolean) {
+        if (mounted && this.props.open != this.prevProps.open) {
+            if (this.props.open) {
+                this.remove = false;
+                BodyScroll.lock();
+                await waitAnimation();
+                this.open = this.props.open;
+                DepthStack.push(this.close);
+            } else {
+                BodyScroll.unlock();
+                this.open = this.props.open;
+                DepthStack.remove(this.close);
+            }
+        }
+    }
 
     afterDispose(element: Node) {
         // If we were locked, unlock
         if (this.open) {
             BodyScroll.unlock();
+            DepthStack.remove(this.close);
         }
     }
 
@@ -123,8 +144,8 @@ export default class Modal extends Component<IModalProps> {
         let modalContentClassName = modalContentClassNames.join(' ');
 
         return (
-            <Portal element={PortalManager.getElement('modal-root')}>
-                <div className={classNames.join(' ')} id={this.props.id} onclick={this.close}>
+            <Portal element={PortalManager.getElement('modal-root')} remove={this.remove}>
+                <div className={classNames.join(' ')} id={this.props.id} ref={this.rootRef}>
                     {title || footer ?
                         <div className="modal-content" onclick={this.preventClick}>
                             {title ?

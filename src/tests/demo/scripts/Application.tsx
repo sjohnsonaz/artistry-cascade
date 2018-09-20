@@ -2,7 +2,7 @@ declare var window: any;
 
 import Cascade from 'cascade';
 
-import { Container, BodyScroll, PortalManager } from '../../../scripts/modules/ArtistryCascade';
+import { Container, BodyScroll, Portal, DepthStack } from '../../../scripts/modules/ArtistryCascade';
 
 import ButtonView from './views/button/ButtonView';
 import RangeView from './views/range/RangeView';
@@ -32,8 +32,9 @@ export default class Application {
         var viewModel = new ViewModel();
         window.viewModel = viewModel;
         window.User = User;
-        PortalManager.addElement('modal-root', 'modal-root');
+        Portal.addElement('modal-root', 'modal-root');
         BodyScroll.init();
+        DepthStack.init();
         Cascade.render(
             document.getElementById('root'),
             <Container menuBarTop>
