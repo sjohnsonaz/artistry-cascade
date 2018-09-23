@@ -8,9 +8,15 @@ export interface IPopoverProps {
     fill?: boolean;
     open?: boolean;
     closed?: boolean;
+    preventClick?: boolean;
 }
 
 export default class Popover extends Component<IPopoverProps> {
+    preventClick(event: Event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+
     render() {
         let classNames = this.props.className ? [this.props.className] : [];
         classNames.push('popover');
@@ -62,7 +68,7 @@ export default class Popover extends Component<IPopoverProps> {
         }
 
         return (
-            <div className={classNames.join(' ')} id={this.props.id}>
+            <div className={classNames.join(' ')} id={this.props.id} onclick={this.props.preventClick ? this.preventClick : undefined}>
                 <div className="popover-content">{this.children}</div>
             </div>
         );

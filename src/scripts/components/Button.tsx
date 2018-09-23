@@ -152,6 +152,7 @@ export default class Button extends Component<IButtonProps> {
                     direction={popoverDirection}
                     open={!popoverMenu ? popoverOpen : undefined}
                     fill={popoverFill}
+                    preventClick
                 >
                     {typeof popover === 'function' ?
                         popover() :

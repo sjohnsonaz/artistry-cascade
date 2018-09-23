@@ -1,5 +1,7 @@
 import Cascade, { Component } from 'cascade';
 
+import DepthStack from '../util/DepthStack';
+
 import { ITemplate } from './ITemplate';
 import Popover from './Popover';
 
@@ -20,12 +22,39 @@ export interface IUserThumbnailProps {
 }
 
 export default class UserThumbnail extends Component<IUserThumbnailProps> {
-    onPopoverClose(event: Event) {
-        event.stopPropagation();
+    private closeHandle: (event: Event) => void;
+
+    close(event: Event) {
         if (this.props.onPopoverClose) {
             this.props.onPopoverClose(event);
         }
     }
+
+    async afterProps(mounted: boolean) {
+        if (this.props.popover) {
+            if (!this.closeHandle) {
+                this.closeHandle = this.close.bind(this);
+            }
+            if (!mounted) {
+                if (this.props.popoverOpen) {
+                    DepthStack.push(this.closeHandle);
+                }
+            } else {
+                if (this.props.popoverOpen) {
+                    DepthStack.push(this.closeHandle);
+                } else {
+                    DepthStack.remove(this.closeHandle);
+                }
+            }
+        }
+    }
+
+    afterDispose() {
+        if (this.props.popoverOpen) {
+            DepthStack.remove(this.closeHandle);
+        }
+    }
+
     render() {
         let classNames = this.props.className ? [this.props.className] : [];
         classNames.push('thumbnail');
@@ -56,6 +85,7 @@ export default class UserThumbnail extends Component<IUserThumbnailProps> {
                     align={this.props.popoverAlign}
                     direction={this.props.popoverDirection}
                     open={!this.props.popoverMenu ? this.props.popoverOpen : undefined}
+                    preventClick
                 >
                     {typeof this.props.popover === 'function' ?
                         this.props.popover() :
@@ -73,15 +103,11 @@ export default class UserThumbnail extends Component<IUserThumbnailProps> {
                 if (this.props.menuBarTop) {
                     triggerClassNames.push('popover-menu-bar-top');
                 }
-                let popOverMask = (
-                    <div className="popover-mask" onclick={this.onPopoverClose.bind(this)}></div>
-                );
                 return (
                     <a href="#" className={triggerClassNames.join(' ')} id={this.props.id}
                         onclick={this.props.onclick}
                     >
                         {thumbnail}
-                        {popOverMask}
                         {popover}
                     </a>
                 )

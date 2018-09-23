@@ -17,7 +17,9 @@ export default class MenuBarLink extends Component<IMenuBarLinkProps> {
         }
         return (
             <li className={classNames.join(' ')} id={this.props.id}>
-                <a href={this.props.href || ''}>{this.props.title}</a>
+                {this.props.href ?
+                    <a href={this.props.href}>{this.props.title}</a> :
+                    <span>{this.props.title}</span>}
             </li>
         );
     }
