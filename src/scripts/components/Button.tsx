@@ -1,7 +1,8 @@
-import Cascade, { Component, Elements, observable } from 'cascade';
+import Cascade, { Component, Elements } from 'cascade';
 
 import { ITemplate } from './ITemplate';
 import Popover from './Popover';
+import DepthStack from '../util/DepthStack';
 
 export interface IButtonProps extends Elements.JSXButtonElement {
     id?: string;
@@ -26,25 +27,40 @@ export interface IButtonProps extends Elements.JSXButtonElement {
     noTrigger?: boolean;
 }
 
-
-export interface IButtonState {
-    open?: boolean;
-}
-
 export default class Button extends Component<IButtonProps> {
-    @observable open = false;
-    afterProps() {
-        if (typeof this.props.open !== 'undefined') {
-            this.open = this.props.open;
-        }
-    }
+    private closeHandle: (event: Event) => void;
 
-    onPopoverClose(event: Event) {
-        event.stopPropagation();
+    close(event: Event) {
         if (this.props.onPopoverClose) {
             this.props.onPopoverClose(event);
         }
     }
+
+    async afterProps(mounted: boolean) {
+        if (this.props.popover) {
+            if (!this.closeHandle) {
+                this.closeHandle = this.close.bind(this);
+            }
+            if (!mounted) {
+                if (this.props.popoverOpen) {
+                    DepthStack.push(this.closeHandle);
+                }
+            } else {
+                if (this.props.popoverOpen) {
+                    DepthStack.push(this.closeHandle);
+                } else {
+                    DepthStack.remove(this.closeHandle);
+                }
+            }
+        }
+    }
+
+    afterDispose() {
+        if (this.props.popoverOpen) {
+            DepthStack.remove(this.closeHandle);
+        }
+    }
+
     render() {
         const {
             id,
@@ -116,7 +132,6 @@ export default class Button extends Component<IButtonProps> {
         }
 
         let popOver;
-        let popOverMask;
         if (typeof popover !== 'undefined') {
             if (!noTrigger) {
                 classNames.push('popover-trigger');
@@ -130,9 +145,6 @@ export default class Button extends Component<IButtonProps> {
                 } else {
                     classNames.push('popover-closed');
                 }
-                popOverMask = (
-                    <div className="popover-mask" onclick={this.onPopoverClose.bind(this)}></div>
-                );
             }
             popOver = (
                 <Popover
@@ -165,7 +177,6 @@ export default class Button extends Component<IButtonProps> {
         return !(popoverMenu || link) ?
             (
                 <button {...props as any} className={classNames.join(' ')} id={id} type={buttonType} {...injectedProps}>
-                    {popOverMask}
                     {popOver}
                     {lockContent ?
                         [
@@ -176,7 +187,6 @@ export default class Button extends Component<IButtonProps> {
                 </button>
             ) : (
                 <a {...props as any} className={classNames.join(' ')} id={id} {...injectedProps}>
-                    {popOverMask}
                     {popOver}
                     {lockContent ?
                         [
