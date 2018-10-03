@@ -20,7 +20,7 @@ export default class DepthStack {
         let item = this.items[this.items.length - 1];
         if (item) {
             let result = item(event);
-            if (result) {
+            if (result !== false) {
                 this.items.pop();
             }
         }
