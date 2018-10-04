@@ -13,7 +13,6 @@ export default class BodyScroll {
             // We must query multiple objects for the scrollTop.
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop || body.scrollTop || root.scrollTop;
             body.setAttribute('data-lock', 'true');
-            root.style.marginRight = this.scrollbarWidth;
             root.scrollTop = scrollTop;
         }
     }
@@ -29,7 +28,6 @@ export default class BodyScroll {
         if (root && this.lockCount === 0) {
             let scrollTop = root.scrollTop || window.pageYOffset || document.documentElement.scrollTop || body.scrollTop;
             body.setAttribute('data-lock', 'false');
-            root.style.marginRight = '';
             // We must set both of these for Chrome and Firefox.
             body.scrollTop = scrollTop;
             document.documentElement.scrollTop = scrollTop;
@@ -42,6 +40,7 @@ export default class BodyScroll {
         body.setAttribute('data-lock', 'init');
         this.scrollbarWidth = getComputedStyle(body).marginRight;
         body.setAttribute('data-lock', 'false');
+        body.style.setProperty('--scrollbar-width', this.scrollbarWidth);
         window.addEventListener('beforeunload', () => {
             this.lockCount = 1;
             this.unlock();
