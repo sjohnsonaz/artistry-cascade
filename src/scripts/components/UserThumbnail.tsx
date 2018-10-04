@@ -94,7 +94,7 @@ export default class UserThumbnail extends Component<IUserThumbnailProps> {
                 </Popover>
             );
             if (this.props.popoverMenu) {
-                let triggerClassNames = ['popover-trigger']
+                let triggerClassNames = ['clickable', 'popover-trigger']
                 if (this.props.popoverOpen) {
                     triggerClassNames.push('popover-open');
                 } else {
@@ -104,12 +104,12 @@ export default class UserThumbnail extends Component<IUserThumbnailProps> {
                     triggerClassNames.push('popover-menu-bar-top');
                 }
                 return (
-                    <a href="#" className={triggerClassNames.join(' ')} id={this.props.id}
+                    <span role="button" className={triggerClassNames.join(' ')} id={this.props.id}
                         onclick={this.props.onclick}
                     >
                         {thumbnail}
                         {popover}
-                    </a>
+                    </span>
                 )
             } else {
                 return (
