@@ -19,16 +19,19 @@
     "watch-link": "tsc --watch --declaration",
     "node": "node ./dist/scripts/main.js"
   },
+  "dependencies": {
+    "@cascade/diff": "0.0.0"
+  },
   "peerDependencies": {
-    "artistry": "^0.5.15",
-    "cascade": "^0.7.4"
+    "artistry": "^0.5.16",
+    "cascade": "^0.7.5"
   },
   "devDependencies": {
     "@types/chai": "4.1.5",
     "@types/mocha": "5.2.5",
-    "artistry": "^0.5.15",
+    "artistry": "^0.5.16",
     "autoprefixer": "8.6.1",
-    "cascade": "^0.7.4",
+    "cascade": "^0.7.5",
     "cascade-validation": "^0.0.1",
     "chai": "4.1.2",
     "css-loader": "1.0.0",
