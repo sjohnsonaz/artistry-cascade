@@ -36,6 +36,7 @@ export default class Button extends Component<IButtonProps> {
         }
     }
 
+    // TODO: Fix leak when popover status changes
     async afterProps(mounted: boolean) {
         if (this.props.popover) {
             if (!this.closeHandle) {
