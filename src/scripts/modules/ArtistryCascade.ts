@@ -1,7 +1,7 @@
 export { default as BodyScroll } from '../util/BodyScroll';
 export { default as ClassNames } from '../util/ClassNames';
 export { default as DepthStack } from '../util/DepthStack';
-export { default as Portal} from '../util/Portal';
+export { default as Portal } from '../util/Portal';
 export { default as Button, IButtonProps } from '../components/Button';
 export { default as ButtonGroup, IButtonGroupProps } from '../components/ButtonGroup';
 export { default as ButtonBar, IButtonBarProps } from '../components/ButtonBar';
@@ -29,7 +29,7 @@ export { default as List, IListProps } from '../components/List';
 export { default as MenuBar, IMenuBarProps } from '../components/MenuBar';
 export { default as MenuBarLink, IMenuBarLinkProps } from '../components/MenuBarLink';
 export { default as MenuBarSpacer, IMenuBarSpacerProps } from '../components/MenuBarSpacer';
-export { default as Modal, IModalProps } from '../components/Modal';
+export { default as Modal, IModalProps, ModalSize } from '../components/Modal';
 export { default as Pager, IPagerProps } from '../components/Pager';
 export { default as Popover, IPopoverProps } from '../components/Popover';
 export { default as ProgressBar, IProgressBarProps } from '../components/ProgressBar';
