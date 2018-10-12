@@ -17,6 +17,7 @@ import TabView from './views/tab/TabView';
 import TableView from './views/table/TableView';
 import PagerView from './views/pager/PagerView';
 import ListView from './views/list/ListView';
+import ScrollableView from './views/scrollable/ScrollableView';
 import FormView from './views/form/FormView';
 import FileUploadView from './views/file-upload/FileUploadView';
 import CodeView from './views/code/CodeView';
@@ -53,6 +54,7 @@ export default class Application {
                 <TableView />
                 <PagerView />
                 <ListView />
+                <ScrollableView />
                 <FormView />
                 <FileUploadView />
                 <CodeView />
