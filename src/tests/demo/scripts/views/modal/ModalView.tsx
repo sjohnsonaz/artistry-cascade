@@ -38,13 +38,27 @@ export default class ModalView extends Component<IModalViewProps> {
         return (
             <Section header="Modal" space>
                 <Button onclick={this.openModal}>Open Modal</Button>
-                <Modal open={this.modalOpen} onclose={this.closeModal} title="Modal" animation="top" lockable locked={this.modalLock}>
+                <Modal
+                    open={this.modalOpen}
+                    onclose={this.closeModal}
+                    title="Modal"
+                    animation="top"
+                    size="small"
+                    lockable
+                    locked={this.modalLock}
+                >
                     <div>test</div>
                     <ButtonBar>
                         <Button onclick={this.openInnerModal}>Open Inner Modal</Button>
                         <Button onclick={this.lockModal}>Lock Modal</Button>
                     </ButtonBar>
-                    <Modal open={this.innerModalOpen} onclose={this.closeInnerModal} title="Inner Modal" animation="center">
+                    <Modal
+                        open={this.innerModalOpen}
+                        onclose={this.closeInnerModal}
+                        title="Inner Modal"
+                        animation="center"
+                        size="small"
+                    >
                         <div>inner test</div>
                     </Modal>
                 </Modal>

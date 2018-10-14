@@ -11,6 +11,7 @@ export default class FormView extends Component<IFormViewProps> {
         return (
             <Section header="Form">
                 <Form
+                    size="small"
                     onEnter={(event: KeyboardEvent) => {
                         event.preventDefault();
                         console.log('enter')

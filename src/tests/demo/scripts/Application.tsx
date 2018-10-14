@@ -38,7 +38,7 @@ export default class Application {
         DepthStack.init();
         Cascade.render(
             document.getElementById('root'),
-            <Container menuBarTop>
+            <Container menuBarTop size="all">
                 <MenuBarView />
                 <h2>Components</h2>
                 <ButtonView />

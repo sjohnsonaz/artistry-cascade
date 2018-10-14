@@ -1,6 +1,9 @@
 import Cascade, { Component, Elements } from 'cascade';
 
+export type FormSize = 'default' | 'small' | 'medium' | 'large' | 'x-large';
+
 export interface IFormProps extends Elements.JSXFormElement {
+    size?: FormSize;
     onEnter?: (event: KeyboardEvent) => boolean | void;
     onEscape?: (event: KeyboardEvent) => boolean | void;
 }
@@ -20,6 +23,22 @@ export default class Form extends Component<IFormProps> {
     render() {
         let classNames = this.props.className ? [this.props.className] : [];
         classNames.push('form');
+
+        switch (this.props.size) {
+            case 'small':
+                classNames.push('form-sm');
+                break;
+            case 'medium':
+                classNames.push('form-md');
+                break;
+            case 'large':
+                classNames.push('form-lg');
+                break;
+            case 'x-large':
+                classNames.push('form-xl');
+                break;
+        }
+
         let onkeydown = (this.props.onEnter || this.props.onEscape) ? this.onkeydown.bind(this) : undefined;
         return (
             <form className={classNames.join(' ')} onkeydown={onkeydown} {...this.props}>{this.children}</form>
