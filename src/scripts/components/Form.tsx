@@ -26,6 +26,7 @@ export default class Form extends Component<IFormProps> {
         let {
             id,
             className,
+            size,
             lockable,
             locked,
             onEnter,
@@ -38,7 +39,7 @@ export default class Form extends Component<IFormProps> {
             classNames.push('form-lock');
         }
 
-        switch (this.props.size) {
+        switch (size) {
             case 'small':
                 classNames.push('form-sm');
                 break;
