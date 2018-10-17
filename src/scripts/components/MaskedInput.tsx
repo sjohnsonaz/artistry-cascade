@@ -15,14 +15,13 @@ export default class MaskedInput<T> extends Component<IMaskedInputProps<T>> {
     command: boolean = false;
     mask: Mask;
 
-    @observable value?: string;
-    @observable selectionStart?: number = 0;
-    @observable selectionEnd?: number = 0;
+    value?: string;
+    selectionStart?: number = 0;
+    selectionEnd?: number = 0;
 
     constructor(props: IMaskedInputProps<T>, children: any[]) {
         super(props, children);
         this.mask = new Mask(this.props.mask);
-        this.value = this.mask.formatValue(this.props.value, true);
     }
 
     updateElement(maskUpdate: IMaskUpdate) {
@@ -54,6 +53,14 @@ export default class MaskedInput<T> extends Component<IMaskedInputProps<T>> {
                     this.rollback();
                 }
             }
+        }
+    }
+
+    afterRender(node: Node, mounted: boolean) {
+        if (!mounted) {
+            this.updateElement({
+                value: this.mask.formatValue(this.props.value, true)
+            });
         }
     }
 
@@ -210,16 +217,16 @@ export default class MaskedInput<T> extends Component<IMaskedInputProps<T>> {
 
         return (
             <input
+                {...props as any}
                 ref={this.inputRef}
                 id={id}
                 className={classNames.join(' ')}
-                onFocus={this.onFocus}
-                onClick={this.onClick}
-                onSelect={this.onSelect}
-                onChange={this.onChange}
-                onKeyDown={this.onKeyDown}
-                onKeyUp={this.onKeyUp}
-                {...props as any}
+                onfocus={this.onFocus}
+                onclick={this.onClick}
+                onselect={this.onSelect}
+                onchange={this.onChange}
+                onkeydown={this.onKeyDown}
+                onkeyup={this.onKeyUp}
             />
         );
     }
