@@ -1,4 +1,5 @@
 import Cascade, { Component, Elements } from 'cascade';
+import MaskedInput from './MaskedInput';
 
 export interface IFormInputProps<T> extends Elements.JSXInputElement {
     fill?: boolean;
@@ -20,9 +21,10 @@ export default class FormInput<T> extends Component<IFormInputProps<T>> {
             className,
             value,
             fill,
+            mask,
             model,
             modelProp,
-            onInput,
+            oninput,
             ...props
         } = this.props;
         let renderedValue: string;
@@ -39,14 +41,27 @@ export default class FormInput<T> extends Component<IFormInputProps<T>> {
             classNames.push('fill-width');
         }
 
-        return (
-            <input
-                id={id}
-                className={classNames.join(' ')}
-                value={renderedValue}
-                oninput={onInput || this.oninput}
-                {...props}
-            />
-        );
+        if (mask) {
+            return (
+                <MaskedInput
+                    id={id}
+                    className={classNames.join(' ')}
+                    value={renderedValue}
+                    oninput={oninput || this.oninput}
+                    mask={mask}
+                    {...props as any}
+                />
+            );
+        } else {
+            return (
+                <input
+                    id={id}
+                    className={classNames.join(' ')}
+                    value={renderedValue}
+                    oninput={oninput || this.oninput}
+                    {...props}
+                />
+            );
+        }
     }
 }

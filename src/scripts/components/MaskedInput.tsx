@@ -6,7 +6,7 @@ export interface IMaskedInputProps<T> extends Partial<HTMLInputElement> {
     id?: string;
     className?: string;
     mask: string;
-    onchange?: (event: Event) => (void | boolean);
+    oninput?: (event: Event) => (void | boolean);
     value?: any;
 }
 
@@ -92,15 +92,15 @@ export default class MaskedInput<T> extends Component<IMaskedInputProps<T>> {
         ));
     }
 
-    onChange = (event?: Event) => {
+    onInput = (event?: Event) => {
         event.preventDefault();
         try {
             this.updateElement(this.mask.updateValue(
                 (event.target as HTMLInputElement).value,
                 this.value
             ));
-            if (this.props.onchange) {
-                this.props.onchange(event);
+            if (this.props.oninput) {
+                this.props.oninput(event);
             }
         }
         catch (e) {
@@ -224,7 +224,7 @@ export default class MaskedInput<T> extends Component<IMaskedInputProps<T>> {
                 onfocus={this.onFocus}
                 onclick={this.onClick}
                 onselect={this.onSelect}
-                onchange={this.onChange}
+                oninput={this.onInput}
                 onkeydown={this.onKeyDown}
                 onkeyup={this.onKeyUp}
             />
