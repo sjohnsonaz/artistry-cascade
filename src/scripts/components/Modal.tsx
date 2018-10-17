@@ -115,19 +115,19 @@ export default class Modal extends Component<IModalProps> {
             sizes.forEach(size => {
                 switch (size) {
                     case 'all':
-                        classNames.push('container-all');
+                        classNames.push('modal-all');
                         break;
                     case 'small':
-                        classNames.push('container-sm');
+                        classNames.push('modal-sm');
                         break;
                     case 'medium':
-                        classNames.push('container-md');
+                        classNames.push('modal-md');
                         break;
                     case 'large':
-                        classNames.push('container-lg');
+                        classNames.push('modal-lg');
                         break;
                     case 'x-large':
-                        classNames.push('container-xl');
+                        classNames.push('modal-xl');
                         break;
                 }
             });
