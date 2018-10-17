@@ -1,6 +1,6 @@
 import Cascade, { Component, Elements } from 'cascade';
 
-export type FormSize = 'default' | 'small' | 'medium' | 'large' | 'x-large';
+export type FormSize = 'none' | 'small' | 'medium' | 'large' | 'x-large';
 
 export interface IFormProps extends Elements.JSXFormElement {
     size?: FormSize;

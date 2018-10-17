@@ -1,6 +1,6 @@
 import Cascade, { Component } from 'cascade';
 
-export type GridSize = 'default' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large';
+export type GridSize = 'none' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large';
 
 export interface IGridProps {
     className?: string;

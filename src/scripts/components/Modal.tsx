@@ -8,7 +8,7 @@ import BodyScroll from '../util/BodyScroll';
 import DepthStack from '../util/DepthStack';
 import PortalManager from '../util/Portal';
 
-export type ModalSize = 'default' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large';
+export type ModalSize = 'none' | 'all' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large';
 
 export interface IModalProps extends IGridExternalProps {
     className?: string;
@@ -22,7 +22,7 @@ export interface IModalProps extends IGridExternalProps {
     locked?: boolean;
     space?: boolean;
     background?: boolean;
-    size?: ModalSize;
+    size?: ModalSize | ModalSize[];
 }
 
 export default class Modal extends Component<IModalProps> {
@@ -109,22 +109,28 @@ export default class Modal extends Component<IModalProps> {
             classNames.push('modal-animate-' + animation.trim());
         }
 
-        switch (size) {
-            case 'x-small':
-                classNames.push('modal-xs');
-                break;
-            case 'small':
-                classNames.push('modal-sm');
-                break;
-            case 'medium':
-                classNames.push('modal-md');
-                break;
-            case 'large':
-                classNames.push('modal-lg');
-                break;
-            case 'x-large':
-                classNames.push('modal-xl');
-                break;
+        if (size) {
+            let sizes = (size instanceof Array) ? size : [size];
+
+            sizes.forEach(size => {
+                switch (size) {
+                    case 'all':
+                        classNames.push('container-all');
+                        break;
+                    case 'small':
+                        classNames.push('container-sm');
+                        break;
+                    case 'medium':
+                        classNames.push('container-md');
+                        break;
+                    case 'large':
+                        classNames.push('container-lg');
+                        break;
+                    case 'x-large':
+                        classNames.push('container-xl');
+                        break;
+                }
+            });
         }
 
         if (this.props.title) {
