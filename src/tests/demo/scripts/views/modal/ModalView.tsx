@@ -46,6 +46,7 @@ export default class ModalView extends Component<IModalViewProps> {
                     size="small"
                     lockable
                     locked={this.modalLock}
+                    space
                 >
                     <div>test</div>
                     <ButtonBar>

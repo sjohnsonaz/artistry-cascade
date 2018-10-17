@@ -4,6 +4,8 @@ export type FormSize = 'none' | 'small' | 'medium' | 'large' | 'x-large';
 
 export interface IFormProps extends Elements.JSXFormElement {
     size?: FormSize;
+    lockable?: boolean;
+    locked?: boolean;
     onEnter?: (event: KeyboardEvent) => boolean | void;
     onEscape?: (event: KeyboardEvent) => boolean | void;
 }
@@ -21,8 +23,20 @@ export default class Form extends Component<IFormProps> {
     }
 
     render() {
-        let classNames = this.props.className ? [this.props.className] : [];
+        let {
+            id,
+            className,
+            lockable,
+            locked,
+            onEnter,
+            onEscape,
+            ...props
+        } = this.props;
+        let classNames = className ? [className] : [];
         classNames.push('form');
+        if (locked) {
+            classNames.push('form-lock');
+        }
 
         switch (this.props.size) {
             case 'small':
@@ -41,7 +55,12 @@ export default class Form extends Component<IFormProps> {
 
         let onkeydown = (this.props.onEnter || this.props.onEscape) ? this.onkeydown.bind(this) : undefined;
         return (
-            <form className={classNames.join(' ')} onkeydown={onkeydown} {...this.props}>{this.children}</form>
+            <form className={classNames.join(' ')} onkeydown={onkeydown} {...props}>
+                {lockable ?
+                    <div className="form-lock-screen"></div> :
+                    null}
+                {this.children}
+            </form>
         );
     }
 }
