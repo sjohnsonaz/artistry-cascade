@@ -179,7 +179,7 @@ export default class Modal extends Component<IModalProps> {
                             {title ?
                                 <div className="modal-header">
                                     <h1 className="modal-title">{title}</h1>
-                                    <div className="modal-controls">
+                                    <div className="modal-action">
                                         <Button onclick={this.props.onclose}>Close</Button>
                                     </div>
                                 </div>
