@@ -23,7 +23,7 @@ export default class CarouselView extends Component<ICarouselViewProps> {
                 <Button onclick={this.backCarouselSlide}>Back</Button>
                 <Button onclick={this.nextCarouselSlide}>Next</Button>
                 <hr />
-                <Carousel activeIndex={this.activeIndex} animation="slide">
+                <Carousel activeIndex={this.activeIndex} animation="slide" space>
                     <div style="background-color: red; padding: 10px;">
                         Content 0
                     </div>
@@ -38,7 +38,7 @@ export default class CarouselView extends Component<ICarouselViewProps> {
                     </div>
                 </Carousel>
                 <hr />
-                <Carousel activeIndex={this.activeIndex} animation="flip">
+                <Carousel activeIndex={this.activeIndex} animation="flip" space>
                     <div style="background-color: red; padding: 10px;">
                         Content 0
                     </div>

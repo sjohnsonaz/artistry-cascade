@@ -13,6 +13,7 @@ export interface ICarouselProps {
     staticHeight?: boolean;
     fillHeight?: boolean;
     scroll?: ScrollableType;
+    space?: boolean;
 }
 
 export default class Carousel extends Component<ICarouselProps> {
@@ -181,6 +182,10 @@ export default class Carousel extends Component<ICarouselProps> {
 
         if (this.props.scroll) {
             classNames.push('scrollable');
+        }
+
+        if (this.props.space) {
+            classNames.push('carousel-space');
         }
 
         let children;
