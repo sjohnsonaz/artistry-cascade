@@ -174,25 +174,27 @@ export default class Modal extends Component<IModalProps> {
         return (
             <Portal element={PortalManager.getElement('modal-root')} remove={this.remove}>
                 <div className={classNames.join(' ')} id={this.props.id} ref={this.rootRef}>
-                    {title || footer ?
-                        <div className="modal-content" onclick={this.preventClick}>
-                            {title ?
-                                <div className="modal-header">
-                                    <h1 className="modal-title">{title}</h1>
-                                    <div className="modal-action">
-                                        <Button onclick={this.props.onclose}>Close</Button>
+                    <div className="modal-background">
+                        {title || footer ?
+                            <div className="modal-content" onclick={this.preventClick}>
+                                {title ?
+                                    <div className="modal-header">
+                                        <h1 className="modal-title">{title}</h1>
+                                        <div className="modal-action">
+                                            <Button onclick={this.props.onclose}>Close</Button>
+                                        </div>
                                     </div>
-                                </div>
-                                : undefined}
-                            <div className={'modal-body ' + modalContentClassName}>{this.children}</div>
-                            {footer ?
-                                <div className="modal-footer">{footer}</div>
-                                : undefined}
-                        </div> :
-                        <div className={'modal-content ' + modalContentClassName} onclick={this.preventClick}>
-                            {this.children}
-                        </div>
-                    }
+                                    : undefined}
+                                <div className={'modal-body ' + modalContentClassName}>{this.children}</div>
+                                {footer ?
+                                    <div className="modal-footer">{footer}</div>
+                                    : undefined}
+                            </div> :
+                            <div className={'modal-content ' + modalContentClassName} onclick={this.preventClick}>
+                                {this.children}
+                            </div>
+                        }
+                    </div>
                 </div>
             </Portal>
         );
