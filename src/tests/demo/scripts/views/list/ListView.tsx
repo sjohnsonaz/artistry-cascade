@@ -1,6 +1,6 @@
 import Cascade, { Component, observable } from 'cascade';
 
-import { List, Section } from '../../../../../scripts/modules/ArtistryCascade';
+import { Cell, Grid, List, Row, Search, Section } from '../../../../../scripts/modules/ArtistryCascade';
 
 export interface ITableViewProps {
 
@@ -38,6 +38,13 @@ export default class TableView extends Component<ITableViewProps> {
     render() {
         return (
             <Section header="List">
+                <Grid space>
+                    <Row>
+                        <Cell>
+                            <Search></Search>
+                        </Cell>
+                    </Row>
+                </Grid>
                 <List
                     data={data}
                     template={item => item.ingredient}

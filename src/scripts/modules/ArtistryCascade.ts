@@ -36,6 +36,7 @@ export { default as ProgressBar, IProgressBarProps } from '../components/Progres
 export { default as Range, IRangeProps } from '../components/Range';
 export { default as Row, IRowProps } from '../components/Row';
 export { default as Scrollable, IScrollableProps, ScrollableType } from '../components/Scrollable';
+export { default as Search, ISearchProps } from '../components/Search';
 export { default as Section, ISectionProps } from '../components/Section';
 export { default as Tab, ITabProps } from '../components/Tab';
 export { default as Table, ITableProps } from '../components/Table';
