@@ -1,20 +1,47 @@
 ﻿import Cascade, { Component } from 'cascade';
 
-import Closeable from './Closeable';
 import { IGridExternalProps, gridConfig } from './Grid';
 
 export interface ICardProps extends IGridExternalProps {
+    /** id of the root element */
     id?: string;
+
+    /** classes to add to the root element */
     className?: string;
+
+    /** JSX to display in the header */
     header?: any;
+
+    /** JSX to display in the footer */
     footer?: any;
+
+    /** determines whether the card should have padding*/
     space?: boolean;
+
+    /** determines whether the card should fill horizontally */
     fill?: boolean;
+
+    /** JSX to display in the nav section */
     nav?: any;
+
+    /** determines the direction the nav section should be aligned */
     navAlign?: 'start' | 'end';
+
+    /** determines whether the card is clickable */
+    clickable?: boolean;
+
+    /** the click event handler */
+    onClick?: (event: MouseEvent) => any;
 }
 
+/** Displays a Card */
 export default class Card extends Component<ICardProps> {
+    onClick = (event: MouseEvent) => {
+        if (this.props.onClick) {
+            this.props.onClick(event);
+        }
+    }
+
     render() {
         let {
             id,
@@ -25,7 +52,8 @@ export default class Card extends Component<ICardProps> {
             fill,
             nav,
             navAlign,
-            grid
+            grid,
+            clickable
         } = this.props;
         let classNames = className ? [className] : [];
         classNames.push('card');
@@ -40,9 +68,12 @@ export default class Card extends Component<ICardProps> {
         if (grid) {
             gridConfig(innerClassNames, this.props);
         }
+        if (clickable) {
+            classNames.push('clickable');
+        }
 
         return (
-            <div className={classNames.join(' ')} id={id}>
+            <div className={classNames.join(' ')} id={id} onClick={this.onClick}>
                 {header ? <header>{header}</header> : null}
                 <div className={innerClassNames.join(' ')}>
                     {this.children}
