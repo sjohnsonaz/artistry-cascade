@@ -55,7 +55,7 @@ export default class Carousel extends Component<ICarouselProps> {
             activeIndex = activeIndex || 0;
             previousActiveIndex = previousActiveIndex || 0;
             let children = this.children;
-            if (children instanceof Array) {
+            if (children instanceof Array && children.length) {
                 activeIndex %= children.length;
                 previousActiveIndex %= children.length;
                 if (activeIndex < 0) {
@@ -66,6 +66,9 @@ export default class Carousel extends Component<ICarouselProps> {
                     previousActiveIndex += children.length;
                     previousActiveIndex %= children.length;
                 }
+            } else {
+                activeIndex = 0;
+                previousActiveIndex = 0;
             }
             if (activeIndex === previousActiveIndex) {
                 return;
