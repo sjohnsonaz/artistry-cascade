@@ -41,11 +41,15 @@ export default class TableView extends Component<ITableViewProps> {
                 <Grid space>
                     <Row>
                         <Cell>
-                            <Search options={[
-                                'Option 1',
-                                'Option 2',
-                                'Option 3'
-                            ]}></Search>
+                            <Search
+                                options={[
+                                    'Option 1',
+                                    'Option 2',
+                                    'Option 3'
+                                ]}
+                                showOptions
+                                fill
+                            ></Search>
                         </Cell>
                     </Row>
                 </Grid>
