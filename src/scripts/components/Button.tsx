@@ -25,6 +25,7 @@ export interface IButtonProps extends Elements.JSXButtonElement {
     down?: boolean;
     link?: boolean;
     noTrigger?: boolean;
+    noWrap?: boolean;
 }
 
 export default class Button extends Component<IButtonProps> {
@@ -84,6 +85,7 @@ export default class Button extends Component<IButtonProps> {
             onPopoverClose,
             link,
             noTrigger,
+            noWrap,
             ...props
         } = this.props;
 
@@ -102,6 +104,10 @@ export default class Button extends Component<IButtonProps> {
 
         if (fill) {
             classNames.push('fill-width');
+        }
+
+        if (noWrap) {
+            classNames.push('button-nowrap');
         }
 
         // Always set button type
