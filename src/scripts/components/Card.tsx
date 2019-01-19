@@ -73,7 +73,7 @@ export default class Card extends Component<ICardProps> {
         }
 
         return (
-            <div className={classNames.join(' ')} id={id} onClick={this.onClick}>
+            <div className={classNames.join(' ')} id={id} onclick={this.onClick}>
                 {header ? <header>{header}</header> : null}
                 <div className={innerClassNames.join(' ')}>
                     {this.children}

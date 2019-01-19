@@ -20,7 +20,7 @@ export default class VerticalCard extends Component<IVerticalCardProps> {
         return (
             <Card
                 header={<span>Card Content</span>}
-                nav={<Button onClick={this.toggleClosed}>Expand</Button>}
+                nav={<Button onclick={this.toggleClosed}>Expand</Button>}
                 navAlign="end"
                 grid
             >

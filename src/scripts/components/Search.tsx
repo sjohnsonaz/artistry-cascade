@@ -187,7 +187,7 @@ export default class Search extends Component<ISearchProps> {
                     />
                     <button
                         className="button search-button"
-                        onClick={this.onSearch}
+                        onclick={this.onSearch}
                         disabled={disabled || disabledButton}
                     >
                         {buttonText || 'Search'}
@@ -203,13 +203,13 @@ export default class Search extends Component<ISearchProps> {
                                 }
                                 return (
                                     <li className={optionClassName.join(' ')} role="presentation" key={option + '_' + index}>
-                                        <div className="search-option-action" role="option" onClick={this.onSelectOption.bind(this, option, index)}>
+                                        <div className="search-option-action" role="option" onclick={this.onSelectOption.bind(this, option, index)}>
                                             <div className="search-option-action-text">
                                                 <span><b>{option}</b></span>
                                             </div>
                                         </div>
                                         {altAction && altActionText ?
-                                            <div className="search-option-alt-action" onClick={altAction.bind(this, option)}>
+                                            <div className="search-option-alt-action" onclick={altAction.bind(this, option)}>
                                                 <div className="search-option-alt-action-text">{altActionText}</div>
                                             </div> :
                                             undefined}
