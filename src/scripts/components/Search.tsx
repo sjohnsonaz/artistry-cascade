@@ -12,7 +12,7 @@ export interface ISearchProps {
     disabled?: boolean;
     disabledButton?: boolean;
     disabledInput?: boolean;
-    onBlur?: (event: MouseEvent) => any;
+    onBlur?: (event: FocusEvent) => any;
     onChange?: (event: Event) => any;
     onSelectOption?: (event: KeyboardEvent | MouseEvent, value?: string) => any;
     onSearch?: (event: KeyboardEvent | MouseEvent, value?: string) => any;
@@ -98,7 +98,7 @@ export default class Search extends Component<ISearchProps> {
         }
     }
 
-    onBlur = (event: MouseEvent) => {
+    onBlur = (event: FocusEvent) => {
         if (this.props.onBlur) {
             this.props.onBlur(event);
         }
@@ -180,8 +180,9 @@ export default class Search extends Component<ISearchProps> {
                 <div className="button-group search-button-group">
                     <input
                         className={inputClassNames.join(' ')}
-                        onKeyDown={this.onKeyDown}
-                        onChange={this.onChange}
+                        onkeydown={this.onKeyDown}
+                        onchange={this.onChange}
+                        onblur={this.onBlur}
                         value={value}
                         disabled={disabled || disabledInput}
                     />
