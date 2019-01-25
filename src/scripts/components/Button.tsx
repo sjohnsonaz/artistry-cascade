@@ -10,6 +10,7 @@ export interface IButtonProps extends Elements.JSXButtonElement {
     type?: 'button' | 'submit' | 'reset';
     theme?: 'default' | 'primary' | 'danger';
     size?: 'default' | 'small' | 'large';
+    display?: 'default' | 'textonly' | 'outline';
     fill?: boolean;
     tooltip?: string;
     tooltipDirection?: 'top' | 'right' | 'bottom' | 'left';
@@ -71,6 +72,7 @@ export default class Button extends Component<IButtonProps> {
             type,
             theme,
             size,
+            display,
             fill,
             down,
             lockContent,
@@ -110,6 +112,15 @@ export default class Button extends Component<IButtonProps> {
                 break;
             case 'large':
                 classNames.push('button-large');
+                break;
+        }
+
+        switch (display) {
+            case 'textonly':
+                classNames.push('button-textonly');
+                break;
+            case 'outline':
+                classNames.push('button-outline');
                 break;
         }
 
