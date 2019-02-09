@@ -28,6 +28,7 @@ export interface IButtonProps extends Elements.JSXButtonElement {
     link?: boolean;
     noTrigger?: boolean;
     noWrap?: boolean;
+    noFocus?: boolean;
 }
 
 export default class Button extends Component<IButtonProps> {
@@ -90,6 +91,7 @@ export default class Button extends Component<IButtonProps> {
             link,
             noTrigger,
             noWrap,
+            noFocus,
             ...props
         } = this.props;
 
@@ -130,6 +132,10 @@ export default class Button extends Component<IButtonProps> {
 
         if (noWrap) {
             classNames.push('button-nowrap');
+        }
+
+        if (noFocus) {
+            classNames.push('button-no-focus');
         }
 
         // Always set button type
