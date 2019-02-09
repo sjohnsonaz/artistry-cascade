@@ -169,7 +169,7 @@ export default class Modal extends Component<IModalProps> {
                     {closeable ?
                         <div className="modal-action">
                             <Button
-                                onClick={this.props.onclose}
+                                onclick={this.props.onclose}
                                 size="small"
                             >
                                 {closeButton || 'Close'}
