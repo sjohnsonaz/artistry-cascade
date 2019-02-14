@@ -1,6 +1,6 @@
 import Cascade, { Component } from 'cascade';
 
-export type AlignType = 'start' | 'end' | 'left' | 'right' | 'center' | 'justify' | 'initial' | 'inherit';
+import { alignClass, AlignType } from '../util/Align';
 
 export interface ICellProps {
     className?: string;
@@ -22,32 +22,7 @@ export default class Cell extends Component<ICellProps> {
             classNames.push('offset-' + this.props.offset);
         }
         if (this.props.align) {
-            switch (this.props.align) {
-                case 'start':
-                    classNames.push('align-start');
-                    break;
-                case 'end':
-                    classNames.push('align-end');
-                    break;
-                case 'left':
-                    classNames.push('align-left');
-                    break;
-                case 'right':
-                    classNames.push('align-right');
-                    break;
-                case 'center':
-                    classNames.push('align-center');
-                    break;
-                case 'justify':
-                    classNames.push('align-justify');
-                    break;
-                case 'initial':
-                    classNames.push('align-initial');
-                    break;
-                case 'inherit':
-                    classNames.push('align-inherit');
-                    break;
-            }
+            alignClass(this.props.align, classNames);
         }
         let className = classNames.join(' ');
         return <div className={className} id={this.props.id}>{this.children}</div>

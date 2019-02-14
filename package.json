@@ -1,6 +1,6 @@
 {
   "name": "@artistry/cascade",
-  "version": "0.4.7",
+  "version": "0.4.9",
   "description": "A powerful component library for Cascade",
   "repository": "https://www.github.com/sjohnsonaz/artistry-cascade.git",
   "license": "MIT",
@@ -24,13 +24,13 @@
     "@cascade/diff": "0.0.0"
   },
   "peerDependencies": {
-    "artistry": "^0.7.8",
+    "artistry": "^0.7.10",
     "cascade": "^0.7.5"
   },
   "devDependencies": {
     "@types/chai": "4.1.5",
     "@types/mocha": "5.2.5",
-    "artistry": "^0.7.8",
+    "artistry": "^0.7.10",
     "autoprefixer": "8.6.1",
     "cascade": "^0.7.5",
     "cascade-validation": "^0.0.1",
@@ -43,6 +43,7 @@
     "postcss-loader": "3.0.0",
     "reflect-metadata": "0.1.12",
     "rimraf": "2.6.2",
+    "roboto-fontface": "0.10.0",
     "style-loader": "0.23.0",
     "stylus": "0.54.5",
     "stylus-loader": "3.0.2",

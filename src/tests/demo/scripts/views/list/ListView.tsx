@@ -35,6 +35,12 @@ let data: IListData[] = [{
 }];
 
 export default class TableView extends Component<ITableViewProps> {
+    @observable searchValue: string = '';
+
+    onChangeSearch = (event: Event) => {
+        this.searchValue = (event.target as any).value;
+    }
+
     render() {
         return (
             <Section header="List">
@@ -48,6 +54,7 @@ export default class TableView extends Component<ITableViewProps> {
                                     'Option 3'
                                 ]}
                                 showOptions
+                                onChange={this.onChangeSearch}
                                 fill
                             ></Search>
                         </Cell>

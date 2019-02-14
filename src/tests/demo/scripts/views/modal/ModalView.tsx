@@ -46,6 +46,7 @@ export default class ModalView extends Component<IModalViewProps> {
                     size="small"
                     lockable
                     locked={this.modalLock}
+                    closeable
                     space
                 >
                     <div>test</div>
@@ -59,6 +60,7 @@ export default class ModalView extends Component<IModalViewProps> {
                         title="Inner Modal"
                         animation="center"
                         size="small"
+                        closeable
                     >
                         <div>inner test</div>
                     </Modal>
