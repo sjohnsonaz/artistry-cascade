@@ -19,9 +19,11 @@ export default class CarouselView extends Component<ICarouselViewProps> {
 
     render() {
         return (
-            <Section header="Carousel" space>
-                <Button onclick={this.backCarouselSlide}>Back</Button>
-                <Button onclick={this.nextCarouselSlide}>Next</Button>
+            <Section header="Carousel">
+                <div className="space">
+                    <Button onclick={this.backCarouselSlide}>Back</Button>
+                    <Button onclick={this.nextCarouselSlide}>Next</Button>
+                </div>
                 <hr />
                 <Carousel activeIndex={this.activeIndex} animation="slide" space>
                     <div style="background-color: red; padding: 10px;">
