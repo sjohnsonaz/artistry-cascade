@@ -1,6 +1,6 @@
 import Cascade, { Component, observable } from 'cascade';
 
-import { Cell, Grid, List, Row, Search, Section } from '../../../../../scripts/modules/ArtistryCascade';
+import { Cell, Grid, Icon, List, Row, Search, Section } from '../../../../../scripts/modules/ArtistryCascade';
 
 export interface ITableViewProps {
 
@@ -56,6 +56,7 @@ export default class TableView extends Component<ITableViewProps> {
                                 showOptions
                                 onChange={this.onChangeSearch}
                                 fill
+                                buttonText={<span className="nowrap"><Icon name="search" /> Search</span>}
                             ></Search>
                         </Cell>
                     </Row>

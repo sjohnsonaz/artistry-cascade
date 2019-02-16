@@ -28,6 +28,8 @@
     "cascade": "^0.7.5"
   },
   "devDependencies": {
+    "@artistry/icons": "0.0.0",
+    "@fortawesome/free-solid-svg-icons": "5.7.2",
     "@types/chai": "4.1.5",
     "@types/mocha": "5.2.5",
     "artistry": "^0.7.10",

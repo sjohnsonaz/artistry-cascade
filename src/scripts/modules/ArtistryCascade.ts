@@ -30,6 +30,7 @@ export { default as FormDivider, IFormDividerProps } from '../components/FormDiv
 export { default as FormInput, IFormInputProps } from '../components/FormInput';
 export { default as FormText, IFormTextProps } from '../components/FormText';
 export { default as Grid, IGridProps, GridSize } from '../components/Grid';
+export { default as Icon, IIconProps } from '../components/Icon';
 export { default as List, IListProps } from '../components/List';
 export { default as MenuBar, IMenuBarProps } from '../components/MenuBar';
 export { default as MenuBarLink, IMenuBarLinkProps } from '../components/MenuBarLink';
