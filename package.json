@@ -21,18 +21,18 @@
     "open": "opn src/tests/demo/html/index.html"
   },
   "dependencies": {
+    "@artistry/icons": "0.0.0",
     "@cascade/diff": "0.0.0"
   },
   "peerDependencies": {
-    "artistry": "^0.7.10",
+    "artistry": "^0.7.13",
     "cascade": "^0.7.5"
   },
   "devDependencies": {
-    "@artistry/icons": "0.0.0",
     "@fortawesome/free-solid-svg-icons": "5.7.2",
     "@types/chai": "4.1.5",
     "@types/mocha": "5.2.5",
-    "artistry": "^0.7.10",
+    "artistry": "^0.7.13",
     "autoprefixer": "8.6.1",
     "cascade": "^0.7.5",
     "cascade-validation": "^0.0.1",
