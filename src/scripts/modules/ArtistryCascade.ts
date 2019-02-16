@@ -7,7 +7,7 @@ export { default as Button, IButtonProps } from '../components/Button';
 export { default as ButtonGroup, IButtonGroupProps } from '../components/ButtonGroup';
 export { default as ButtonBar, IButtonBarProps } from '../components/ButtonBar';
 export { default as Calendar, ICalendarProps } from '../components/Calendar';
-export { default as Card, ICardProps } from '../components/Card';
+export { default as Card, ICardProps, CardHandle, CardType } from '../components/Card';
 export { default as CardContainer, ICardContainerProps } from '../components/CardContainer'
 export { default as CardControl, ICardControlProps } from '../components/CardControl';
 export { default as CardNavigation, ICardNavigationProps } from '../components/CardNavigation';

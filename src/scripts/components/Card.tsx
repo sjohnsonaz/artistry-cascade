@@ -2,6 +2,10 @@
 
 import { IGridExternalProps, gridConfig } from './Grid';
 
+export type CardType = 'default' | 'success' | 'info' | 'warning' | 'danger';
+
+export type CardHandle = 'default' | 'top' | 'right' | 'bottom' | 'left';
+
 export interface ICardProps extends IGridExternalProps {
     /** id of the root element */
     id?: string;
@@ -26,6 +30,9 @@ export interface ICardProps extends IGridExternalProps {
 
     /** determines the direction the nav section should be aligned */
     navAlign?: 'start' | 'end';
+
+    type?: CardType;
+    handle?: CardHandle;
 
     /** determines whether the card is clickable */
     clickable?: boolean;
@@ -52,6 +59,8 @@ export default class Card extends Component<ICardProps> {
             fill,
             nav,
             navAlign,
+            type,
+            handle,
             grid,
             clickable
         } = this.props;
@@ -64,6 +73,12 @@ export default class Card extends Component<ICardProps> {
         }
         if (fill) {
             classNames.push('fill');
+        }
+        if (type) {
+            classNames.push('card-type-' + type);
+        }
+        if (handle) {
+            classNames.push('card-handle-' + handle);
         }
         if (grid) {
             gridConfig(innerClassNames, this.props);
