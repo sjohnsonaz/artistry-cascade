@@ -6,8 +6,8 @@ export interface IFormProps extends Elements.JSXFormElement {
     size?: FormSize;
     lockable?: boolean;
     locked?: boolean;
-    onEnter?: (event: KeyboardEvent) => boolean | void;
-    onEscape?: (event: KeyboardEvent) => boolean | void;
+    onEnter?: (event: KeyboardEvent) => any;
+    onEscape?: (event: KeyboardEvent) => any;
 }
 
 export default class Form extends Component<IFormProps> {
