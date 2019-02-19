@@ -8,6 +8,5 @@ import Application from './Application';
 window.onload = function() {
     Icons.registerFontAwesome(FontAwesome.fas);
     document.body.appendChild(Icons.createIconRoot());
-    Icons.setCreateElement(Cascade.createElement);
     Application.run();
 };
