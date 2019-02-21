@@ -22,7 +22,7 @@ export default class TimePicker extends Component<ITimePickerProps> {
         let currentHour = utc ? value.getUTCHours() : value.getHours();
         let currentMinute = utc ? value.getUTCMinutes() : value.getMinutes();
         let currentMeridiem = currentHour > 11 ? true : false;
-        currentHour = ((currentHour - 1) % 12) + 1;
+        currentHour = ((currentHour + 12 - 1) % 12) + 1;
 
         this.hours = currentHour;
         this.minutes = currentMinute;

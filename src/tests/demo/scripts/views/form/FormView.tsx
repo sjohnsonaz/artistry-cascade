@@ -1,6 +1,6 @@
 import Cascade, { Component } from 'cascade';
 
-import { Button, Form, FormAction, FormContainer, FormDivider, FormInput, FormText, Section, TimeInput } from '../../../../../scripts/modules/ArtistryCascade';
+import { Button, Form, FormAction, FormContainer, FormDivider, FormInput, FormText, Section, TimeInput, TimePicker } from '../../../../../scripts/modules/ArtistryCascade';
 
 export interface IFormViewProps {
 
@@ -60,11 +60,22 @@ export default class FormView extends Component<IFormViewProps> {
                     <FormText>
                         <h3>Advanced Input</h3>
                     </FormText>
-                    <FormContainer label="Time">
+                    <FormContainer label="Time Input">
                         <TimeInput
                             fill
                             value={(new Date(Date.now())).toUTCString()}
                             onchange={(event, date?: Date) => {
+                                if (date) {
+                                    console.log(date);
+                                }
+                            }}
+                        />
+                    </FormContainer>
+                    <FormContainer label="Time Picker" nonLabel>
+                        <TimePicker
+                            value={new Date(Date.now())}
+                            onChange={(event, date?: Date) => {
+                                event;
                                 if (date) {
                                     console.log(date);
                                 }
