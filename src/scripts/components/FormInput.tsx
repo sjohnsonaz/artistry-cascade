@@ -2,16 +2,25 @@ import Cascade, { Component, Elements } from 'cascade';
 import MaskedInput from './MaskedInput';
 
 export interface IFormInputProps<T> extends Elements.JSXInputElement {
+    number?: boolean;
     fill?: boolean;
+    mask?: string;
     model?: T;
     modelProp?: keyof T;
 }
 
 export default class FormInput<T> extends Component<IFormInputProps<T>> {
     oninput = (event?: Event) => {
-        let { model, modelProp } = this.props;
+        let { number, model, modelProp } = this.props;
         if (model && modelProp) {
-            model[modelProp] = (event.target as HTMLInputElement).value as any;
+            let value = (event.target as HTMLInputElement).value;
+            if (number) {
+                value = parseFloat(value) as any;
+            }
+            model[modelProp] = value as any;
+        }
+        if (this.props.oninput) {
+            this.props.oninput(event);
         }
     }
 
@@ -20,6 +29,7 @@ export default class FormInput<T> extends Component<IFormInputProps<T>> {
             id,
             className,
             value,
+            number,
             fill,
             mask,
             model,
