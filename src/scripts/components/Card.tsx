@@ -1,12 +1,13 @@
 ﻿import Cascade, { Component } from 'cascade';
 
+import { IDisableable, disabledClass } from '../abilities/Disabled';
 import { IGridExternalProps, gridConfig } from './Grid';
 
 export type CardType = 'default' | 'success' | 'info' | 'warning' | 'danger';
 
 export type CardHandle = 'default' | 'top' | 'right' | 'bottom' | 'left';
 
-export interface ICardProps extends IGridExternalProps {
+export interface ICardProps extends IGridExternalProps, IDisableable {
     /** id of the root element */
     id?: string;
 
@@ -62,7 +63,8 @@ export default class Card extends Component<ICardProps> {
             type,
             handle,
             grid,
-            clickable
+            clickable,
+            disabled
         } = this.props;
         let classNames = className ? [className] : [];
         classNames.push('card');
@@ -86,6 +88,7 @@ export default class Card extends Component<ICardProps> {
         if (clickable) {
             classNames.push('clickable');
         }
+        disabledClass(disabled, classNames);
 
         return (
             <div className={classNames.join(' ')} id={id} onclick={this.onClick}>

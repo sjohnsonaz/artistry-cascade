@@ -8,23 +8,61 @@ export interface ICellProps {
     columns?: number;
     offset?: number;
     align?: AlignType;
+    width?: number | string;
+    leftMargin?: number | string;
 }
 
 export default class Cell extends Component<ICellProps> {
     render() {
-        let classNames = this.props.className ? [this.props.className] : [];
-        if (this.props.columns) {
-            classNames.push('col-' + this.props.columns);
+        let {
+            id,
+            className,
+            columns,
+            offset,
+            align,
+            width,
+            leftMargin
+        } = this.props;
+
+        let classNames = className ? [className] : [];
+        if (columns) {
+            classNames.push('col-' + columns);
         } else {
             classNames.push('col');
         }
-        if (this.props.offset) {
-            classNames.push('offset-' + this.props.offset);
+        if (offset) {
+            classNames.push('offset-' + offset);
         }
-        if (this.props.align) {
-            alignClass(this.props.align, classNames);
+        if (align) {
+            alignClass(align, classNames);
         }
-        let className = classNames.join(' ');
-        return <div className={className} id={this.props.id}>{this.children}</div>
+
+        let fixed = false;
+        let style = {};
+        if (width) {
+            if (typeof width === 'number') {
+                width += 'px' as any;
+            }
+            style['--col-width'] = width;
+            fixed = true;
+        }
+        if (leftMargin) {
+            if (typeof leftMargin === 'number') {
+                leftMargin += 'px' as any;
+            }
+            style['--col-offset'] = width;
+            fixed = true;
+        }
+        if (fixed) {
+            classNames.push('col-fixed');
+        }
+
+        return <div
+            className={classNames.join(' ')}
+            id={id}
+            style={style as any}
+        >
+            {this.children}
+        </div>
     }
 }

@@ -26,7 +26,7 @@
   },
   "peerDependencies": {
     "artistry": "^0.7.17",
-    "cascade": "^0.7.6"
+    "cascade": "^0.7.7"
   },
   "devDependencies": {
     "@fortawesome/free-solid-svg-icons": "5.7.2",
@@ -34,7 +34,7 @@
     "@types/mocha": "5.2.5",
     "artistry": "^0.7.17",
     "autoprefixer": "8.6.1",
-    "cascade": "^0.7.6",
+    "cascade": "^0.7.7",
     "cascade-validation": "^0.0.1",
     "chai": "4.1.2",
     "css-loader": "1.0.0",
