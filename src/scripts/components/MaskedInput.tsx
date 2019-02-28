@@ -6,8 +6,9 @@ export interface IMaskedInputProps<T> extends Partial<HTMLInputElement> {
     id?: string;
     className?: string;
     mask: string;
-    oninput?: (event: Event) => (void | boolean);
     value?: any;
+    fill?: boolean;
+    oninput?: (event: Event) => (void | boolean);
 }
 
 export default class MaskedInput<T> extends Component<IMaskedInputProps<T>> {
@@ -208,12 +209,17 @@ export default class MaskedInput<T> extends Component<IMaskedInputProps<T>> {
             id,
             className,
             value,
+            fill,
             onchange,
             ...props
         } = this.props;
 
         let classNames = this.props.className ? [this.props.className] : [];
         classNames.push('input');
+
+        if (fill) {
+            classNames.push('fill-width');
+        }
 
         return (
             <input
