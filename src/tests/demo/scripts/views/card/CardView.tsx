@@ -49,7 +49,7 @@ export default class CardView extends Component<ICardViewProps> {
                         </Card>
                     </Fillable>
                 </CardContainer>
-                <Card type="success" handle="left">
+                <Card type="success" handle="left" square>
                     <CardSection multiColumn>
                         <CardControl title="Title 1">Data 1</CardControl>
                         <CardControl title="Title 2">Data 2</CardControl>

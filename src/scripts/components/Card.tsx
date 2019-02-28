@@ -34,6 +34,7 @@ export interface ICardProps extends IGridExternalProps, IDisableable {
 
     type?: CardType;
     handle?: CardHandle;
+    square?: boolean;
 
     /** determines whether the card is clickable */
     clickable?: boolean;
@@ -62,6 +63,7 @@ export default class Card extends Component<ICardProps> {
             navAlign,
             type,
             handle,
+            square,
             grid,
             clickable,
             disabled
@@ -81,6 +83,9 @@ export default class Card extends Component<ICardProps> {
         }
         if (handle) {
             classNames.push('card-handle-' + handle);
+        }
+        if (square) {
+            classNames.push('card-square');
         }
         if (grid) {
             gridConfig(innerClassNames, this.props);
