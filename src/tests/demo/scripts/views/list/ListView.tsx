@@ -1,6 +1,7 @@
 import Cascade, { Component, observable } from 'cascade';
 
 import { Cell, Grid, Icon, List, Row, Search, Section } from '../../../../../scripts/modules/ArtistryCascade';
+import { wait } from '../../../../../scripts/util/PromiseUtil';
 
 export interface ITableViewProps {
 
@@ -32,14 +33,43 @@ let data: IListData[] = [{
     ingredient: 'Hot Milk',
     quantity: '1/4',
     unit: 'cup'
+}, {
+    ingredient: 'Scallions',
+    quantity: '1/8',
+    unit: 'cup'
+}, {
+    ingredient: 'Cheese',
+    quantity: '1/8',
+    unit: 'cup'
 }];
 
 export default class TableView extends Component<ITableViewProps> {
     @observable searchValue: string = '';
+    @observable showOptions?: boolean = false;
+    @observable options?: IListData[] = [];
 
-    onChangeSearch = (event: Event) => {
+    onChange = async (event: Event) => {
         this.searchValue = (event.target as any).value;
+        await wait(1000);
+        this.showOptions = true;
+        this.options = data;
     }
+
+    onSelectOption = (event: KeyboardEvent | MouseEvent, value?: string) => {
+        this.searchValue = value;
+        this.showOptions = false;
+    }
+
+    onSearch = (event: KeyboardEvent | MouseEvent, value?: string) => {
+        this.searchValue = value;
+        this.showOptions = false;
+    };
+
+    onClose = (event: Event) => {
+        this.showOptions = false;
+    }
+
+    altAction?: (option: string) => any;
 
     render() {
         return (
@@ -48,21 +78,27 @@ export default class TableView extends Component<ITableViewProps> {
                     <Row>
                         <Cell>
                             <Search
+                                value={this.searchValue}
                                 options={[
                                     'Option 1',
                                     'Option 2',
                                     'Option 3'
                                 ]}
-                                showOptions
-                                onChange={this.onChangeSearch}
+                                showOptions={this.showOptions}
+                                onChange={this.onChange}
+                                onSelectOption={this.onSelectOption}
+                                onSearch={this.onSearch}
+                                onClose={this.onClose}
+                                altAction={this.altAction}
                                 fill
                                 buttonText={<span className="nowrap"><Icon name="search" /> Search</span>}
+                                size="small"
                             ></Search>
                         </Cell>
                     </Row>
                 </Grid>
                 <List
-                    data={data}
+                    data={this.options}
                     template={item => item.ingredient}
                 />
             </Section>

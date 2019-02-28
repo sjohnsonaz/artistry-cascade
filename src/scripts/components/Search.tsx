@@ -1,5 +1,9 @@
 import Cascade, { Component, observable } from 'cascade';
 
+import DepthStack from '../util/DepthStack';
+
+export type SearchSize = 'default' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large';
+
 export interface ISearchProps {
     id?: string;
     className?: string;
@@ -12,7 +16,7 @@ export interface ISearchProps {
     disabled?: boolean;
     disabledButton?: boolean;
     disabledInput?: boolean;
-    onBlur?: (event: FocusEvent) => any;
+    size?: SearchSize;
     onChange?: (event: Event) => any;
     onSelectOption?: (event: KeyboardEvent | MouseEvent, value?: string) => any;
     onSearch?: (event: KeyboardEvent | MouseEvent, value?: string) => any;
@@ -21,6 +25,7 @@ export interface ISearchProps {
 }
 
 export default class Search extends Component<ISearchProps> {
+    private closeHandle: (event: Event) => void;
     @observable activeOption: number = -1;
     @observable value: string;
     @observable options: string[];
@@ -98,13 +103,7 @@ export default class Search extends Component<ISearchProps> {
         }
     }
 
-    onBlur = (event: FocusEvent) => {
-        if (this.props.onBlur) {
-            this.props.onBlur(event);
-        }
-    }
-
-    onChange = (event: Event) => {
+    oninput = (event: Event) => {
         if (this.props.onChange) {
             this.props.onChange(event);
         }
@@ -124,22 +123,45 @@ export default class Search extends Component<ISearchProps> {
         }
     }
 
-    onClose = (event: KeyboardEvent) => {
+    onClose(event: KeyboardEvent) {
         if (this.props.onClose) {
             this.props.onClose(event);
         }
     }
 
-    afterProps() {
+    afterProps(updating: boolean) {
         let {
             value,
-            options
+            options,
+            showOptions
         } = this.props;
         options = this.cleanOptions(options, value);
         this.value = value;
         this.options = options;
         if (value !== this.props.value) {
             this.activeOption = -1;
+        }
+        if (!updating) {
+            if (!this.closeHandle) {
+                this.closeHandle = this.onClose.bind(this);
+            }
+            if (this.props.showOptions) {
+                DepthStack.push(this.closeHandle);
+            }
+        } else {
+            if (showOptions !== this.props.showOptions) {
+                if (showOptions) {
+                    DepthStack.push(this.closeHandle);
+                } else {
+                    DepthStack.remove(this.closeHandle);
+                }
+            }
+        }
+    }
+
+    afterDispose() {
+        if (this.props.showOptions) {
+            DepthStack.remove(this.closeHandle);
         }
     }
 
@@ -154,7 +176,8 @@ export default class Search extends Component<ISearchProps> {
             fill,
             disabled,
             disabledButton,
-            disabledInput
+            disabledInput,
+            size
         } = this.props;
 
         let {
@@ -166,8 +189,9 @@ export default class Search extends Component<ISearchProps> {
         let classNames = className ? [className] : [];
         classNames.push('search');
 
-        if (options.length && !disabled && !disabledInput) {
-            classNames.push('search-open');
+        let open: string = undefined;
+        if (options.length && !disabled && !disabledInput && showOptions) {
+            open = "true";
         }
 
         let inputClassNames = ['input', 'search-input'];
@@ -175,14 +199,35 @@ export default class Search extends Component<ISearchProps> {
             inputClassNames.push('fill-width');
         }
 
+        switch (size) {
+            case 'x-small':
+                classNames.push('search-xs');
+                break;
+            case 'small':
+                classNames.push('search-sm');
+                break;
+            case 'medium':
+                classNames.push('search-md');
+                break;
+            case 'large':
+                classNames.push('search-lg');
+                break;
+            case 'x-large':
+                classNames.push('search-xl');
+                break;
+        }
+
         return (
-            <div id={id} className={classNames.join(' ')}>
+            <div
+                id={id}
+                className={classNames.join(' ')}
+                data-open={open}
+            >
                 <div className="button-group search-button-group">
                     <input
                         className={inputClassNames.join(' ')}
                         onkeydown={this.onKeyDown}
-                        onchange={this.onChange}
-                        onblur={this.onBlur}
+                        oninput={this.oninput}
                         value={value}
                         disabled={disabled || disabledInput}
                     />
@@ -194,32 +239,30 @@ export default class Search extends Component<ISearchProps> {
                         {buttonText || 'Search'}
                     </button>
                 </div>
-                {showOptions ?
-                    <div className="search-option-box">
-                        <ul role="listbox" className="search-option-list">
-                            {!options ? undefined : options.map((option, index) => {
-                                let optionClassName = ['search-option'];
-                                if (index === activeOption) {
-                                    optionClassName.push('search-option-active');
-                                }
-                                return (
-                                    <li className={optionClassName.join(' ')} role="presentation" key={option + '_' + index}>
-                                        <div className="search-option-action" role="option" onclick={this.onSelectOption.bind(this, option, index)}>
-                                            <div className="search-option-action-text">
-                                                <span><b>{option}</b></span>
-                                            </div>
+                <div className="search-option-box">
+                    <ul role="listbox" className="search-option-list">
+                        {!options ? undefined : options.map((option, index) => {
+                            let optionClassName = ['search-option'];
+                            if (index === activeOption) {
+                                optionClassName.push('search-option-active');
+                            }
+                            return (
+                                <li className={optionClassName.join(' ')} role="presentation" key={option + '_' + index}>
+                                    <div className="search-option-action" role="option" onclick={this.onSelectOption.bind(this, option, index)}>
+                                        <div className="search-option-action-text">
+                                            <span><b>{option}</b></span>
                                         </div>
-                                        {altAction && altActionText ?
-                                            <div className="search-option-alt-action" onclick={altAction.bind(this, option)}>
-                                                <div className="search-option-alt-action-text">{altActionText}</div>
-                                            </div> :
-                                            undefined}
-                                    </li>
-                                );
-                            })}
-                        </ul>
-                    </div> :
-                    null}
+                                    </div>
+                                    {altAction && altActionText ?
+                                        <div className="search-option-alt-action" onclick={altAction.bind(this, option)}>
+                                            <div className="search-option-alt-action-text">{altActionText}</div>
+                                        </div> :
+                                        undefined}
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </div>
             </div>
         );
     }
