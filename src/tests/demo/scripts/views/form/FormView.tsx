@@ -1,4 +1,4 @@
-import Cascade, { Component } from 'cascade';
+import Cascade, { Component, observable } from 'cascade';
 
 import { Button, Form, FormAction, FormContainer, FormDivider, FormInput, FormText, Section, TimeInput, TimePicker } from '../../../../../scripts/modules/ArtistryCascade';
 
@@ -7,6 +7,8 @@ export interface IFormViewProps {
 }
 
 export default class FormView extends Component<IFormViewProps> {
+    @observable date: Date = new Date(Date.now());
+
     render() {
         return (
             <Section header="Form">
@@ -63,20 +65,26 @@ export default class FormView extends Component<IFormViewProps> {
                     <FormContainer label="Time Input">
                         <TimeInput
                             fill
-                            value={(new Date(Date.now())).toUTCString()}
-                            onchange={(event, date?: Date) => {
-                                if (date) {
-                                    console.log(date);
+                            value={this.date.toUTCString()}
+                            oninput={(event) => {
+                                let value = (event.target as any).value;
+                                let date = new Date(this.date);
+                                let parts = value.split(':').map(part => parseInt(part));
+                                if (parts) {
+                                    date.setHours(parts[0], parts[1]);
                                 }
+                                this.date = date;
+                                console.log(date);
                             }}
                         />
                     </FormContainer>
                     <FormContainer label="Time Picker" nonLabel>
                         <TimePicker
-                            value={new Date(Date.now())}
+                            value={this.date}
                             onChange={(event, date?: Date) => {
                                 event;
                                 if (date) {
+                                    this.date = date;
                                     console.log(date);
                                 }
                             }}
@@ -86,11 +94,16 @@ export default class FormView extends Component<IFormViewProps> {
                         <TimeInput
                             fill
                             seconds
-                            value={(new Date(Date.now())).toUTCString()}
-                            onchange={(event, date?: Date) => {
-                                if (date) {
-                                    console.log(date);
+                            value={this.date.toUTCString()}
+                            oninput={(event) => {
+                                let value = (event.target as any).value;
+                                let date = new Date(this.date);
+                                let parts = value.split(':').map(part => parseInt(part));
+                                if (parts) {
+                                    date.setHours(parts[0], parts[1], parts[2]);
                                 }
+                                this.date = date;
+                                console.log(date);
                             }}
                         />
                     </FormContainer>
