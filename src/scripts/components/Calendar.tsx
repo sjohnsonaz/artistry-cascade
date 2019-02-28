@@ -17,8 +17,8 @@ export default class Calendar extends Component<ICalendarProps> {
     @observable year: number;
     @observable date: Date;
 
-    constructor() {
-        super();
+    constructor(props: ICalendarProps, children: any[]) {
+        super(props, children);
         var date = this.props.date || new Date(Date.now());
         this.year = date.getFullYear();
         this.month = date.getMonth();
@@ -81,12 +81,36 @@ export default class Calendar extends Component<ICalendarProps> {
         return weeks;
     }
 
+    afterProps(updating: boolean) {
+        if (updating) {
+            if (this.props.date) {
+                let year = this.props.date.getFullYear();
+                let month = this.props.date.getMonth();
+                if (
+                    !this.prevProps.date ||
+                    this.prevProps.date.getFullYear() !== year ||
+                    this.prevProps.date.getMonth() !== month
+                ) {
+                    this.year = year;
+                    this.month = month;
+                }
+            }
+        }
+    }
+
     render() {
         var weeks = this.getWeeks(this.year, this.month);
         let years = [];
         let year = this.year;
         for (let index = -100, length = 200; index <= length; index++) {
             years.push(year + index);
+        }
+        if (this.props.date) {
+            var selectedDate: ISelectedDate = {
+                year: this.props.date.getFullYear(),
+                month: this.props.date.getMonth(),
+                date: this.props.date.getDate()
+            };
         }
         let today = new Date();
         today.setHours(0, 0, 0, 0);
@@ -110,9 +134,9 @@ export default class Calendar extends Component<ICalendarProps> {
                     <ButtonGroup>
                         <Button onclick={this.decreaseMonth}>-</Button>
                         <select className="select" style="flex-grow: 1;"
-                            value={this.month as any}
+                            value={this.month + 1 + ''}
                             onchange={(event) => {
-                                this.month = parseInt((event.target as any).value);
+                                this.month = parseInt((event.target as any).value) - 1;
                             }}>
                             <option value="1">January</option>
                             <option value="2">February</option>
@@ -150,9 +174,8 @@ export default class Calendar extends Component<ICalendarProps> {
                                         <td colSpan={7 - week.length}></td>
                                         : undefined}
                                     {week.map((day, index, array) => {
-                                        let time = day.getTime();
-                                        var selected = this.props.date && this.props.date.getTime() === time;
-                                        var current = todayTime === time;
+                                        var selected = compareDays(selectedDate, day);
+                                        var current = todayTime === day.getTime();
                                         let dayClassName = undefined;
                                         if (selected) {
                                             dayClassName = 'calendar-day-selected';
@@ -175,5 +198,24 @@ export default class Calendar extends Component<ICalendarProps> {
                 </table>
             </div>
         );
+    }
+}
+
+interface ISelectedDate {
+    year: number;
+    month: number;
+    date: number;
+}
+
+function compareDays(selectedDate: ISelectedDate, date: Date) {
+    if (
+        selectedDate &&
+        selectedDate.year === date.getFullYear() &&
+        selectedDate.month === date.getMonth() &&
+        selectedDate.date === date.getDate()
+    ) {
+        return true;
+    } else {
+        return false;
     }
 }
