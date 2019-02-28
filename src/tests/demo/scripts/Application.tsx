@@ -27,6 +27,7 @@ import ViewModel from './ViewModel';
 import User from './models/User';
 import UserListView from './views/user/UserListView';
 import CardView from './views/card/CardView';
+import NotificationView from './views/notification/NotificationView';
 
 export default class Application {
     static run() {
@@ -60,6 +61,7 @@ export default class Application {
                 <CodeView />
                 <GridView />
                 <CardView />
+                <NotificationView />
                 <h2>Examples</h2>
                 <UserListView viewModel={viewModel} />
             </Container>
