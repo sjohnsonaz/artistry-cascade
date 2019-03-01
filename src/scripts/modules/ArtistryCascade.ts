@@ -49,6 +49,7 @@ export { default as Row, IRowProps } from '../components/Row';
 export { default as Scrollable, IScrollableProps, ScrollableType } from '../components/Scrollable';
 export { default as Search, ISearchProps } from '../components/Search';
 export { default as Section, ISectionProps } from '../components/Section';
+export { default as Select, ISelectProps } from '../components/Select';
 export { default as Tab, ITabProps } from '../components/Tab';
 export { default as Table, ITableProps } from '../components/Table';
 export { default as Thumbnail, IThumbnailProps } from '../components/Thumbnail';
