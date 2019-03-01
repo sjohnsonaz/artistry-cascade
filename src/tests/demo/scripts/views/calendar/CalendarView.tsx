@@ -7,7 +7,7 @@ export interface ICalendarViewProps {
 }
 
 export default class CalendarView extends Component<ICalendarViewProps> {
-    @observable date: Date = new Date(Date.now());
+    @observable date: Date = undefined;
 
     render() {
         return (
