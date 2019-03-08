@@ -29,11 +29,16 @@ export default class DatePicker extends Component<IDatePickerProps>{
     }
 
     render() {
-        var date: Date;
-        if (!(this.props.date instanceof Date)) {
-            date = new Date(this.props.date as string);
-        } else {
-            date = this.props.date as Date;
+        var date: Date = undefined;
+        switch (typeof this.props.date) {
+            case 'object':
+                if (this.props.date instanceof Date) {
+                    date = this.props.date as Date;
+                }
+                break;
+            case 'string':
+                date = new Date(this.props.date as string);
+                break;
         }
 
         return (
@@ -64,11 +69,15 @@ export default class DatePicker extends Component<IDatePickerProps>{
 }
 
 function getDateFormatted(date: Date) {
-    var dd = date.getDate();
-    var mm = date.getMonth() + 1; //January is 0!
-    var yyyy = date.getFullYear();
+    if (date) {
+        var dd = date.getDate();
+        var mm = date.getMonth() + 1; //January is 0!
+        var yyyy = date.getFullYear();
 
-    var day = dd < 10 ? '0' + dd : '' + dd;
-    var month = mm < 10 ? '0' + mm : '' + mm;
-    return month + '/' + day + '/' + yyyy;
+        var day = dd < 10 ? '0' + dd : '' + dd;
+        var month = mm < 10 ? '0' + mm : '' + mm;
+        return month + '/' + day + '/' + yyyy;
+    } else {
+        return '__/__/____';
+    }
 }
