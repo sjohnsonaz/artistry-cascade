@@ -25,12 +25,6 @@ export default class CardControl extends Component<ICardControlProps> {
             width += 'px' as any;
         }
 
-        let content = (
-            <>
-                <div className="card-control-title">{title}</div>
-                <div className="card-control-data">{this.children}</div>
-            </>
-        );
         if (label) {
             return (
                 <label
@@ -38,7 +32,8 @@ export default class CardControl extends Component<ICardControlProps> {
                     id={id}
                     style={{ '--card-control-min-width': width } as any}
                 >
-                    {content}
+                    <div className="card-control-title">{title}</div>
+                    <div className="card-control-data">{this.children}</div>
                 </label>
             );
         } else {
@@ -48,7 +43,8 @@ export default class CardControl extends Component<ICardControlProps> {
                     id={id}
                     style={{ '--card-control-min-width': width } as any}
                 >
-                    {content}
+                    <div className="card-control-title">{title}</div>
+                    <div className="card-control-data">{this.children}</div>
                 </div>
             );
         }
