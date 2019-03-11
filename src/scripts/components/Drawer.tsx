@@ -14,6 +14,7 @@ export interface IDrawerProps extends IGridExternalProps {
     full?: boolean;
     onClose: (event: Event) => void;
     background?: boolean;
+    space?: boolean;
 }
 
 export default class Drawer extends Component<IDrawerProps> {
@@ -85,7 +86,8 @@ export default class Drawer extends Component<IDrawerProps> {
             id,
             direction,
             full,
-            background
+            background,
+            space
         } = this.props;
 
         let classNames = className ? [className] : [];
@@ -98,12 +100,16 @@ export default class Drawer extends Component<IDrawerProps> {
             classNames.push('drawer-open');
         }
 
+        if (full) {
+            classNames.push('drawer-full');
+        }
+
         if (background) {
             classNames.push('drawer-background');
         }
 
-        if (full) {
-            classNames.push('drawer-full');
+        if (space) {
+            classNames.push('drawer-space');
         }
 
         let innerClassNames = ['drawer-content'];
