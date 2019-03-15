@@ -2,7 +2,6 @@
 
 import Button from './Button';
 import ButtonGroup from './ButtonGroup';
-import Input from './FormInput';
 
 import Calendar, { ICalendarProps } from './Calendar';
 import MaskedInput from './MaskedInput';

@@ -2,7 +2,7 @@ import Cascade, { Component, observable } from 'cascade';
 
 import Button from './Button';
 import ButtonGroup from './ButtonGroup';
-import FormInput from './FormInput';
+import Input from './Input';
 import Icon from './Icon';
 
 export enum RoundingType {
@@ -235,7 +235,7 @@ export default class AmountInput extends Component<IAmountInputProps> {
                     {decrementIconFull}
                     {decrementText}
                 </Button>
-                <FormInput
+                <Input
                     value={this.value + ''}
                     onChange={this.change}
                     disabled={disableInput || disabled}

@@ -27,7 +27,7 @@ export default class ButtonView extends Component<IButtonViewProps> {
 
     render() {
         return (
-            <Section header="Buttons" space>
+            <Section header="Buttons" space headerSpace>
                 <h3>Individual Buttons</h3>
                 <div>
                     <Button>Edit</Button>{' '}
@@ -51,9 +51,9 @@ export default class ButtonView extends Component<IButtonViewProps> {
 
                 <h3>Button Sizes</h3>
                 <div>
-                    <Button size="small">Small</Button>{' '}
+                    <Button displaySize="small">Small</Button>{' '}
                     <Button>Medium</Button>{' '}
-                    <Button size="large">Large</Button>
+                    <Button displaySize="large">Large</Button>
                 </div>
 
                 <h3>Disabled Buttons</h3>

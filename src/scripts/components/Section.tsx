@@ -11,6 +11,8 @@ export interface ISectionProps extends Elements.JSXElement, IGridExternalProps {
     closeable?: boolean;
     closed?: boolean;
     space?: boolean;
+    headerSpace?: boolean;
+    footerSpace?: boolean;
     relative?: boolean;
     onClose?: (closed: boolean) => void;
 }
@@ -128,6 +130,8 @@ export default class Section extends Component<ISectionProps> {
             lockable,
             locked,
             space,
+            headerSpace,
+            footerSpace,
             relative,
             grid,
             gridColumns,
@@ -176,7 +180,9 @@ export default class Section extends Component<ISectionProps> {
                 }}
                 {...props}
             >
-                <header>
+                <header
+                    className={headerSpace ? 'section-title' : undefined}
+                >
                     {header}
                     {closeable ?
                         <Button className="section-toggle" onclick={this.close}>-</Button>
@@ -184,8 +190,12 @@ export default class Section extends Component<ISectionProps> {
                 </header>
                 <div className={innerClassNames.join(' ')}>{this.children}</div>
                 {footer ?
-                    <footer>{footer}</footer> :
-                    null}
+                    <footer
+                        className={footerSpace ? 'section-title' : undefined}
+                    >
+                        {footer}
+                    </footer> :
+                    undefined}
             </section>
         );
     }

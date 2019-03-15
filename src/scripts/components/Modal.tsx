@@ -1,6 +1,5 @@
 import Cascade, { Component, observable, Portal, Ref } from 'cascade';
 
-import { ITemplate } from './ITemplate';
 import Button from './Button';
 import { IGridExternalProps, gridConfig } from './Grid';
 import { waitAnimation } from '../util/PromiseUtil';
@@ -167,10 +166,10 @@ export default class Modal extends Component<IModalProps> {
                 <div className="modal-header">
                     <div className="modal-title">{title}</div>
                     {closeable ?
-                        <div className="modal-action">
+                        <div className="action-bar">
                             <Button
                                 onclick={this.props.onclose}
-                                size="small"
+                                displaySize="small"
                             >
                                 {closeButton || 'Close'}
                             </Button>

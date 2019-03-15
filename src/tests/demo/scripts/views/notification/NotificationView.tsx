@@ -81,7 +81,7 @@ export default class NotificationView extends Component<INotificationViewProps> 
 
     render() {
         return (
-            <Section header="Notification" space>
+            <Section header="Notification" space headerSpace>
                 <Button onclick={this.pushDefault}>Push Default</Button>
                 <Button onclick={this.pushSuccess}>Push Success</Button>
                 <Button onclick={this.pushInfo}>Push Info</Button>

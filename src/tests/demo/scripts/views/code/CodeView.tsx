@@ -9,7 +9,7 @@ export interface ICodeViewProps {
 export default class CodeView extends Component<ICodeViewProps> {
     render() {
         return (
-            <Section header="Code" space>
+            <Section header="Code" space headerSpace>
                 <Code>{'\
 window.onload = function() {\r\n\
     console.log(\'started...\');\r\n\

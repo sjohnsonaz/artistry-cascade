@@ -19,7 +19,7 @@ export default class CarouselView extends Component<ICarouselViewProps> {
 
     render() {
         return (
-            <Section header="Carousel">
+            <Section header="Carousel" headerSpace>
                 <div className="space">
                     <Button onclick={this.backCarouselSlide}>Back</Button>
                     <Button onclick={this.nextCarouselSlide}>Next</Button>

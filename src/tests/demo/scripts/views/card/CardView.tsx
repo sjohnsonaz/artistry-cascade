@@ -22,7 +22,7 @@ export default class CardView extends Component<ICardViewProps> {
 
     render() {
         return (
-            <Section header="Card" space>
+            <Section header="Card" space headerSpace>
                 <h3>Card</h3>
                 <CardContainer>
                     <VerticalCard />

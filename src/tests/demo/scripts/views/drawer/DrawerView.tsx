@@ -1,6 +1,6 @@
 import Cascade, { Component, observable } from 'cascade';
 
-import { Button, Form, FormAction, FormContainer, FormDivider, Drawer, Section } from '../../../../../scripts/modules/ArtistryCascade';
+import { ActionBar, Button, Form, FormContainer, Divider, Drawer, Section } from '../../../../../scripts/modules/ArtistryCascade';
 
 export interface IDrawerViewProps {
 
@@ -19,7 +19,7 @@ export default class DrawerView extends Component<IDrawerViewProps> {
 
     render() {
         return (
-            <Section header="Drawer" space>
+            <Section header="Drawer" space headerSpace>
                 <Button onclick={this.openDrawer}>Open Drawer</Button>
                 <Drawer open={this.drawerOpen} onClose={this.closeDrawer}>
                     <Button onclick={this.closeDrawer} className="pull-right">Close</Button>
@@ -29,10 +29,10 @@ export default class DrawerView extends Component<IDrawerViewProps> {
                         <FormContainer label="Input">
                             <input className="input" />
                         </FormContainer>
-                        <FormDivider />
-                        <FormAction>
+                        <Divider />
+                        <ActionBar>
                             <Button theme="primary">OK</Button>
-                        </FormAction>
+                        </ActionBar>
                     </Form>
                 </Drawer>
             </Section>

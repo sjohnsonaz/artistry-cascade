@@ -121,7 +121,7 @@ export default class Calendar extends Component<ICalendarProps> {
                     <ButtonGroup>
                         <Button onclick={this.decreaseYear}>-</Button>
                         <select
-                            className="select"
+                            className="input"
                             style="flex-grow: 1;"
                             value={this.year.toString()}
                             onchange={(event) => {
@@ -133,7 +133,7 @@ export default class Calendar extends Component<ICalendarProps> {
                     </ButtonGroup>
                     <ButtonGroup>
                         <Button onclick={this.decreaseMonth}>-</Button>
-                        <select className="select" style="flex-grow: 1;"
+                        <select className="input" style="flex-grow: 1;"
                             value={this.month + 1 + ''}
                             onchange={(event) => {
                                 this.month = parseInt((event.target as any).value) - 1;

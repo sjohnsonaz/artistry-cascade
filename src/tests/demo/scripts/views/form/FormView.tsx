@@ -1,6 +1,6 @@
 import Cascade, { Component, observable } from 'cascade';
 
-import { AmountInput, Button, Form, FormAction, FormContainer, FormDivider, FormInput, FormText, Section, TimeInput, TimePicker } from '../../../../../scripts/modules/ArtistryCascade';
+import { ActionBar, AmountInput, Button, Form, FormContainer, Divider, FormText, Input, Section, TimeInput, TimePicker } from '../../../../../scripts/modules/ArtistryCascade';
 
 export interface IFormViewProps {
 
@@ -25,41 +25,41 @@ export default class FormView extends Component<IFormViewProps> {
                     }}
                 >
                     <FormContainer label="Value">
-                        <FormInput type="text" fill />
+                        <Input type="text" fill />
                     </FormContainer>
-                    <FormDivider />
+                    <Divider />
                     <FormText>
                         <h2>Masked Inputs</h2>
                     </FormText>
                     <FormContainer label="Time">
-                        <FormInput mask="[[0-23]]:[[0-59]]" fill />
+                        <Input mask="[[0-23]]:[[0-59]]" fill />
                     </FormContainer>
                     <FormContainer label="Phone">
-                        <FormInput mask="(999) 999-9999" fill />
+                        <Input mask="(999) 999-9999" fill />
                     </FormContainer>
                     <FormContainer label="Color">
-                        <FormInput mask="#000000" fill />
+                        <Input mask="#000000" fill />
                     </FormContainer>
-                    <FormDivider />
+                    <Divider />
                     <FormText>
                         <h3>Test Examples</h3>
                     </FormText>
                     <FormContainer label="99999">
-                        <FormInput mask="99999" fill />
+                        <Input mask="99999" fill />
                     </FormContainer>
                     <FormContainer label="aaaaa">
-                        <FormInput mask="aaaaa" fill />
+                        <Input mask="aaaaa" fill />
                     </FormContainer>
                     <FormContainer label="nnnnn">
-                        <FormInput mask="nnnnn" fill />
+                        <Input mask="nnnnn" fill />
                     </FormContainer>
                     <FormContainer label="[[0-23]]00000">
-                        <FormInput mask="[[0-23]]00000" fill />
+                        <Input mask="[[0-23]]00000" fill />
                     </FormContainer>
                     <FormContainer label="99aa99aa99aa">
-                        <FormInput mask="99aa99aa99aa" fill />
+                        <Input mask="99aa99aa99aa" fill />
                     </FormContainer>
-                    <FormDivider />
+                    <Divider />
                     <FormText>
                         <h3>Advanced Input</h3>
                     </FormText>
@@ -113,11 +113,11 @@ export default class FormView extends Component<IFormViewProps> {
                             this.amount = value;
                         }} />
                     </FormContainer>
-                    <FormDivider />
-                    <FormAction>
+                    <Divider />
+                    <ActionBar>
                         <Button>Cancel</Button>
                         <Button theme="primary">Save</Button>
-                    </FormAction>
+                    </ActionBar>
                 </Form>
             </Section>
         );
