@@ -11,7 +11,7 @@ export default class CalendarView extends Component<ICalendarViewProps> {
 
     render() {
         return (
-            <Section header="Calendar">
+            <Section header="Calendar" headerSpace>
                 <FormContainer
                     label="Calendar">
                     <DatePicker date={this.date} onSelect={(date) => {
