@@ -4,6 +4,7 @@ export { default as DepthStack } from '../util/DepthStack';
 export { default as NotificationUtil, INotification, NotificationType } from '../util/NotificationUtil';
 export { default as Portal } from '../util/Portal';
 export { alignClass, AlignType } from '../util/Align';
+export { default as AmountInput, IAmountInputProps } from '../components/AmountInput';
 export { default as Button, IButtonProps } from '../components/Button';
 export { default as ButtonGroup, IButtonGroupProps } from '../components/ButtonGroup';
 export { default as ButtonBar, IButtonBarProps } from '../components/ButtonBar';

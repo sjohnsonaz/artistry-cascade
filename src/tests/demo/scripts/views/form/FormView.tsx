@@ -1,6 +1,6 @@
 import Cascade, { Component, observable } from 'cascade';
 
-import { Button, Form, FormAction, FormContainer, FormDivider, FormInput, FormText, Section, TimeInput, TimePicker } from '../../../../../scripts/modules/ArtistryCascade';
+import { AmountInput, Button, Form, FormAction, FormContainer, FormDivider, FormInput, FormText, Section, TimeInput, TimePicker } from '../../../../../scripts/modules/ArtistryCascade';
 
 export interface IFormViewProps {
 
@@ -8,6 +8,7 @@ export interface IFormViewProps {
 
 export default class FormView extends Component<IFormViewProps> {
     @observable date: Date = new Date(Date.now());
+    @observable amount: number = 0;
 
     render() {
         return (
@@ -106,6 +107,11 @@ export default class FormView extends Component<IFormViewProps> {
                                 console.log(date);
                             }}
                         />
+                    </FormContainer>
+                    <FormContainer label="Amount" nonLabel>
+                        <AmountInput value={this.amount} minimum={1} maximum={10} onChange={(value) => {
+                            this.amount = value;
+                        }} />
                     </FormContainer>
                     <FormDivider />
                     <FormAction>
