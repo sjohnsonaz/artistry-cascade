@@ -1,3 +1,5 @@
+import BrowserTest from "./BrowserTest";
+
 export interface ICloseHandle {
     (event: Event): boolean | void;
 }
@@ -9,7 +11,7 @@ export default class DepthStack {
         this.items.push(closeHandle);
     }
 
-    static remove(closeHandle:ICloseHandle) {
+    static remove(closeHandle: ICloseHandle) {
         let index = this.items.indexOf(closeHandle);
         if (index > -1) {
             this.items.splice(index, 1);
@@ -38,8 +40,9 @@ export default class DepthStack {
                     break;
             }
         });
-        window.addEventListener('click', (event: MouseEvent) => {
+        // Use onclick for iOS Safari
+        window.onclick = (event: MouseEvent) => {
             this.close(event);
-        });
+        };
     }
 }
