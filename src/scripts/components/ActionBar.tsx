@@ -3,9 +3,9 @@ import Cascade, { Component } from 'cascade';
 export interface IActionBarProps {
     className?: string;
     id?: string;
-    displaySize?: 'default' | 'small' | 'large';
-    align?: 'start' | 'end';
     direction?: 'forward' | 'reverse';
+    align?: 'start' | 'end' | 'center' | 'space-between' | 'space-around' | 'space-evenly';
+    displaySize?: 'default' | 'small' | 'large';
 }
 
 export default class ActionBar extends Component<IActionBarProps>{
@@ -13,33 +13,22 @@ export default class ActionBar extends Component<IActionBarProps>{
         let {
             id,
             className,
-            displaySize,
+            direction,
             align,
-            direction
+            displaySize
         } = this.props;
 
         let classNames = className ? [className] : [];
         classNames.push('action-bar');
 
-        switch (displaySize) {
-            case 'small':
-                classNames.push('action-bar-small');
-                break;
-            case 'large':
-                classNames.push('action-bar-large');
-                break;
-        }
-
-        if (align === 'start') {
-            classNames.push('action-bar-start');
-        }
-
-        if (direction === 'reverse') {
-            classNames.push('action-bar-reverse');
-        }
-
         return (
-            <div className={classNames.join(' ')} id={id}>
+            <div
+                className={classNames.join(' ')}
+                id={id}
+                data-direction={direction}
+                data-align={align}
+                data-size={displaySize}
+            >
                 {this.children}
             </div>
         );

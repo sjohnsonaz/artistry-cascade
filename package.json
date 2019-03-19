@@ -25,14 +25,14 @@
     "@cascade/diff": "0.0.0"
   },
   "peerDependencies": {
-    "artistry": "^0.8.0",
+    "artistry": "^0.8.1",
     "cascade": "^0.7.8"
   },
   "devDependencies": {
     "@fortawesome/free-solid-svg-icons": "5.7.2",
     "@types/chai": "4.1.7",
     "@types/mocha": "5.2.6",
-    "artistry": "^0.8.0",
+    "artistry": "^0.8.1",
     "autoprefixer": "8.6.1",
     "cascade": "^0.7.8",
     "cascade-validation": "^0.0.1",
