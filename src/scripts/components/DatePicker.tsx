@@ -8,6 +8,8 @@ import MaskedInput from './MaskedInput';
 export { Calendar, ICalendarProps };
 
 export interface IDatePickerProps {
+    id?: string;
+    className?: string;
     mask?: string;
     date: Date | string;
     fill?: boolean;
@@ -28,6 +30,14 @@ export default class DatePicker extends Component<IDatePickerProps>{
     }
 
     render() {
+        let {
+            id,
+            className
+        } = this.props;
+
+        let classNames = className ? [className] : [];
+        classNames.push('popover-trigger');
+
         var date: Date = undefined;
         switch (typeof this.props.date) {
             case 'object':
@@ -42,8 +52,9 @@ export default class DatePicker extends Component<IDatePickerProps>{
 
         return (
             <ButtonGroup
+                id={id}
+                className={classNames.join(' ')}
                 fill={this.props.fill}
-                className="popover-trigger"
             >
                 <MaskedInput
                     mask={'[[0-12]]/[[0-31]]/[[0-9999]]'}
