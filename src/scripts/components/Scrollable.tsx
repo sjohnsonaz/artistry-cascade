@@ -39,7 +39,7 @@ export interface IScrollableProps {
 export default class Scrollable extends Component<IScrollableProps> {
     insideBottom: boolean = false;
 
-    scroll = (event: MouseEvent) => {
+    onScroll = (event: MouseEvent) => {
         let element = event.target as HTMLDivElement;
 
         let buffer = this.props.buffer || 0;
@@ -71,7 +71,7 @@ export default class Scrollable extends Component<IScrollableProps> {
 
         let scrollHandler = undefined;
         if (onscroll || onTop || onRight || onBottom || onLeft) {
-            scrollHandler = this.scroll;
+            scrollHandler = this.onScroll;
         }
 
         if (typeof height === 'number') {
