@@ -24,7 +24,7 @@ export interface IModalProps extends IGridExternalProps {
     locked?: boolean;
     space?: boolean;
     background?: boolean;
-    size?: ModalSize | ModalSize[];
+    displaySize?: ModalSize | ModalSize[];
 }
 
 export default class Modal extends Component<IModalProps> {
@@ -94,7 +94,7 @@ export default class Modal extends Component<IModalProps> {
         let {
             animation,
             background,
-            size,
+            displaySize,
             closeable,
             closeButton,
             title,
@@ -116,8 +116,8 @@ export default class Modal extends Component<IModalProps> {
             classNames.push('modal-animate-' + animation.trim());
         }
 
-        if (size) {
-            let sizes = (size instanceof Array) ? size : [size];
+        if (displaySize) {
+            let sizes = (displaySize instanceof Array) ? displaySize : [displaySize];
 
             sizes.forEach(size => {
                 switch (size) {

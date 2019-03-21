@@ -43,7 +43,7 @@ export default class ModalView extends Component<IModalViewProps> {
                     onclose={this.closeModal}
                     title="Modal"
                     animation="top"
-                    size="small"
+                    displaySize="small"
                     lockable
                     locked={this.modalLock}
                     closeable
@@ -59,7 +59,7 @@ export default class ModalView extends Component<IModalViewProps> {
                         onclose={this.closeInnerModal}
                         title="Inner Modal"
                         animation="center"
-                        size="small"
+                        displaySize="small"
                         closeable
                     >
                         <div>inner test</div>
