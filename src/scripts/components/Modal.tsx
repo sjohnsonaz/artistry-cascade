@@ -124,6 +124,9 @@ export default class Modal extends Component<IModalProps> {
                     case 'all':
                         classNames.push('modal-all');
                         break;
+                    case 'x-small':
+                        classNames.push('modal-xs');
+                        break;
                     case 'small':
                         classNames.push('modal-sm');
                         break;
