@@ -1,12 +1,13 @@
 import Cascade, { Component, observable, Portal, Ref } from 'cascade';
 
 import { IGridExternalProps, gridConfig } from './Grid';
+import { IScrollableExternalProps, scrollHandler } from './Scrollable';
 import { waitAnimation } from '../util/PromiseUtil';
 import BodyScroll from '../util/BodyScroll';
 import DepthStack from '../util/DepthStack';
 import PortalManager from '../util/Portal';
 
-export interface IDrawerProps extends IGridExternalProps {
+export interface IDrawerProps extends IGridExternalProps, IScrollableExternalProps {
     className?: string;
     id?: string;
     direction?: 'top' | 'right' | 'bottom' | 'left';
@@ -50,6 +51,10 @@ export default class Drawer extends Component<IDrawerProps> {
         }
     }
 
+    onScroll(event: MouseEvent) {
+        scrollHandler(this.props, event);
+    }
+
     afterRender(node: HTMLDivElement, updating: boolean) {
         if (!updating) {
             this.rootRef.current.children[0].addEventListener('transitionend', this.transitionEnd);
@@ -87,7 +92,12 @@ export default class Drawer extends Component<IDrawerProps> {
             direction,
             full,
             background,
-            space
+            space,
+            onscroll,
+            onTop,
+            onRight,
+            onBottom,
+            onLeft
         } = this.props;
 
         let classNames = className ? [className] : [];
@@ -117,11 +127,13 @@ export default class Drawer extends Component<IDrawerProps> {
             gridConfig(innerClassNames, this.props);
         }
 
+        let onScrollHandler = (onscroll || onTop || onRight || onBottom || onLeft) ? this.onScroll.bind(this) : undefined;
+
         return (
             <Portal element={PortalManager.getElement('modal-root')} remove={this.remove}>
                 <div className={classNames.join(' ')} id={id} ref={this.rootRef}>
                     <div class="drawer-background">
-                        <div class="drawer-scroller">
+                        <div class="drawer-scroller" onscroll={onScrollHandler}>
                             <div className={innerClassNames.join(' ')} onclick={this.preventClick}>
                                 {this.children}
                             </div>

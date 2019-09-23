@@ -23,12 +23,8 @@ export enum ScrollableTypeEnum {
     yNever = "yNever"
 }
 
-export interface IScrollableProps {
-    id?: string;
-    className?: string;
-    type?: ScrollableType;
+export interface IScrollableExternalProps {
     buffer?: number;
-    height?: number | string;
     onscroll?: (event?: MouseEvent) => void;
     onTop?: (event?: MouseEvent) => void;
     onRight?: (event?: MouseEvent) => void;
@@ -36,22 +32,31 @@ export interface IScrollableProps {
     onLeft?: (event?: MouseEvent) => void;
 }
 
+export interface IScrollableProps extends IScrollableExternalProps {
+    id?: string;
+    className?: string;
+    type?: ScrollableType;
+    height?: number | string;
+}
+
+export function scrollHandler(props: IScrollableExternalProps, event: MouseEvent) {
+    let element = event.currentTarget as HTMLDivElement;
+    let buffer = props.buffer || 0;
+    if (props.onBottom) {
+        if (element.scrollTop + element.clientHeight + buffer >= element.scrollHeight) {
+            props.onBottom(event);
+        }
+    }
+    if (props.onscroll) {
+        props.onscroll(event);
+    }
+}
+
 export default class Scrollable extends Component<IScrollableProps> {
     insideBottom: boolean = false;
 
     onScroll = (event: MouseEvent) => {
-        let element = event.target as HTMLDivElement;
-
-        let buffer = this.props.buffer || 0;
-        if (this.props.onBottom) {
-            if (element.scrollTop + element.clientHeight + buffer >= element.scrollHeight) {
-                this.props.onBottom(event);
-            }
-        }
-
-        if (this.props.onscroll) {
-            this.props.onscroll(event);
-        }
+        scrollHandler(this.props, event);
     }
 
     render() {
