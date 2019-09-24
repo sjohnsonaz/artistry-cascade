@@ -132,8 +132,8 @@ export default class Drawer extends Component<IDrawerProps> {
         return (
             <Portal element={PortalManager.getElement('modal-root')} remove={this.remove}>
                 <div className={classNames.join(' ')} id={id} ref={this.rootRef}>
-                    <div class="drawer-background">
-                        <div class="drawer-scroller" onscroll={onScrollHandler}>
+                    <div class="drawer-background" onscroll={onScrollHandler}>
+                        <div class="drawer-scroller">
                             <div className={innerClassNames.join(' ')} onclick={this.preventClick}>
                                 {this.children}
                             </div>
