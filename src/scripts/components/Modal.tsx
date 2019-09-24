@@ -2,6 +2,7 @@ import Cascade, { Component, observable, Portal, Ref } from 'cascade';
 
 import Button from './Button';
 import { IGridExternalProps, gridConfig } from './Grid';
+import { IScrollableExternalProps, scrollHandler } from './Scrollable';
 import { waitAnimation } from '../util/PromiseUtil';
 import BodyScroll from '../util/BodyScroll';
 import DepthStack from '../util/DepthStack';
@@ -9,7 +10,7 @@ import PortalManager from '../util/Portal';
 
 export type ModalSize = 'none' | 'all' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large';
 
-export interface IModalProps extends IGridExternalProps {
+export interface IModalProps extends IGridExternalProps, IScrollableExternalProps {
     className?: string;
     id?: string;
     open: boolean;
@@ -60,6 +61,10 @@ export default class Modal extends Component<IModalProps> {
         }
     }
 
+    onScroll(event: MouseEvent) {
+        scrollHandler(this.props, event);
+    }
+
     afterRender(node: HTMLDivElement, updating: boolean) {
         if (!updating) {
             this.rootRef.current.children[0].addEventListener('transitionend', this.transitionEnd);
@@ -99,7 +104,12 @@ export default class Modal extends Component<IModalProps> {
             closeButton,
             title,
             header,
-            footer
+            footer,
+            onscroll,
+            onTop,
+            onRight,
+            onBottom,
+            onLeft
         } = this.props;
 
         let classNames = this.props.className ? [this.props.className] : [];
@@ -185,14 +195,16 @@ export default class Modal extends Component<IModalProps> {
             );
         }
 
+        let onScrollHandler = (onscroll || onTop || onRight || onBottom || onLeft) ? this.onScroll.bind(this) : undefined;
+
         return (
             <Portal element={PortalManager.getElement('modal-root')} remove={this.remove}>
-                <div className={classNames.join(' ')} id={this.props.id} ref={this.rootRef}>
+                <div className={classNames.join(' ')} id={this.props.id} ref={this.rootRef} onscroll={onScrollHandler}>
                     <div className="modal-background">
                         {headerSection || footer ?
                             <div className="modal-content" onclick={this.preventClick}>
                                 {headerSection}
-                                <div className={'modal-body ' + modalContentClassName}>
+                                <div className={'modal-body ' + modalContentClassName} onscroll={onScrollHandler}>
                                     {this.children}
                                 </div>
                                 {footer ?
