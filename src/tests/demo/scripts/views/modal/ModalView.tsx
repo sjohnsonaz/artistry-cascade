@@ -40,7 +40,7 @@ export default class ModalView extends Component<IModalViewProps> {
                 <Button onclick={this.openModal}>Open Modal</Button>
                 <Modal
                     open={this.modalOpen}
-                    onclose={this.closeModal}
+                    onClose={this.closeModal}
                     title="Modal"
                     animation="top"
                     screenSize="small"
@@ -56,7 +56,7 @@ export default class ModalView extends Component<IModalViewProps> {
                     </ButtonBar>
                     <Modal
                         open={this.innerModalOpen}
-                        onclose={this.closeInnerModal}
+                        onClose={this.closeInnerModal}
                         title="Inner Modal"
                         animation="center"
                         screenSize="small"
