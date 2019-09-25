@@ -2,7 +2,7 @@ import Cascade, { Component, observable, Portal, Ref } from 'cascade';
 
 import Button from './Button';
 import { IGridExternalProps, gridConfig } from './Grid';
-import { IScrollableExternalProps, scrollHandler } from './Scrollable';
+import { IScrollableExternalProps } from './Scrollable';
 import { waitAnimation } from '../util/PromiseUtil';
 import BodyScroll from '../util/BodyScroll';
 import DepthStack from '../util/DepthStack';
@@ -61,8 +61,10 @@ export default class Modal extends Component<IModalProps> {
         }
     }
 
-    onScroll(event: MouseEvent) {
-        scrollHandler(this.props, event);
+    onScroll = (event: MouseEvent) => {
+        if (this.props.onscroll) {
+            this.props.onscroll(event);
+        }
     }
 
     afterRender(node: HTMLDivElement, updating: boolean) {
@@ -104,12 +106,7 @@ export default class Modal extends Component<IModalProps> {
             closeButton,
             title,
             header,
-            footer,
-            onscroll,
-            onTop,
-            onRight,
-            onBottom,
-            onLeft
+            footer
         } = this.props;
 
         let classNames = this.props.className ? [this.props.className] : [];
@@ -193,15 +190,13 @@ export default class Modal extends Component<IModalProps> {
             );
         }
 
-        let onScrollHandler = (onscroll || onTop || onRight || onBottom || onLeft) ? this.onScroll.bind(this) : undefined;
-
         return (
             <Portal element={PortalManager.getElement('modal-root')} remove={this.remove}>
                 <div
                     className={classNames.join(' ')}
                     id={this.props.id}
                     ref={this.rootRef}
-                    onscroll={onScrollHandler}
+                    onscroll={this.onScroll}
                 >
                     <div className="modal-background">
                         {headerSection || footer ?
@@ -209,7 +204,7 @@ export default class Modal extends Component<IModalProps> {
                                 {headerSection}
                                 <div
                                     className={'modal-body ' + modalContentClassNames.join(' ')}
-                                    onscroll={onScrollHandler}
+                                    onscroll={this.onScroll}
                                 >
                                     {this.children}
                                 </div>

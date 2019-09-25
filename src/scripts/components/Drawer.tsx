@@ -1,7 +1,7 @@
 import Cascade, { Component, observable, Portal, Ref } from 'cascade';
 
 import { IGridExternalProps, gridConfig } from './Grid';
-import { IScrollableExternalProps, scrollHandler } from './Scrollable';
+import { IScrollableExternalProps } from './Scrollable';
 import { waitAnimation } from '../util/PromiseUtil';
 import BodyScroll from '../util/BodyScroll';
 import DepthStack from '../util/DepthStack';
@@ -51,8 +51,10 @@ export default class Drawer extends Component<IDrawerProps> {
         }
     }
 
-    onScroll(event: MouseEvent) {
-        scrollHandler(this.props, event);
+    onScroll = (event: MouseEvent) => {
+        if (this.props.onscroll) {
+            this.props.onscroll(event);
+        }
     }
 
     afterRender(node: HTMLDivElement, updating: boolean) {
@@ -92,12 +94,7 @@ export default class Drawer extends Component<IDrawerProps> {
             direction,
             full,
             background,
-            space,
-            onscroll,
-            onTop,
-            onRight,
-            onBottom,
-            onLeft
+            space
         } = this.props;
 
         let classNames = className ? [className] : [];
@@ -127,12 +124,10 @@ export default class Drawer extends Component<IDrawerProps> {
             gridConfig(innerClassNames, this.props);
         }
 
-        let onScrollHandler = (onscroll || onTop || onRight || onBottom || onLeft) ? this.onScroll.bind(this) : undefined;
-
         return (
             <Portal element={PortalManager.getElement('modal-root')} remove={this.remove}>
                 <div className={classNames.join(' ')} id={id} ref={this.rootRef}>
-                    <div class="drawer-background" onscroll={onScrollHandler}>
+                    <div class="drawer-background" onscroll={this.onScroll}>
                         <div class="drawer-scroller">
                             <div className={innerClassNames.join(' ')} onclick={this.preventClick}>
                                 {this.children}

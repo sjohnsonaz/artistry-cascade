@@ -1,5 +1,4 @@
 import Cascade, { Component } from 'cascade';
-import { debouncePromise } from '@cascade/promise-util';
 
 import { Scrollable } from '../../../../../scripts/modules/ArtistryCascade';
 
@@ -8,12 +7,8 @@ export interface IScrollableViewProps {
 }
 
 export default class ScrollableView extends Component<IScrollableViewProps> {
-    bottomDebounced = debouncePromise(async () => {
-        console.log('bottom!');
-    }, 1000);
-
     bottom = async () => {
-        await this.bottomDebounced();
+        console.log('bottom!');
     }
 
     render() {
@@ -23,7 +18,7 @@ export default class ScrollableView extends Component<IScrollableViewProps> {
         }
         return (
             <div>
-                <Scrollable type="y" height="100px" buffer={10} onBottom={this.bottom}>
+                <Scrollable type="y" height="100px" bumper={10} onBottomEnter={this.bottom}>
                     <ul>
                         {values.map(value => <li>{value}</li>)}
                     </ul>
