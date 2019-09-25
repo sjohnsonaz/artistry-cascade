@@ -5,8 +5,11 @@ import Carousel, { ICarouselProps } from './Carousel';
 import CardContainer from './CardContainer';
 
 export interface ICardCarouselProps extends ICarouselProps {
-    slideSize: number;
-    cardWidth?: number;
+    minWidth?: number;
+    maxWidth?: number;
+    cardSpacing?: number;
+    carouselSpacing?: number;
+    onChangeSize?: (index: number, slideSize?: number, oldSlideSize?: number) => any;
 }
 
 export default class CardCarousel extends Component<ICardCarouselProps> {
@@ -16,49 +19,70 @@ export default class CardCarousel extends Component<ICardCarouselProps> {
 
     afterRender(element: Node, updating: boolean) {
         if (!updating) {
-            let {
-                cardWidth
-            } = this.props;
+            this.resizeHandler();
+            window.addEventListener('resize', this.resizeHandler);
+        }
+    }
 
-            let slideSize = 1;
-            let element = this.rootRef.current;
-            if (element) {
-                cardWidth = cardWidth || 300;
-                let width = element.clientWidth;
-                if (width > cardWidth) {
-                    let remainder = width % cardWidth;
-                    slideSize = (width - remainder) / cardWidth;
-                }
+    afterDispose() {
+        window.removeEventListener('resize', this.resizeHandler);
+    }
+
+    onChangeSize = (slideSize: number, oldSlideSize: number) => {
+        if (this.props.onChangeSize) {
+            let oldIndex = this.props.activeIndex;
+            if (oldIndex < 0) {
+                let length = this.children.length;
+                oldIndex = (oldIndex % length) + length;
             }
+            let newIndex = Math.floor(oldIndex * oldSlideSize / slideSize);
+            this.props.onChangeSize(newIndex, slideSize, oldSlideSize);
+        }
+    }
 
-            this.rendered = true;
-            this.slideSize = slideSize;
-        } else {
-            let {
-                cardWidth
-            } = this.props;
+    resizeHandler = () => {
+        let {
+            minWidth,
+            cardSpacing,
+            carouselSpacing
+        } = this.props;
 
-            let slideSize = 1;
-            let element = this.rootRef.current;
-            if (element) {
-                cardWidth = cardWidth || 300;
-                let width = element.clientWidth;
-                if (width > cardWidth) {
-                    let remainder = width % cardWidth;
-                    slideSize = (width - remainder) / cardWidth;
-                }
-            }
-
-            if (slideSize !== this.slideSize) {
-                this.slideSize = slideSize;
+        let slideSize = 1;
+        let element = this.rootRef.current;
+        if (element) {
+            minWidth = minWidth || 300;
+            cardSpacing = cardSpacing || 10;
+            carouselSpacing = carouselSpacing || 10;
+            minWidth += cardSpacing;
+            let width = element.clientWidth;
+            if (width > minWidth + cardSpacing) {
+                let remainder = (width - cardSpacing) % minWidth;
+                slideSize = (width - cardSpacing - remainder) / minWidth;
             }
         }
+
+        if (!this.rendered) {
+            let oldSlideSize = this.slideSize;
+            this.rendered = true;
+            this.slideSize = slideSize;
+            this.onChangeSize(slideSize, oldSlideSize);
+        } else if (slideSize !== this.slideSize) {
+            let oldSlideSize = this.slideSize;
+            this.slideSize = slideSize;
+            this.onChangeSize(slideSize, oldSlideSize);
+        }
+    };
+
+    componentDidUpdate() {
+        this.resizeHandler();
     }
 
     render() {
         let {
             id,
             className,
+            minWidth,
+            maxWidth,
             ...props
         } = this.props;
 
@@ -90,6 +114,8 @@ export default class CardCarousel extends Component<ICardCarouselProps> {
                             return (
                                 <CardContainer
                                     className="space"
+                                    minWidth={minWidth}
+                                    maxWidth={maxWidth}
                                     key={index}>
                                     {children}
                                 </CardContainer>

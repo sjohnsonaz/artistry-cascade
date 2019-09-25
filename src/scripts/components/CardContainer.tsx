@@ -4,7 +4,8 @@ export interface ICardContainerProps {
     id?: string;
     className?: string;
     space?: boolean;
-    width?: number | string;
+    minWidth?: number | string;
+    maxWidth?: number | string;
 }
 
 export default class CardContainer extends Component<ICardContainerProps> {
@@ -13,7 +14,8 @@ export default class CardContainer extends Component<ICardContainerProps> {
             id,
             className,
             space,
-            width
+            minWidth,
+            maxWidth
         } = this.props;
 
         let classNames = className ? [className] : [];
@@ -23,15 +25,18 @@ export default class CardContainer extends Component<ICardContainerProps> {
             classNames.push('space');
         }
 
-        if (width && typeof width === 'number') {
-            width += 'px' as any;
+        if (maxWidth && typeof maxWidth === 'number') {
+            maxWidth += 'px' as any;
         }
 
         return (
             <div
                 className={classNames.join(' ')}
                 id={id}
-                style={{ '--card-min-width': width } as any}
+                style={{
+                    '--card-min-width': minWidth,
+                    '--card-max-width': maxWidth
+                } as any}
             >
                 {this.children}
             </div>
