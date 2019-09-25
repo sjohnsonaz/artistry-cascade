@@ -1,21 +1,57 @@
-import Cascade, {Component, observable, Ref} from 'cascade';
+import Cascade, { Component, observable, Ref } from 'cascade';
 
 import Carousel, { ICarouselProps } from './Carousel';
 //import Card from './Card';
 import CardContainer from './CardContainer';
 
 export interface ICardCarouselProps extends ICarouselProps {
-
-
+    slideSize: number;
+    cardWidth?: number;
 }
 
 export default class CardCarousel extends Component<ICardCarouselProps> {
     rootRef: Ref<HTMLDivElement> = new Ref();
     @observable rendered: boolean = false;
+    @observable slideSize: number = 1;
 
     afterRender(element: Node, updating: boolean) {
         if (!updating) {
+            let {
+                cardWidth
+            } = this.props;
+
+            let slideSize = 1;
+            let element = this.rootRef.current;
+            if (element) {
+                cardWidth = cardWidth || 300;
+                let width = element.clientWidth;
+                if (width > cardWidth) {
+                    let remainder = width % cardWidth;
+                    slideSize = (width - remainder) / cardWidth;
+                }
+            }
+
             this.rendered = true;
+            this.slideSize = slideSize;
+        } else {
+            let {
+                cardWidth
+            } = this.props;
+
+            let slideSize = 1;
+            let element = this.rootRef.current;
+            if (element) {
+                cardWidth = cardWidth || 300;
+                let width = element.clientWidth;
+                if (width > cardWidth) {
+                    let remainder = width % cardWidth;
+                    slideSize = (width - remainder) / cardWidth;
+                }
+            }
+
+            if (slideSize !== this.slideSize) {
+                this.slideSize = slideSize;
+            }
         }
     }
 
@@ -33,7 +69,7 @@ export default class CardCarousel extends Component<ICardCarouselProps> {
 
         let innerWrapper: any[];
         this.children.forEach((child, index) => {
-            if (index % 3 === 0) {
+            if (index % this.slideSize === 0) {
                 innerWrapper = [];
                 wrappedChildren.push(innerWrapper);
             }
