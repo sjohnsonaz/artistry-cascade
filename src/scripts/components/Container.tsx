@@ -6,7 +6,7 @@ export interface IContainerProps {
     className?: string;
     id?: string;
     menuBarTop?: boolean;
-    size?: ContainerSize | ContainerSize[];
+    screenSize?: ContainerSize | ContainerSize[];
 }
 
 export default class Container extends Component<IContainerProps>{
@@ -18,8 +18,8 @@ export default class Container extends Component<IContainerProps>{
             classNames.push('container-menu-bar-top');
         }
 
-        if (this.props.size) {
-            let sizes = (this.props.size instanceof Array) ? this.props.size : [this.props.size];
+        if (this.props.screenSize) {
+            let sizes = (this.props.screenSize instanceof Array) ? this.props.screenSize : [this.props.screenSize];
 
             sizes.forEach(size => {
                 switch (size) {

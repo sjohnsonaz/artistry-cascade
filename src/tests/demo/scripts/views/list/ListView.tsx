@@ -92,7 +92,7 @@ export default class TableView extends Component<ITableViewProps> {
                                 altAction={this.altAction}
                                 fill
                                 buttonText={<span className="nowrap"><Icon name="search" /> Search</span>}
-                                size="small"
+                                screenSize="small"
                             ></Search>
                         </Cell>
                     </Row>

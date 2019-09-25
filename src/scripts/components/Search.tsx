@@ -19,7 +19,7 @@ export interface ISearchProps {
     disabled?: boolean;
     disabledButton?: boolean;
     disabledInput?: boolean;
-    size?: SearchSize;
+    screenSize?: SearchSize;
     showClear?: boolean;
     clearText?: any;
     onChange?: (event: Event) => any;
@@ -212,7 +212,7 @@ export default class Search extends Component<ISearchProps> {
             disabled,
             disabledButton,
             disabledInput,
-            size,
+            screenSize,
             showClear,
             clearText,
 
@@ -246,7 +246,7 @@ export default class Search extends Component<ISearchProps> {
             inputClassNames.push('fill-width');
         }
 
-        switch (size) {
+        switch (screenSize) {
             case 'x-small':
                 classNames.push('search-xs');
                 break;

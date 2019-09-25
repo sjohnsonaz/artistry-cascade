@@ -6,7 +6,7 @@ export interface IGridProps {
     className?: string;
     id?: string;
     columns?: number;
-    size?: GridSize;
+    screenSize?: GridSize;
     fillWidth?: boolean;
     space?: boolean;
 }
@@ -14,7 +14,7 @@ export interface IGridProps {
 export default class Grid extends Component<IGridProps> {
     render() {
         let classNames = this.props.className ? [this.props.className] : [];
-        grid(classNames, this.props.columns, this.props.size, this.props.space);
+        grid(classNames, this.props.columns, this.props.screenSize, this.props.space);
 
         if (this.props.fillWidth) {
             classNames.push('fill-width');
@@ -24,9 +24,9 @@ export default class Grid extends Component<IGridProps> {
     }
 }
 
-function grid(classNames: string[], columns: number, size?: GridSize, space?: boolean) {
+function grid(classNames: string[], columns: number, screenSize?: GridSize, space?: boolean) {
     columns = columns || 12;
-    switch (size) {
+    switch (screenSize) {
         case 'x-small':
             classNames.push('grid-xs-' + columns);
             break;

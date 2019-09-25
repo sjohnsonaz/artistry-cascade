@@ -11,7 +11,7 @@ export default class GridView extends Component<IGridViewProps> {
         return (
             <Section header="Grid">
                 <h3>Grid</h3>
-                <Grid size="small" space>
+                <Grid screenSize="small" space>
                     <Row>
                         <Cell>Item 1</Cell>
                         <Cell>Item 2</Cell>
