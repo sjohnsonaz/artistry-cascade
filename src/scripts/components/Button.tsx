@@ -26,6 +26,7 @@ export interface IButtonProps extends Elements.JSXButtonElement {
     locked?: boolean;
     down?: boolean;
     link?: boolean;
+    noCaps?: boolean;
     noTrigger?: boolean;
     noWrap?: boolean;
     noFocus?: boolean;
@@ -89,6 +90,7 @@ export default class Button extends Component<IButtonProps> {
             popoverFill,
             onPopoverClose,
             link,
+            noCaps,
             noTrigger,
             noWrap,
             noFocus,
@@ -128,6 +130,10 @@ export default class Button extends Component<IButtonProps> {
 
         if (fill) {
             classNames.push('fill-width');
+        }
+
+        if (noCaps) {
+            classNames.push('button-no-caps');
         }
 
         if (noWrap) {

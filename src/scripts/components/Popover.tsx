@@ -9,6 +9,7 @@ export interface IPopoverProps {
     open?: boolean;
     closed?: boolean;
     preventClick?: boolean;
+    space?: boolean;
 }
 
 export default class Popover extends Component<IPopoverProps> {
@@ -65,6 +66,9 @@ export default class Popover extends Component<IPopoverProps> {
         }
         if (this.props.closed) {
             classNames.push('popover-closed');
+        }
+        if (this.props.space) {
+            classNames.push('popover-space');
         }
 
         return (
