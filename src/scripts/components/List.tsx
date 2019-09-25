@@ -5,7 +5,9 @@ export interface IListProps<T> {
     className?: string;
     data: T[];
     space?: boolean;
-    template?: (item: T) => any;
+    active?: number;
+    selected?: number[];
+    template?: (item: T, index?: number) => any;
 }
 
 export default class List<T> extends Component<IListProps<T>> {
@@ -15,6 +17,8 @@ export default class List<T> extends Component<IListProps<T>> {
             id,
             data,
             space,
+            selected,
+            active,
             template
         } = this.props;
 
@@ -25,12 +29,32 @@ export default class List<T> extends Component<IListProps<T>> {
             classNames.push('list-space');
         }
 
+        let hash: { [index: number]: boolean; } = {};
+        if (selected) {
+            for (let x of selected) {
+                hash[x] = true;
+            }
+        }
+
         return (
             <ul className={classNames.join(' ')} id={id}>
-                {data ? data.map(item => <li>
-                    {template ? template(item) : item}
-                </li>) : undefined}
+                {data ? data.map((item, index) => {
+                    let className: string = undefined;
+                    if (active === index) {
+                        className = 'list-option-active';
+                    } else if (hash[index]) {
+                        className = 'list-option-selected';
+                    }
+                    return (
+                        <li
+                            key={index}
+                            className={className}
+                        >
+                            {template ? template(item, index) : item}
+                        </li>
+                    );
+                }) : undefined}
             </ul>
-        )
+        );
     }
 }

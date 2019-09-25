@@ -100,6 +100,9 @@ export default class TableView extends Component<ITableViewProps> {
                 <List
                     data={this.options}
                     template={item => item.ingredient}
+                    active={3}
+                    selected={[1, 3, 5]}
+                    space
                 />
             </Section>
         );
