@@ -27,14 +27,19 @@ export default class Carousel extends Component<ICarouselProps> {
     @observable animating: boolean = false;
     @observable selected: boolean = true;
     runCount: number = 0;
+    transitionCount: number = 0;
 
     transitionEnd = (event: TransitionEvent) => {
-        if (event.propertyName === 'height') {
-            let running = this.running;
-            if (!running) {
-                this.animating = false;
-                this.height = undefined;
-                this.previousActiveIndex = this.activeIndex;
+        if (event.propertyName === 'transform') {
+            this.transitionCount++;
+            this.transitionCount %= 2;
+            if (!this.transitionCount) {
+                let running = this.running;
+                if (!running) {
+                    this.animating = false;
+                    this.height = undefined;
+                    this.previousActiveIndex = this.activeIndex;
+                }
             }
         }
     }
