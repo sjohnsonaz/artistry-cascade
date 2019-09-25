@@ -20,9 +20,12 @@ export interface ISearchProps {
     disabledButton?: boolean;
     disabledInput?: boolean;
     size?: SearchSize;
+    showClear?: boolean;
+    clearText?: any;
     onChange?: (event: Event) => any;
-    onSelectOption?: (event: KeyboardEvent | MouseEvent, value?: string) => any;
-    onSearch?: (event: KeyboardEvent | MouseEvent, value?: string) => any;
+    onSelectOption?: (event: KeyboardEvent | MouseEvent, value: string) => any;
+    onSearch?: (event: KeyboardEvent | MouseEvent, value: string) => any;
+    onClear?: (event: MouseEvent) => any;
     onClose?: (event: KeyboardEvent) => any;
     altAction?: (option: string) => any;
 
@@ -137,7 +140,7 @@ export default class Search extends Component<ISearchProps> {
 
     onSearch = (event: KeyboardEvent | MouseEvent) => {
         if (this.props.onSearch) {
-            this.props.onSearch(event);
+            this.props.onSearch(event, this.value);
         }
     }
 
@@ -146,6 +149,12 @@ export default class Search extends Component<ISearchProps> {
         this.value = option;
         if (this.props.onSelectOption) {
             this.props.onSelectOption(event, option);
+        }
+    }
+
+    onClear = (event: MouseEvent) => {
+        if (this.props.onClear) {
+            this.props.onClear(event);
         }
     }
 
@@ -204,6 +213,8 @@ export default class Search extends Component<ISearchProps> {
             disabledButton,
             disabledInput,
             size,
+            showClear,
+            clearText,
 
             // Unused
             value: _value,
@@ -211,6 +222,7 @@ export default class Search extends Component<ISearchProps> {
             onChange,
             onSelectOption,
             onSearch,
+            onClear,
             onClose,
             ...buttonProps
         } = this.props;
@@ -263,9 +275,19 @@ export default class Search extends Component<ISearchProps> {
                         className={inputClassNames.join(' ')}
                         onkeydown={this.onKeyDown}
                         oninput={this.oninput}
-                        value={value}
+                        value={value || ''}
                         disabled={disabled || disabledInput}
                     />
+                    {showClear && onClear ?
+                        <Button
+                            className="search-button"
+                            onClick={this.onClear}
+                            disabled={!value}
+                        >
+                            {clearText || 'Clear'}
+                        </Button> :
+                        undefined
+                    }
                     <Button
                         className="search-button"
                         onclick={this.onSearch}
