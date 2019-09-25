@@ -171,8 +171,6 @@ export default class Modal extends Component<IModalProps> {
             gridConfig(modalContentClassNames, this.props);
         }
 
-        let modalContentClassName = modalContentClassNames.join(' ');
-
         let headerSection;
         if (title || header || closeable) {
             headerSection = (
@@ -199,12 +197,20 @@ export default class Modal extends Component<IModalProps> {
 
         return (
             <Portal element={PortalManager.getElement('modal-root')} remove={this.remove}>
-                <div className={classNames.join(' ')} id={this.props.id} ref={this.rootRef} onscroll={onScrollHandler}>
+                <div
+                    className={classNames.join(' ')}
+                    id={this.props.id}
+                    ref={this.rootRef}
+                    onscroll={onScrollHandler}
+                >
                     <div className="modal-background">
                         {headerSection || footer ?
                             <div className="modal-content" onclick={this.preventClick}>
                                 {headerSection}
-                                <div className={'modal-body ' + modalContentClassName} onscroll={onScrollHandler}>
+                                <div
+                                    className={'modal-body ' + modalContentClassNames.join(' ')}
+                                    onscroll={onScrollHandler}
+                                >
                                     {this.children}
                                 </div>
                                 {footer ?
@@ -213,7 +219,7 @@ export default class Modal extends Component<IModalProps> {
                                     </div>
                                     : undefined}
                             </div> :
-                            <div className={'modal-content ' + modalContentClassName} onclick={this.preventClick}>
+                            <div className={'modal-content ' + modalContentClassNames.join(' ')} onclick={this.preventClick}>
                                 {this.children}
                             </div>
                         }

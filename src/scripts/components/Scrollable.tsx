@@ -17,13 +17,14 @@ export enum ScrollableTypeEnum {
     none = "none",
     x = "x",
     y = "y",
-    xAlways = "xAlways",
-    yAlways = "yAlways",
-    xNever = "xNever",
-    yNever = "yNever"
+    xAlways = "x-always",
+    yAlways = "y-always",
+    xNever = "x-never",
+    yNever = "y-never"
 }
 
 export interface IScrollableExternalProps {
+    scrollType?: ScrollableType;
     buffer?: number;
     onscroll?: (event?: MouseEvent) => void;
     onTop?: (event?: MouseEvent) => void;
@@ -32,11 +33,17 @@ export interface IScrollableExternalProps {
     onLeft?: (event?: MouseEvent) => void;
 }
 
-export interface IScrollableProps extends IScrollableExternalProps {
+export interface IScrollableProps {
     id?: string;
     className?: string;
     type?: ScrollableType;
     height?: number | string;
+    buffer?: number;
+    onscroll?: (event?: MouseEvent) => void;
+    onTop?: (event?: MouseEvent) => void;
+    onRight?: (event?: MouseEvent) => void;
+    onBottom?: (event?: MouseEvent) => void;
+    onLeft?: (event?: MouseEvent) => void;
 }
 
 export function scrollHandler(props: IScrollableExternalProps, event: MouseEvent) {
@@ -91,7 +98,7 @@ export default class Scrollable extends Component<IScrollableProps> {
             <div
                 className={classNames.join(' ')}
                 id={id}
-                data-scroll={type}
+                data-scroll={ScrollableTypeEnum[type]}
                 onscroll={scrollHandler}
                 style={style}
             >
