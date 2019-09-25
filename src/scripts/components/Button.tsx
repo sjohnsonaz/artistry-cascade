@@ -21,6 +21,7 @@ export interface IButtonProps extends Elements.JSXButtonElement {
     popoverMenu?: boolean;
     popoverOpen?: boolean;
     popoverFill?: boolean;
+    popoverSpace?: boolean;
     onPopoverClose?: (event: Event) => boolean | void;
     lockContent?: any;
     locked?: boolean;
@@ -88,6 +89,7 @@ export default class Button extends Component<IButtonProps> {
             popoverMenu,
             popoverOpen,
             popoverFill,
+            popoverSpace,
             onPopoverClose,
             link,
             noCaps,
@@ -193,6 +195,7 @@ export default class Button extends Component<IButtonProps> {
                     direction={popoverDirection}
                     open={!popoverMenu ? popoverOpen : undefined}
                     fill={popoverFill}
+                    space={popoverSpace}
                     preventClick
                 >
                     {typeof popover === 'function' ?

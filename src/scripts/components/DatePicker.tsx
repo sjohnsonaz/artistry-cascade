@@ -68,6 +68,7 @@ export default class DatePicker extends Component<IDatePickerProps>{
                     popoverDirection="bottom"
                     popoverAlign="right"
                     popoverFill
+                    popoverSpace
                     popover={<Calendar
                         date={date}
                         onSelect={this.onSelect}
