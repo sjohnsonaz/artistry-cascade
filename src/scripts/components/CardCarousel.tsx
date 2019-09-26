@@ -1,7 +1,6 @@
 import Cascade, { Component, observable, Ref } from 'cascade';
 
 import Carousel, { ICarouselProps } from './Carousel';
-//import Card from './Card';
 import CardContainer from './CardContainer';
 
 export interface ICardCarouselProps extends ICarouselProps {
@@ -21,6 +20,8 @@ export default class CardCarousel extends Component<ICardCarouselProps> {
         if (!updating) {
             this.resizeHandler();
             window.addEventListener('resize', this.resizeHandler);
+        } else {
+            this.resizeHandler();
         }
     }
 
@@ -72,10 +73,6 @@ export default class CardCarousel extends Component<ICardCarouselProps> {
             this.onChangeSize(slideSize, oldSlideSize);
         }
     };
-
-    componentDidUpdate() {
-        this.resizeHandler();
-    }
 
     render() {
         let {
