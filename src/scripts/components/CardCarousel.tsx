@@ -14,7 +14,7 @@ export interface ICardCarouselProps extends ICarouselProps {
 
 export default class CardCarousel extends Component<ICardCarouselProps> {
     rootRef: Ref<HTMLDivElement> = new Ref();
-    @observable rendered: boolean = false;
+    @observable initialized: boolean = false;
     @observable slideSize: number = 1;
 
     afterRender(element: Node, updating: boolean) {
@@ -61,9 +61,9 @@ export default class CardCarousel extends Component<ICardCarouselProps> {
             }
         }
 
-        if (!this.rendered) {
+        if (!this.initialized) {
             let oldSlideSize = this.slideSize;
-            this.rendered = true;
+            this.initialized = true;
             this.slideSize = slideSize;
             this.onChangeSize(slideSize, oldSlideSize);
         } else if (slideSize !== this.slideSize) {
@@ -92,8 +92,9 @@ export default class CardCarousel extends Component<ICardCarouselProps> {
         let wrappedChildren: any[][] = [];
 
         let innerWrapper: any[];
+        let slideSize = this.slideSize;
         this.children.forEach((child, index) => {
-            if (index % this.slideSize === 0) {
+            if (index % slideSize === 0) {
                 innerWrapper = [];
                 wrappedChildren.push(innerWrapper);
             }
@@ -106,7 +107,7 @@ export default class CardCarousel extends Component<ICardCarouselProps> {
                 id={id}
                 className={classNames.join(' ')}
             >
-                {this.rendered ?
+                {this.initialized ?
                     <Carousel
                         {...props}
                     >
