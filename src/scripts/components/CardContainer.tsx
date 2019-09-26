@@ -25,6 +25,10 @@ export default class CardContainer extends Component<ICardContainerProps> {
             classNames.push('space');
         }
 
+        if (minWidth && typeof minWidth === 'number') {
+            minWidth += 'px' as any;
+        }
+
         if (maxWidth && typeof maxWidth === 'number') {
             maxWidth += 'px' as any;
         }
