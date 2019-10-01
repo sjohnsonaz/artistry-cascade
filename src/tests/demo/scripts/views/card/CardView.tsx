@@ -67,7 +67,7 @@ export default class CardView extends Component<ICardViewProps> {
                     </CardSection>
                 </Card>
                 <div>
-                    <Button onClick={this.clickPrevious}>&lt;</Button>
+                    <Button onclick={this.clickPrevious}>&lt;</Button>
                     <CardCarousel activeIndex={this.index}>
                         <Card type="success" handle="left" square>
                             <CardSection multiColumn>
@@ -118,7 +118,7 @@ export default class CardView extends Component<ICardViewProps> {
                             </CardSection>
                         </Card>
                     </CardCarousel>
-                    <Button onClick={this.clickNext}>&gt;</Button>
+                    <Button onclick={this.clickNext}>&gt;</Button>
                 </div>
             </Section>
         );
