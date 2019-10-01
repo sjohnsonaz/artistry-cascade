@@ -1,4 +1,4 @@
-import Cascade, { Component, observable, Ref } from 'cascade';
+import Cascade, { Component, observable, Ref, ComponentNode } from 'cascade';
 
 import Carousel, { ICarouselProps } from './Carousel';
 import CardContainer from './CardContainer';
@@ -18,10 +18,10 @@ export default class CardCarousel extends Component<ICardCarouselProps> {
 
     afterRender(element: Node, updating: boolean) {
         if (!updating) {
-            this.resizeHandler();
+            window.setTimeout(() => {
+                this.resizeHandler();
+            });
             window.addEventListener('resize', this.resizeHandler);
-        } else {
-            this.resizeHandler();
         }
     }
 
@@ -94,6 +94,11 @@ export default class CardCarousel extends Component<ICardCarouselProps> {
             if (index % slideSize === 0) {
                 innerWrapper = [];
                 wrappedChildren.push(innerWrapper);
+            }
+            if (child instanceof ComponentNode) {
+                if (typeof child.key === 'undefined') {
+                    child.key = index;
+                }
             }
             innerWrapper.push(child);
         });
