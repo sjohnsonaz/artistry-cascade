@@ -1,7 +1,5 @@
 import Cascade, { Component, observable, Ref } from 'cascade';
 
-import Button from './Button';
-
 export interface IFileUploadProps {
     id?: string;
     className?: string;
