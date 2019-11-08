@@ -1,6 +1,6 @@
 import Cascade, { Component, observable } from 'cascade';
 
-import { ActionBar, AmountInput, Button, Form, FormContainer, Divider, FormText, Input, Section, TimeInput, TimePicker } from '../../../../../scripts/modules/ArtistryCascade';
+import { ActionBar, AmountInput, Button, Form, FormContainer, Divider, FormText, Input, Section, TimeInput, TimePicker, Select } from '../../../../../scripts/modules/ArtistryCascade';
 
 export interface IFormViewProps {
 
@@ -9,10 +9,11 @@ export interface IFormViewProps {
 export default class FormView extends Component<IFormViewProps> {
     @observable date: Date = new Date(Date.now());
     @observable amount: number = 0;
+    @observable selectValue = 'a';
 
     render() {
         return (
-            <Section header="Form">
+            <Section header="Form" headerSpace>
                 <Form
                     size="small"
                     onEnter={(event: KeyboardEvent) => {
@@ -63,6 +64,13 @@ export default class FormView extends Component<IFormViewProps> {
                     <FormText>
                         <h3>Advanced Input</h3>
                     </FormText>
+                    <FormContainer label="Select" nonLabel>
+                        <Select
+                            data={['a', 'b', 'c']}
+                            model={this}
+                            modelProp="selectValue"
+                        />
+                    </FormContainer>
                     <FormContainer label="Time Input">
                         <TimeInput
                             fill

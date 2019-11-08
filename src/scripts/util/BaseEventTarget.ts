@@ -43,3 +43,7 @@ export default class BaseEventTarget implements EventTarget {
         this.dispatchEvent(new CustomEvent(type, detail ? { detail: detail } : undefined));
     }
 }
+
+export interface DOMEvent<T extends Node = Node> extends Event {
+    target: T;
+}
