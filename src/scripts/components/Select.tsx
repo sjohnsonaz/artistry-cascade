@@ -8,6 +8,7 @@ export interface ISelectProps<T, U> {
     template?: (value: T, index: number, data: T[]) => any;
     value?: string | number | string[];
     valueProp?: keyof T;
+    displayProp?: keyof T;
     onChange?: (option: T, event?: DOMEvent<HTMLSelectElement>) => any;
     model: U;
     modelProp: keyof U;
