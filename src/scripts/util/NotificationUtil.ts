@@ -8,7 +8,13 @@ export interface INotification {
     decay?: number;
 }
 
-export default class NotificationUtil extends BaseEventTarget {
+export interface INotificationEvents {
+    push: INotification[];
+    update: INotification[];
+    remove: INotification[];
+}
+
+export default class NotificationUtil extends BaseEventTarget<INotificationEvents> {
     notifications: INotification[] = [];
 
     push(notification: INotification) {
@@ -26,3 +32,9 @@ export default class NotificationUtil extends BaseEventTarget {
         }
     }
 }
+
+let notificationUtil = new NotificationUtil();
+
+notificationUtil.addEventListener('push', (notifications) => {
+
+})
