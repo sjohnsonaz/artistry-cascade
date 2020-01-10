@@ -1,5 +1,6 @@
 import Cascade, { Component, Elements } from 'cascade';
 import MaskedInput from './MaskedInput';
+import { DOMEvent } from '../util/BaseEventTarget';
 
 export interface IInputProps<T> extends Elements.JSXInputElement {
     number?: boolean;
@@ -11,10 +12,10 @@ export interface IInputProps<T> extends Elements.JSXInputElement {
 }
 
 export default class Input<T> extends Component<IInputProps<T>> {
-    oninput = (event?: Event) => {
+    oninput = (event: DOMEvent<HTMLInputElement>) => {
         let { number, model, modelProp } = this.props;
         if (model && modelProp) {
-            let value = (event.target as HTMLInputElement).value;
+            let value = event.target.value;
             if (number) {
                 value = parseFloat(value) as any;
             }
