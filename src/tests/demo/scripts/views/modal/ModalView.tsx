@@ -17,10 +17,12 @@ export default class ModalView extends Component<IModalViewProps> {
 
     closeModal = () => {
         this.modalOpen = false;
+        console.log('close');
     }
 
     confirmModal = () => {
         this.modalOpen = false;
+        console.log('confirm');
     }
 
     openInnerModal = () => {

@@ -47,16 +47,20 @@ export default class Modal extends Component<IModalProps> {
         event.stopPropagation();
     }
 
-    close = (event: Event, confirm: boolean) => {
-        if (confirm) {
-            if (this.props.onConfirm) {
-                this.props.onConfirm(event);
-            }
+    close = (event: Event) => {
+        // TODO: Create a prop for preventing mask clicks.
+        if (this.props.onClose) {
+            return this.props.onClose(event);
         } else {
-            // TODO: Create a prop for preventing mask clicks.
-            if (this.props.onClose) {
-                this.props.onClose(event);
-            }
+            return false;
+        }
+    }
+
+    confirm = (event: Event) => {
+        if (this.props.onConfirm) {
+            return this.props.onConfirm(event);
+        } else {
+            return false;
         }
     }
 
@@ -88,7 +92,7 @@ export default class Modal extends Component<IModalProps> {
                 BodyScroll.lock();
                 await waitAnimation();
                 this.open = this.props.open;
-                DepthStack.push(this.close, true);
+                DepthStack.push(this.close, this.confirm);
             } else {
                 BodyScroll.unlock();
                 this.open = this.props.open;
