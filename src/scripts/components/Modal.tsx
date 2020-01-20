@@ -15,6 +15,7 @@ export interface IModalProps extends IGridExternalProps, IScrollableExternalProp
     id?: string;
     open: boolean;
     onClose?: (event: Event) => void;
+    onConfirm?: (event: Event) => void;
     closeable?: boolean;
     closeButton?: any;
     title?: any;
@@ -46,10 +47,16 @@ export default class Modal extends Component<IModalProps> {
         event.stopPropagation();
     }
 
-    close = (event) => {
-        // TODO: Create a prop for preventing mask clicks.
-        if (this.props.onClose) {
-            this.props.onClose(event);
+    close = (event: Event, confirm: boolean) => {
+        if (confirm) {
+            if (this.props.onConfirm) {
+                this.props.onConfirm(event);
+            }
+        } else {
+            // TODO: Create a prop for preventing mask clicks.
+            if (this.props.onClose) {
+                this.props.onClose(event);
+            }
         }
     }
 
@@ -76,11 +83,12 @@ export default class Modal extends Component<IModalProps> {
     async afterProps(mounted: boolean) {
         if (mounted && this.props.open != this.prevProps.open) {
             if (this.props.open) {
+                DepthStack.blur();
                 this.remove = false;
                 BodyScroll.lock();
                 await waitAnimation();
                 this.open = this.props.open;
-                DepthStack.push(this.close);
+                DepthStack.push(this.close, true);
             } else {
                 BodyScroll.unlock();
                 this.open = this.props.open;

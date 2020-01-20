@@ -19,6 +19,10 @@ export default class ModalView extends Component<IModalViewProps> {
         this.modalOpen = false;
     }
 
+    confirmModal = () => {
+        this.modalOpen = false;
+    }
+
     openInnerModal = () => {
         this.innerModalOpen = true;
     }
@@ -41,6 +45,7 @@ export default class ModalView extends Component<IModalViewProps> {
                 <Modal
                     open={this.modalOpen}
                     onClose={this.closeModal}
+                    onConfirm={this.confirmModal}
                     title="Modal"
                     animation="top"
                     screenSize="small"
