@@ -6,6 +6,7 @@ export { default as Portal } from '../util/Portal';
 export { alignClass, AlignType } from '../util/Align';
 export { default as ActionBar, IActionBarProps } from '../components/ActionBar';
 export { default as AmountInput, IAmountInputProps } from '../components/AmountInput';
+export { default as Breadcrumbs, IBreadcrumbs } from '../components/Breadcrumbs';
 export { default as Button, IButtonProps } from '../components/Button';
 export { default as ButtonGroup, IButtonGroupProps } from '../components/ButtonGroup';
 export { default as ButtonBar, IButtonBarProps } from '../components/ButtonBar';
