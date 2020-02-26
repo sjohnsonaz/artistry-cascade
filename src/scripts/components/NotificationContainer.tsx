@@ -1,22 +1,13 @@
 import Cascade, { Component, Portal } from 'cascade';
 
 import ClassNames from '../util/ClassNames';
-import { NotificationType } from '../util/NotificationUtil';
 import PortalManager from '../util/Portal';
-
-import Notification from './Notification';
 
 export type NotificationLocation = 'default' | 'top' | 'right' | 'bottom' | 'left' | 'center-horizontal' | 'center-vertical' | 'top-right' | 'bottom-right' | 'bottom-left' | 'top-left';
 
 export interface INotificationContainerProps {
     id?: string;
     className?: string;
-    items?: {
-        type?: NotificationType;
-        title?: string;
-        text?: string;
-        decay?: number;
-    }[];
     location?: NotificationLocation;
 }
 
@@ -25,14 +16,13 @@ export default class NotificationContainer extends Component<INotificationContai
         let {
             id,
             className,
-            items,
             location
         } = this.props;
 
         let classNames = new ClassNames(className);
         classNames.add('notification-container');
 
-        if (!items || !items.length) {
+        if (!this.children || !this.children.length) {
             classNames.add('hidden');
         }
 
@@ -70,18 +60,9 @@ export default class NotificationContainer extends Component<INotificationContai
         }
 
         return (
-            <Portal element={PortalManager.getElement('layer-fixed')}>
+            <Portal element={PortalManager.getElement('layer-flyout')}>
                 <div className={classNames.toString()} id={id}>
-                    {items ? items.map((item, index) => (
-                        <Notification
-                            type={item.type}
-                            title={item.title}
-                            decay={item.decay}
-                            key={index}
-                        >
-                            {item.text}
-                        </Notification>
-                    )) : undefined}
+                    {this.children}
                 </div>
             </Portal>
         );

@@ -1,37 +1,31 @@
-import Cascade, { Component, observable } from 'cascade';
+import Cascade, { Component, observable, hash } from 'cascade';
 
-import { Button, NotificationContainer, NotificationType, Section } from '../../../../../scripts/modules/ArtistryCascade';
+import { Button, NotificationContainer, NotificationType, Section, Notification, INotificationProps, ActionBar } from '../../../../../scripts/modules/ArtistryCascade';
 
 export interface INotificationViewProps {
 
 }
 
+export interface INotification extends INotificationProps {
+    text?: string;
+}
+
 export interface INotificationViewState {
     items?: {
-        type?: NotificationType;
-        title?: string;
-        text?: string;
-        decay?: number;
-    }[];
+        [index: number]: INotification;
+    };
 }
 
 export default class NotificationView extends Component<INotificationViewProps> {
-    @observable items?: {
-        type?: NotificationType;
-        title?: string;
-        text?: string;
-        decay?: number;
-    }[] = [];
+    @hash items?: {
+        [index: number]: INotification;
+    };
 
-    pushItem(item: {
-        type?: NotificationType;
-        title?: string;
-        text?: string;
-        decay?: number;
-    }) {
-        let items = this.items.splice(0);
-        items.push(item);
-        this.items = items;
+    static currentKey = 0;
+
+    pushItem(item: INotification) {
+        this.items[NotificationView.currentKey] = item;
+        NotificationView.currentKey++;
     }
 
     pushDefault = () => {
@@ -39,7 +33,8 @@ export default class NotificationView extends Component<INotificationViewProps> 
             type: 'default',
             title: 'Default',
             text: 'This is a default message.',
-            decay: 2000
+            decay: 2000,
+            onClick: () => console.log('Default clicked!')
         });
     }
 
@@ -81,15 +76,35 @@ export default class NotificationView extends Component<INotificationViewProps> 
 
     render() {
         return (
-            <Section header="Notification" space headerSpace>
-                <Button onclick={this.pushDefault}>Push Default</Button>
-                <Button onclick={this.pushSuccess}>Push Success</Button>
-                <Button onclick={this.pushInfo}>Push Info</Button>
-                <Button onclick={this.pushWarning}>Push Warning</Button>
-                <Button onclick={this.pushDanger}>Push Danger</Button>
-                <NotificationContainer
-                    items={this.items}
-                />
+            <Section header="Notification" headerSpace>
+                <ActionBar align="start">
+                    <Button onclick={this.pushDefault}>Push Default</Button>
+                    <Button onclick={this.pushSuccess}>Push Success</Button>
+                    <Button onclick={this.pushInfo}>Push Info</Button>
+                    <Button onclick={this.pushWarning}>Push Warning</Button>
+                    <Button onclick={this.pushDanger}>Push Danger</Button>
+                </ActionBar>
+                <NotificationContainer>
+                    {Object.keys(this.items).map(key => {
+                        let item = this.items[key];
+                        return (
+                            <Notification
+                                key={key}
+                                title={item.title}
+                                type={item.type}
+                                decay={item.decay}
+                                onClick={item.onClick}
+                                clickable={!!item.onClick}
+                                allowDelay
+                                onClose={() => {
+                                    delete this.items[key];
+                                }}
+                            >
+                                {item.text}
+                            </Notification>
+                        );
+                    })}
+                </NotificationContainer>
             </Section>
         );
     }
