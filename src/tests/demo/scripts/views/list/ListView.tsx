@@ -73,7 +73,7 @@ export default class TableView extends Component<ITableViewProps> {
 
     render() {
         return (
-            <Section header="List">
+            <Section header="List" headerSpace>
                 <Grid space>
                     <Row>
                         <Cell>

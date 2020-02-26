@@ -1,6 +1,6 @@
 import Cascade, { Component, observable } from 'cascade';
 
-import { DatePicker, FormContainer, Section } from '../../../../../scripts/modules/ArtistryCascade';
+import { DatePicker, FormGroup, Section } from '../../../../../scripts/modules/ArtistryCascade';
 
 export interface ICalendarViewProps {
 
@@ -12,12 +12,12 @@ export default class CalendarView extends Component<ICalendarViewProps> {
     render() {
         return (
             <Section header="Calendar" headerSpace>
-                <FormContainer
+                <FormGroup
                     label="Calendar">
                     <DatePicker date={this.date} onSelect={(date) => {
                         this.date = date;
                     }} />
-                </FormContainer>
+                </FormGroup>
             </Section>
         );
     }

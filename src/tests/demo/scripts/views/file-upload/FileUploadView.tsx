@@ -15,6 +15,7 @@ export default class TableView extends Component<ITableViewProps> {
         return (
             <Section
                 header="File Upload"
+                headerSpace
                 space
             >
                 <FileUpload onUpload={this.upload} />

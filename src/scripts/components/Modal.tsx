@@ -32,13 +32,12 @@ export interface IModalProps extends IGridExternalProps, IScrollableExternalProp
 export default class Modal extends Component<IModalProps> {
     @observable open: boolean = this.props.open;
     @observable remove: boolean = !this.props.open;
-    container = document.createElement('div');
     rootRef: Ref<HTMLDivElement> = new Ref();
 
     constructor(props: IModalProps, ...children: any[]) {
         super(props, ...children);
         if (this.props.open) {
-            BodyScroll.lock();
+            BodyScroll.lock(true);
             DepthStack.push(this.close);
         }
     }
@@ -89,7 +88,7 @@ export default class Modal extends Component<IModalProps> {
             if (this.props.open) {
                 DepthStack.blur();
                 this.remove = false;
-                BodyScroll.lock();
+                BodyScroll.lock(true);
                 await waitAnimation();
                 this.open = this.props.open;
                 DepthStack.push(this.close, this.confirm);
@@ -203,7 +202,7 @@ export default class Modal extends Component<IModalProps> {
         }
 
         return (
-            <Portal element={PortalManager.getElement('modal-root')} remove={this.remove}>
+            <Portal element={PortalManager.getElement('layer-overlay')} remove={this.remove}>
                 <div
                     className={classNames.join(' ')}
                     id={this.props.id}

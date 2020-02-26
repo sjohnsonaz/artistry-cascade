@@ -5,7 +5,9 @@ export default class ClassNames {
     constructor(...names: string[]) {
         for (let index = 0, length = names.length; index < length; index++) {
             let name = names[index];
-            this.parts[name] = name;
+            if (name) {
+                this.parts[name] = name;
+            }
         }
     }
 

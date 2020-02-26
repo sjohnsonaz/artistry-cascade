@@ -27,7 +27,7 @@ export default class Drawer extends Component<IDrawerProps> {
     constructor(props: IDrawerProps, ...children: any[]) {
         super(props, ...children);
         if (this.props.open) {
-            BodyScroll.lock();
+            BodyScroll.lock(true);
             DepthStack.push(this.close);
         }
     }
@@ -67,7 +67,7 @@ export default class Drawer extends Component<IDrawerProps> {
         if (mounted && this.props.open != this.prevProps.open) {
             if (this.props.open) {
                 this.remove = false;
-                BodyScroll.lock();
+                BodyScroll.lock(true);
                 await waitAnimation();
                 this.open = this.props.open;
                 DepthStack.push(this.close);
@@ -125,7 +125,7 @@ export default class Drawer extends Component<IDrawerProps> {
         }
 
         return (
-            <Portal element={PortalManager.getElement('modal-root')} remove={this.remove}>
+            <Portal element={PortalManager.getElement('layer-overlay')} remove={this.remove}>
                 <div className={classNames.join(' ')} id={id} ref={this.rootRef}>
                     <div class="drawer-background" onscroll={this.onScroll}>
                         <div class="drawer-scroller">

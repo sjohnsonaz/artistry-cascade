@@ -34,11 +34,13 @@ export default class Application {
         var viewModel = new ViewModel();
         window.viewModel = viewModel;
         window.User = User;
-        Portal.addElement('modal-root', 'modal-root');
+        Portal.addElement('layer-fixed', 'layer-fixed');
+        Portal.addElement('layer-overlay', 'layer-overlay');
+        Portal.addElement('layer-flyout', 'layer-flyout');
         BodyScroll.init();
         DepthStack.init();
         Cascade.render(
-            document.getElementById('root'),
+            document.getElementById('layer-root'),
             <Container menuBarTop screenSize="all">
                 <MenuBarView />
                 <h2>Components</h2>

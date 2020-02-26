@@ -1,4 +1,6 @@
-import Cascade, { Component } from 'cascade';
+import Cascade, { Component, Portal } from 'cascade';
+
+import PortalManager from '../util/Portal';
 
 export interface IMenuBarProps {
     className?: string;
@@ -10,11 +12,13 @@ export interface IMenuBarProps {
 }
 
 export default class MenuBar extends Component<IMenuBarProps> {
+    container = document.createElement('div');
+
     onOpen(event: MouseEvent) {
         event.preventDefault();
         if (this.props.onOpen) {
             this.props.onOpen(event);
-        }    
+        }
     }
 
     render() {
@@ -37,15 +41,17 @@ export default class MenuBar extends Component<IMenuBarProps> {
         }
 
         return (
-            <div className={classNames.join(' ')} id={this.props.id}>
-                {this.props.top ? <div className="menu-bar-expander">
-                    <a href="#" onclick={this.onOpen.bind(this)}>&#9776;</a>
-                </div> : undefined}
-                {menuBarTitle}
-                <ul>
-                    {this.children}
-                </ul>
-            </div>
+            <Portal element={PortalManager.getElement('layer-fixed')}>
+                <div className={classNames.join(' ')} id={this.props.id}>
+                    {this.props.top ? <div className="menu-bar-expander">
+                        <a href="#" onclick={this.onOpen.bind(this)}>&#9776;</a>
+                    </div> : undefined}
+                    {menuBarTitle}
+                    <ul>
+                        {this.children}
+                    </ul>
+                </div>
+            </Portal>
         );
     }
 }

@@ -1,8 +1,9 @@
-import Cascade, { Component } from 'cascade';
+import Cascade, { Component, Portal } from 'cascade';
 
 import ClassNames from '../util/ClassNames';
-
 import { NotificationType } from '../util/NotificationUtil';
+import PortalManager from '../util/Portal';
+
 import Notification from './Notification';
 
 export type NotificationLocation = 'default' | 'top' | 'right' | 'bottom' | 'left' | 'center-horizontal' | 'center-vertical' | 'top-right' | 'bottom-right' | 'bottom-left' | 'top-left';
@@ -69,18 +70,20 @@ export default class NotificationContainer extends Component<INotificationContai
         }
 
         return (
-            <div className={classNames.toString()} id={id}>
-                {items ? items.map((item, index) => (
-                    <Notification
-                        type={item.type}
-                        title={item.title}
-                        decay={item.decay}
-                        key={index}
-                    >
-                        {item.text}
-                    </Notification>
-                )) : undefined}
-            </div>
+            <Portal element={PortalManager.getElement('layer-fixed')}>
+                <div className={classNames.toString()} id={id}>
+                    {items ? items.map((item, index) => (
+                        <Notification
+                            type={item.type}
+                            title={item.title}
+                            decay={item.decay}
+                            key={index}
+                        >
+                            {item.text}
+                        </Notification>
+                    )) : undefined}
+                </div>
+            </Portal>
         );
     }
 }

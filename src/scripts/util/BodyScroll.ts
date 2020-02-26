@@ -1,36 +1,56 @@
 export default class BodyScroll {
-    static lockCount: number = 0;
-    static rootSelector: string = 'body > .root';
+    static lockStack: {
+        scrollTop: number;
+        hideScroll: boolean;
+    }[] = [];
+    static rootSelector: string = '.layer-root';
     static bodyLockClass: string = 'body-scroll';
     static scrollbarWidth: string;
 
-    static lock() {
-        this.lockCount++;
-
+    static lock(hideScroll: boolean) {
         let body = document.body;
         let root = document.querySelector(this.rootSelector) as HTMLElement;
         if (root) {
             // We must query multiple objects for the scrollTop.
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop || body.scrollTop || root.scrollTop;
-            body.setAttribute('data-lock', 'true');
+            let currentHideScroll = body.getAttribute('data-lock') === 'hide';
+            this.lockStack.push({
+                scrollTop: scrollTop,
+                hideScroll: currentHideScroll
+            });
+            if (this.lockStack.length === 1) {
+                root.setAttribute('data-status', 'locked');
+            }
             root.scrollTop = scrollTop;
+            if (hideScroll) {
+                body.setAttribute('data-lock', 'hide');
+                root.setAttribute('data-pad-scroll', 'true');
+            } else {
+                body.setAttribute('data-lock', '');
+                root.setAttribute('data-pad-scroll', '');
+            }
         }
     }
 
     static unlock() {
-        this.lockCount--;
-        if (this.lockCount < 0) {
-            this.lockCount = 0;
-        }
-
         let body = document.body;
         let root = document.querySelector(this.rootSelector) as HTMLElement;
-        if (root && this.lockCount === 0) {
-            let scrollTop = root.scrollTop || window.pageYOffset || document.documentElement.scrollTop || body.scrollTop;
-            body.setAttribute('data-lock', 'false');
-            // We must set both of these for Chrome and Firefox.
-            body.scrollTop = scrollTop;
-            document.documentElement.scrollTop = scrollTop;
+        if (root) {
+            let lockConfig = this.lockStack.pop();
+            if (!this.lockStack.length) {
+                root.setAttribute('data-status', '');
+            }
+            if (lockConfig) {
+                body.scrollTop = lockConfig.scrollTop;
+                if (lockConfig.hideScroll) {
+                    body.setAttribute('data-lock', 'hide');
+                    root.setAttribute('data-pad-scroll', 'true');
+                } else {
+                    body.setAttribute('data-lock', '');
+                    root.setAttribute('data-pad-scroll', '');
+                }
+                document.documentElement.scrollTop = lockConfig.scrollTop;
+            }
         }
     }
 
@@ -39,10 +59,15 @@ export default class BodyScroll {
         body.classList.add(this.bodyLockClass);
         body.setAttribute('data-lock', 'init');
         this.scrollbarWidth = getComputedStyle(body).marginRight;
-        body.setAttribute('data-lock', 'false');
+        body.setAttribute('data-lock', '');
         body.style.setProperty('--scrollbar-width', this.scrollbarWidth);
+
+        let root = document.querySelector(this.rootSelector) as HTMLElement;
+        if (root) {
+            root.setAttribute('data-status', '');
+        }
+
         window.addEventListener('beforeunload', () => {
-            this.lockCount = 1;
             this.unlock();
         });
     }

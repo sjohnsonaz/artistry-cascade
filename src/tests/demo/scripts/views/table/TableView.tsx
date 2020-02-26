@@ -37,7 +37,7 @@ let data: ITableData[] = [{
 export default class TableView extends Component<ITableViewProps> {
     render() {
         return (
-            <Section header="Table">
+            <Section header="Table" headerSpace>
                 <Table
                     id="table-component"
                     data={data}
@@ -47,7 +47,7 @@ export default class TableView extends Component<ITableViewProps> {
                     }, {
                         header: 'Quantity',
                         property: 'quantity',
-                        template: item => <strong>{item.quantity}</strong>
+                        template: item => <td><strong>{item.quantity}</strong></td>
                     }, {
                         header: 'Unit',
                         property: 'unit'

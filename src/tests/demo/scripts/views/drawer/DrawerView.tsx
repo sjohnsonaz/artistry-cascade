@@ -1,6 +1,6 @@
 import Cascade, { Component, observable } from 'cascade';
 
-import { ActionBar, Button, Form, FormContainer, Divider, Drawer, Section } from '../../../../../scripts/modules/ArtistryCascade';
+import { ActionBar, Button, Form, FormGroup, Divider, Drawer, Section } from '../../../../../scripts/modules/ArtistryCascade';
 
 export interface IDrawerViewProps {
 
@@ -26,9 +26,9 @@ export default class DrawerView extends Component<IDrawerViewProps> {
                     <p>Drawer Content</p>
                     <br />
                     <Form>
-                        <FormContainer label="Input">
+                        <FormGroup label="Input">
                             <input className="input" />
-                        </FormContainer>
+                        </FormGroup>
                         <Divider />
                         <ActionBar>
                             <Button theme="primary">OK</Button>

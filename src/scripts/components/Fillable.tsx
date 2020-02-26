@@ -29,7 +29,7 @@ export default class Fillable extends Component<IFillableProps> {
             this.right = 0 + 'px';
             this.bottom = 0 + 'px';
             this.left = 0 + 'px';
-            BodyScroll.lock();
+            BodyScroll.lock(true);
         }
     }
 
@@ -39,7 +39,7 @@ export default class Fillable extends Component<IFillableProps> {
             if (!animating) {
                 if (this.props.filled) {
                     this.running = false;
-                    BodyScroll.lock();
+                    BodyScroll.lock(true);
                 } else {
                     this.running = false;
                     this.filled = false;

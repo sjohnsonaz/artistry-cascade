@@ -31,7 +31,7 @@ export { default as EventContainer, IEventContainer } from '../components/EventC
 export { default as FileUpload, IFileUploadProps } from '../components/FileUpload';
 export { default as Fillable, IFillableProps } from '../components/Fillable';
 export { default as Form, IFormProps, FormSize } from '../components/Form';
-export { default as FormContainer, IFormContainerProps } from '../components/FormContainer';
+export { default as FormGroup, IFormGroupProps } from '../components/FormGroup';
 export { default as FormText, IFormTextProps } from '../components/FormText';
 export { default as Grid, IGridProps, GridSize } from '../components/Grid';
 export { default as Icon, IIconProps } from '../components/Icon';
