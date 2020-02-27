@@ -40,11 +40,14 @@ export default class Section extends Component<ISectionProps> {
         if (event.propertyName === 'height') {
             let animating = this.animating;
             if (!animating) {
-                if (this.closed) {
+                if (this.props.closed) {
+                    this.height = undefined;
                     this.running = false;
+                    this.closed = true;
                 } else {
                     this.height = undefined;
                     this.running = false;
+                    this.closed = false;
                 }
             }
         }
@@ -81,8 +84,7 @@ export default class Section extends Component<ISectionProps> {
                 }
 
                 this.height = header.offsetHeight + 'px';
-                this.closed = true;
-                await Cascade.track(this, 'closed');
+                await Cascade.track(this, 'height');
                 if (runCount !== this.runCount) {
                     return;
                 }
@@ -178,6 +180,7 @@ export default class Section extends Component<ISectionProps> {
                 style={{
                     height: this.height
                 }}
+                onTransitionEnd={this.transitionEnd}
                 {...props}
             >
                 <header

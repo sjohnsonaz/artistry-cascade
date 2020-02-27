@@ -1,6 +1,6 @@
 import Cascade, { Component, observable } from 'cascade';
 
-import { Button, Carousel, Section } from '../../../../../scripts/modules/ArtistryCascade';
+import { Button, Carousel, Section, ActionBar, Divider } from '../../../../../scripts/modules/ArtistryCascade';
 
 export interface ICarouselViewProps {
 
@@ -20,11 +20,11 @@ export default class CarouselView extends Component<ICarouselViewProps> {
     render() {
         return (
             <Section header="Carousel" headerSpace>
-                <div className="space">
+                <ActionBar align="space-between">
                     <Button onclick={this.backCarouselSlide}>Back</Button>
                     <Button onclick={this.nextCarouselSlide}>Next</Button>
-                </div>
-                <hr />
+                </ActionBar>
+                <Divider />
                 <Carousel activeIndex={this.activeIndex} animation="slide" space>
                     <div style="background-color: red; padding: 10px;">
                         Content 0
@@ -39,7 +39,7 @@ export default class CarouselView extends Component<ICarouselViewProps> {
                         <br /> Line 3
                     </div>
                 </Carousel>
-                <hr />
+                <Divider />
                 <Carousel activeIndex={this.activeIndex} animation="flip" space>
                     <div style="background-color: red; padding: 10px;">
                         Content 0
