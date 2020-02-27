@@ -1,6 +1,6 @@
 import Cascade, { Component } from 'cascade';
 
-import { Scrollable } from '../../../../../scripts/modules/ArtistryCascade';
+import { Scrollable, Section, CardContainer, Card } from '../../../../../scripts/modules/ArtistryCascade';
 
 export interface IScrollableViewProps {
 
@@ -17,13 +17,18 @@ export default class ScrollableView extends Component<IScrollableViewProps> {
             values.push(index);
         }
         return (
-            <div>
-                <Scrollable type="y" height="100px" bumper={10} onBottomEnter={this.bottom}>
-                    <ul>
-                        {values.map(value => <li>{value}</li>)}
-                    </ul>
+            <Section header="Scrollable" headerSpace>
+                <Scrollable type="y" height="200px" bumper={10} onBottomEnter={this.bottom}>
+                    <CardContainer space>
+                        {values.map((value, index) => <Card key={index}
+                            header="Card"
+                            space
+                        >
+                            {value}
+                        </Card>)}
+                    </CardContainer>
                 </Scrollable>
-            </div>
+            </Section>
         );
     }
 }

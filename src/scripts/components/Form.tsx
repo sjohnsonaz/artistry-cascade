@@ -6,6 +6,7 @@ export interface IFormProps extends Elements.JSXFormElement {
     size?: FormSize;
     lockable?: boolean;
     locked?: boolean;
+    nonForm?: boolean;
     onEnter?: (event: KeyboardEvent) => any;
     onEscape?: (event: KeyboardEvent) => any;
 }
@@ -29,6 +30,7 @@ export default class Form extends Component<IFormProps> {
             size,
             lockable,
             locked,
+            nonForm,
             onEnter,
             onEscape,
             ...props
@@ -58,13 +60,24 @@ export default class Form extends Component<IFormProps> {
         }
 
         let onkeydown = (this.props.onEnter || this.props.onEscape) ? this.onkeydown.bind(this) : undefined;
-        return (
-            <form className={classNames.join(' ')} onkeydown={onkeydown} {...props}>
-                {lockable ?
-                    <div className="form-lock-screen"></div> :
-                    null}
-                {this.children}
-            </form>
-        );
+        if (nonForm) {
+            return (
+                <div id={id} className={classNames.join(' ')} onkeydown={onkeydown} {...props as any}>
+                    {lockable ?
+                        <div className="form-lock-screen"></div> :
+                        null}
+                    {this.children}
+                </div>
+            );
+        } else {
+            return (
+                <form id={id} className={classNames.join(' ')} onkeydown={onkeydown} {...props}>
+                    {lockable ?
+                        <div className="form-lock-screen"></div> :
+                        null}
+                    {this.children}
+                </form>
+            );
+        }
     }
 }

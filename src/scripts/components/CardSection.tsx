@@ -1,9 +1,12 @@
 import Cascade, { Component } from 'cascade';
 
+import ClassNames from '../util/ClassNames';
+
 export interface ICardSectionProps {
     id?: string;
     className?: string;
     multiColumn?: boolean;
+    centered?: boolean;
 }
 
 export default class CardSection extends Component<ICardSectionProps> {
@@ -11,18 +14,17 @@ export default class CardSection extends Component<ICardSectionProps> {
         let {
             id,
             className,
-            multiColumn
+            multiColumn,
+            centered
         } = this.props;
 
-        let classNames = className ? [className] : [];
-        classNames.push('card-section');
+        let classNames = new ClassNames(className, 'card-section');
 
-        if (multiColumn) {
-            classNames.push('card-section-multi-column');
-        }
+        classNames.addTest('card-section-multi-column', multiColumn);
+        classNames.addTest('card-section-centered', centered);
 
         return (
-            <section className={classNames.join(' ')} id={id}>
+            <section className={classNames.toString()} id={id}>
                 {this.children}
             </section>
         );

@@ -1,6 +1,7 @@
 import Cascade, { Component } from 'cascade';
 
 import ClassNames from '../util/ClassNames';
+import { AlignType, alignClass } from '../util/Align';
 
 export type FormTextTheme = 'default' | 'success' | 'info' | 'warning' | 'danger';
 
@@ -9,6 +10,7 @@ export interface IFormTextProps {
     id?: string;
     fill?: boolean;
     theme?: FormTextTheme;
+    align?: AlignType;
 }
 
 export default class FormText extends Component<IFormTextProps>{
@@ -17,7 +19,8 @@ export default class FormText extends Component<IFormTextProps>{
             id,
             className,
             fill,
-            theme
+            theme,
+            align
         } = this.props;
 
         let classNames = new ClassNames(className);
@@ -25,6 +28,10 @@ export default class FormText extends Component<IFormTextProps>{
 
         if (fill) {
             classNames.add('fill');
+        }
+
+        if (align) {
+            alignClass(align, classNames);
         }
 
         let _theme: string;

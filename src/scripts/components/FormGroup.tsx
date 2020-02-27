@@ -1,15 +1,16 @@
 import Cascade, { Component } from 'cascade';
 
 import ClassNames from '../util/ClassNames';
+import { AlignType } from '../util/Align';
 
-import { FormTextTheme } from './FormText';
-import FormText from './FormText';
+import FormText, { FormTextTheme } from './FormText';
 
 export interface IFormGroupProps {
     className?: string;
     id?: string;
     label?: any;
     text?: any;
+    textAlign?: AlignType;
     theme?: FormTextTheme;
     nonLabel?: boolean;
     inline?: boolean;
@@ -52,6 +53,7 @@ export default class FormGroup extends Component<IFormGroupProps> {
                 {this.props.text ?
                     <FormText
                         theme={this.props.theme}
+                        align={this.props.textAlign}
                     >
                         {this.props.text}
                     </FormText> :

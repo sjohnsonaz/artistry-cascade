@@ -1,6 +1,7 @@
 import Cascade, { Component } from 'cascade';
 
 import { alignClass, AlignType } from '../util/Align';
+import ClassNames from '../util/ClassNames';
 
 export interface ICardRowProps {
     id?: string;
@@ -16,15 +17,14 @@ export default class CardRow extends Component<ICardRowProps> {
             align
         } = this.props;
 
-        let classNames = className ? [className] : [];
-        classNames.push('card-row');
+        let classNames = new ClassNames(className, 'card-row');
 
         if (align) {
             alignClass(align, classNames);
         }
 
         return (
-            <div className={classNames.join(' ')} id={id}>
+            <div className={classNames.toString()} id={id}>
                 {this.children}
             </div>
         );
