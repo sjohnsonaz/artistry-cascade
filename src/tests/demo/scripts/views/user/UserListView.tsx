@@ -15,7 +15,7 @@ export default class UserListView extends Component<IUserListViewProps> {
     render() {
         let {viewModel} = this.props;
         return (
-            <Section header="Users">
+            <Section header="Users" headerSpace>
                 <table className="table">
                     <thead>
                         <tr>

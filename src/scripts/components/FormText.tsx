@@ -1,14 +1,56 @@
 import Cascade, { Component } from 'cascade';
 
+import ClassNames from '../util/ClassNames';
+
+export type FormTextTheme = 'default' | 'success' | 'info' | 'warning' | 'danger';
+
 export interface IFormTextProps {
     className?: string;
     id?: string;
+    fill?: boolean;
+    theme?: FormTextTheme;
 }
 
 export default class FormText extends Component<IFormTextProps>{
     render() {
-        let classNames = this.props.className ? [this.props.className] : [];
-        classNames.push('form-text');
-        return <div className={classNames.join(' ')} id={this.props.id}>{this.children}</div>
+        let {
+            id,
+            className,
+            fill,
+            theme
+        } = this.props;
+
+        let classNames = new ClassNames(className);
+        classNames.add('form-text');
+
+        if (fill) {
+            classNames.add('fill');
+        }
+
+        let _theme: string;
+        switch (theme) {
+            case 'success':
+                _theme = 'success';
+                break;
+            case 'info':
+                _theme = 'info';
+                break;
+            case 'warning':
+                _theme = 'warning';
+                break;
+            case 'danger':
+                _theme = 'danger';
+                break;
+        }
+
+        return (
+            <div
+                className={classNames.toString()}
+                id={id}
+                data-theme={_theme}
+            >
+                {this.children}
+            </div>
+        );
     }
 }

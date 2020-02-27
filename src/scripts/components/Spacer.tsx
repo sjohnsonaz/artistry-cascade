@@ -1,11 +1,11 @@
 import Cascade, { Component } from 'cascade';
 
-export interface IMenuBarSpacerProps {
+export interface ISpacerProps {
     className?: string;
     id?: string;
 }
 
-export default class MenuBarSpacer extends Component<IMenuBarSpacerProps> {
+export default class Spacer extends Component<ISpacerProps> {
     render() {
         let classNames = this.props.className ? [this.props.className] : [];
         classNames.push('menu-spacer');

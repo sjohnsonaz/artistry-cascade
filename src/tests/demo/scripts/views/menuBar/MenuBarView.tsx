@@ -1,6 +1,6 @@
 import Cascade, { Component, observable } from 'cascade';
 
-import { Button, MenuBar, MenuBarLink, Popover, Section, UserThumbnail } from '../../../../../scripts/modules/ArtistryCascade';
+import { MenuBar, MenuBarLink, UserThumbnail, Spacer } from '../../../../../scripts/modules/ArtistryCascade';
 
 export interface IMenuBarViewProps {
 
@@ -27,7 +27,7 @@ export default class MenuBarView extends Component<IMenuBarViewProps> {
                     title="Home"
                     href="#"
                 />
-                <li class="menu-spacer"></li>
+                <Spacer />
                 <MenuBarLink
                     title={
                         <UserThumbnail

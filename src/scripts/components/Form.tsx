@@ -1,6 +1,6 @@
 import Cascade, { Component, Elements } from 'cascade';
 
-export type FormSize = 'none' | 'small' | 'medium' | 'large' | 'x-large';
+export type FormSize = 'none' | 'small' | 'medium' | 'large' | 'x-large' | 'stacked';
 
 export interface IFormProps extends Elements.JSXFormElement {
     size?: FormSize;
@@ -51,6 +51,9 @@ export default class Form extends Component<IFormProps> {
                 break;
             case 'x-large':
                 classNames.push('form-xl');
+                break;
+            case 'stacked':
+                classNames.push('form-stacked');
                 break;
         }
 

@@ -32,6 +32,7 @@ export { default as FileUpload, IFileUploadProps } from '../components/FileUploa
 export { default as Fillable, IFillableProps } from '../components/Fillable';
 export { default as Form, IFormProps, FormSize } from '../components/Form';
 export { default as FormGroup, IFormGroupProps } from '../components/FormGroup';
+export { default as FormRow, IFormRowProps } from '../components/FormRow';
 export { default as FormText, IFormTextProps } from '../components/FormText';
 export { default as Grid, IGridProps, GridSize } from '../components/Grid';
 export { default as Icon, IIconProps } from '../components/Icon';
@@ -39,7 +40,7 @@ export { default as Input, IInputProps } from '../components/Input';
 export { default as List, IListProps } from '../components/List';
 export { default as MenuBar, IMenuBarProps } from '../components/MenuBar';
 export { default as MenuBarLink, IMenuBarLinkProps } from '../components/MenuBarLink';
-export { default as MenuBarSpacer, IMenuBarSpacerProps } from '../components/MenuBarSpacer';
+export { default as Spacer, ISpacerProps } from '../components/Spacer';
 export { default as Modal, IModalProps, ModalSize } from '../components/Modal';
 export { default as Notification, INotificationProps } from '../components/Notification';
 export { default as NotificationContainer, INotificationContainerProps, NotificationLocation } from '../components/NotificationContainer';

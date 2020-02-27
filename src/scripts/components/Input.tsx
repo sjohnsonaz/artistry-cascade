@@ -54,12 +54,13 @@ export default class Input<T> extends Component<IInputProps<T>> {
             classNames.push('fill-width');
         }
 
+        let _displaySize: string;
         switch (displaySize) {
             case 'small':
-                classNames.push('input-small');
+                _displaySize = 'input-small';
                 break;
             case 'large':
-                classNames.push('input-large');
+                _displaySize = 'input-large';
                 break;
         }
 
@@ -68,6 +69,7 @@ export default class Input<T> extends Component<IInputProps<T>> {
                 <MaskedInput
                     id={id}
                     className={classNames.join(' ')}
+                    data-size={_displaySize}
                     value={renderedValue}
                     oninput={oninput || this.oninput}
                     mask={mask}
@@ -79,6 +81,7 @@ export default class Input<T> extends Component<IInputProps<T>> {
                 <input
                     id={id}
                     className={classNames.join(' ')}
+                    data-size={_displaySize}
                     value={renderedValue}
                     oninput={oninput || this.oninput}
                     {...props}
