@@ -14,6 +14,7 @@ export interface IUserThumbnailProps {
     popover?: ITemplate;
     popoverDirection?: 'top' | 'right' | 'bottom' | 'left';
     popoverAlign?: 'top' | 'right' | 'bottom' | 'left' | 'center';
+    popoverSpace?: boolean;
     popoverOpen?: boolean;
     popoverMenu?: boolean;
     menuBarTop?: boolean;
@@ -85,6 +86,7 @@ export default class UserThumbnail extends Component<IUserThumbnailProps> {
                     align={this.props.popoverAlign}
                     direction={this.props.popoverDirection}
                     open={!this.props.popoverMenu ? this.props.popoverOpen : undefined}
+                    space={this.props.popoverSpace}
                     preventClick
                 >
                     {typeof this.props.popover === 'function' ?
