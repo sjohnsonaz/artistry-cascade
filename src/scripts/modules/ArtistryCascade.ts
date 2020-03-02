@@ -1,4 +1,5 @@
 export { default as BodyScroll } from '../util/BodyScroll';
+export { default as BaseEventTarget, CustomEventListener, CustomEventTarget, DOMEvent } from '../util/BaseEventTarget';
 export { default as ClassNames } from '../util/ClassNames';
 export { default as DepthStack } from '../util/DepthStack';
 export { default as NotificationUtil, INotification, NotificationType } from '../util/NotificationUtil';
