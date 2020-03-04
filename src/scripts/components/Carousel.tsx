@@ -23,9 +23,9 @@ export default class Carousel extends Component<ICarouselProps> {
     @observable height: string = undefined;
     @observable activeIndex: number = this.props.activeIndex || 0;
     @observable previousActiveIndex: number = this.props.activeIndex || 0;
-    @observable running: boolean = false;
     @observable animating: boolean = false;
     @observable selected: boolean = true;
+    running: boolean = false;
     runCount: number = 0;
     transitionCount: number = 0;
 
@@ -34,8 +34,7 @@ export default class Carousel extends Component<ICarouselProps> {
             this.transitionCount++;
             this.transitionCount %= 2;
             if (!this.transitionCount) {
-                let running = this.running;
-                if (!running) {
+                if (!this.running) {
                     this.animating = false;
                     this.height = undefined;
                     this.previousActiveIndex = this.activeIndex;
@@ -84,10 +83,7 @@ export default class Carousel extends Component<ICarouselProps> {
             let runCount = this.runCount;
 
             // Start run
-            await Cascade.set(this, 'running', true);
-            if (runCount !== this.runCount) {
-                return;
-            }
+            this.running = true;
 
             if (!this.props.staticHeight) {
                 // Store current height
@@ -141,13 +137,11 @@ export default class Carousel extends Component<ICarouselProps> {
             // Stop run
             if (this.running) {
                 if (this.props.staticHeight) {
-                    this.running = false;
                     this.animating = false;
                     this.height = undefined;
                     await Cascade.set(this, 'previousActiveIndex', this.activeIndex);
-                } else {
-                    await Cascade.set(this, 'running', false);
                 }
+                this.running = false;
             }
         }
     }
