@@ -3,7 +3,8 @@ import Cascade, { Component, observable, Ref } from 'cascade';
 export interface IFileUploadProps {
     id?: string;
     className?: string;
-    onUpload: (files: FileList) => Promise<string[]>;
+    onSelect: (files: FileList) => Promise<any>;
+    value?: string;
     text?: string;
 }
 
@@ -14,7 +15,7 @@ export default class FileUpload extends Component<IFileUploadProps> {
 
     handleFiles = async (files: FileList) => {
         this.uploading = true;
-        await this.props.onUpload(files);
+        await this.props.onSelect(files);
         this.uploading = false;
     }
 
@@ -22,7 +23,7 @@ export default class FileUpload extends Component<IFileUploadProps> {
         this.fileInput.current.click();
     }
 
-    upload = () => {
+    select = () => {
         let fileInput = this.fileInput.current;
         let files = fileInput.files;
         if (files && files.length) {
@@ -56,7 +57,8 @@ export default class FileUpload extends Component<IFileUploadProps> {
         let {
             id,
             className,
-            text
+            text,
+            value
         } = this.props;
 
         let classNames = className ? [className] : [];
@@ -77,7 +79,8 @@ export default class FileUpload extends Component<IFileUploadProps> {
             >
                 <input
                     type="file"
-                    onchange={this.upload}
+                    onchange={this.select}
+                    value={value}
                     multiple
                     ref={this.fileInput}
                 />
