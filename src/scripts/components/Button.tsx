@@ -10,7 +10,7 @@ export interface IButtonProps extends Elements.JSXButtonElement {
     type?: 'button' | 'submit' | 'reset';
     theme?: 'default' | 'primary' | 'danger';
     displaySize?: 'default' | 'small' | 'large';
-    display?: 'default' | 'textonly' | 'outline';
+    display?: 'default' | 'textonly' | 'outline' | 'underline';
     fill?: boolean;
     tooltip?: string;
     tooltipDirection?: 'top' | 'right' | 'bottom' | 'left';
@@ -127,6 +127,9 @@ export default class Button extends Component<IButtonProps> {
                 break;
             case 'outline':
                 classNames.push('button-outline');
+                break;
+            case 'underline':
+                classNames.push('button-underline');
                 break;
         }
 

@@ -26,16 +26,16 @@
     "@cascade/promise-util": "0.0.1"
   },
   "peerDependencies": {
-    "artistry": "^0.9.4",
-    "cascade": "^0.7.9"
+    "artistry": "^0.9.7",
+    "cascade": "^0.7.10"
   },
   "devDependencies": {
     "@fortawesome/free-solid-svg-icons": "5.7.2",
     "@types/chai": "4.2.3",
     "@types/mocha": "5.2.7",
-    "artistry": "^0.9.4",
+    "artistry": "^0.9.7",
     "autoprefixer": "9.7.4",
-    "cascade": "^0.7.9",
+    "cascade": "^0.7.10",
     "cascade-validation": "^0.0.1",
     "chai": "4.2.0",
     "css-loader": "3.4.2",

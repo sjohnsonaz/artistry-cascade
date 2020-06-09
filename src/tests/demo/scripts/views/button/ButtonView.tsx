@@ -1,6 +1,6 @@
 import Cascade, { Component, observable } from 'cascade';
 
-import { Button, ButtonBar, ButtonGroup, Section } from '../../../../../scripts/modules/ArtistryCascade';
+import { Button, ButtonBar, ButtonGroup, Section, ActionBarBreadcrumb } from '../../../../../scripts/modules/ArtistryCascade';
 
 export interface IButtonViewProps {
 
@@ -102,6 +102,20 @@ export default class ButtonView extends Component<IButtonViewProps> {
                     onPopoverClose={this.closePopover}
                     onclick={this.openPopover}
                 >Popover Menu</Button>
+
+                <div className="explode-width">
+                    <ActionBarBreadcrumb>
+                        <Button display="underline">Home</Button>
+                        <Button display="underline">Home</Button>
+                        <Button display="underline">Home</Button>
+                        <Button display="underline">Home</Button>
+                        <Button display="underline">Home</Button>
+                        <Button display="underline">Home</Button>
+                        <Button display="underline">Home</Button>
+                        <Button display="underline">Home</Button>
+                        <Button display="underline">Home</Button>
+                    </ActionBarBreadcrumb>
+                </div>
             </Section>
         );
     }
