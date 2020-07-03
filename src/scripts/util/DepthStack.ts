@@ -57,10 +57,19 @@ export default class DepthStack {
                 case 27: // Escape
                     this.close(event);
                     break;
+                case 32: // Space
+                    break;
                 default:
                     break;
             }
         });
+        window.addEventListener('blur', (event: Event) => {
+            // This should close popovers, but not modals.
+            this.close(event);
+        });
+        // window.addEventListener('visibilitychange', (event: Event) => {
+        //     this.close(event);
+        // });
         // Use onclick for iOS Safari
         window.onclick = (event: MouseEvent) => {
             this.close(event);
